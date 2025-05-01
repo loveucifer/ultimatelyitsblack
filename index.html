@@ -9,107 +9,70 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* Base body styles with gradient */
-        body {
-            margin: 0;
-            /* Subtle gradient from black to dark purple */
-            background: linear-gradient(180deg, #000000 0%, #1a0a2e 100%);
-            min-height: 100vh; /* Ensure gradient covers full height */
-            display: flex;
-            flex-direction: column; /* Stack items vertically */
-            align-items: center; /* Center items horizontally */
-            font-family: 'Inter', sans-serif; /* Modern font */
-            color: #e5e7eb; /* Default light gray text (Tailwind gray-200) */
-            overflow-x: hidden; /* Prevent horizontal scroll */
+        :root {
+            --bg-gradient-start: #000000;
+            --bg-gradient-end: #1a0a2e; /* Dark Purple */
+            --text-primary: #e5e7eb; /* gray-200 */
+            --text-secondary: #9ca3af; /* gray-400 */
+            --text-accent: #a78bfa; /* violet-400 */
+            --highlight-bg: rgba(106, 0, 173, 0.5); /* Purple highlight */
+            --glass-bg: rgba(23, 23, 23, 0.65); /* Slightly darker glass */
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --footer-text: #6b7280; /* gray-500 */
         }
 
-        /* Container for the initial animation - centers vertically and horizontally */
+        /* Base body styles */
+        body {
+            margin: 0;
+            background: linear-gradient(180deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+            overflow-x: hidden;
+            overflow-y: hidden; /* Hide scrollbar initially */
+        }
+
+        /* Animation container */
         .animation-container {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh; /* Takes full viewport height initially */
+            height: 100vh;
             width: 100%;
-            position: fixed; /* Keeps it centered during animation */
+            position: fixed;
             top: 0;
             left: 0;
-            z-index: 50; /* Above other content initially */
-            transition: opacity 0.8s ease-out 2.8s; /* Fade out after animation */
-            background: linear-gradient(180deg, #000000 0%, #1a0a2e 100%); /* Match body gradient */
+            z-index: 50;
+            opacity: 1; /* Start visible */
+            transition: opacity 0.8s ease-out 2.8s; /* Fade out */
+            background: linear-gradient(180deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
         }
 
-        /* Hide animation container after fade out */
+        /* Hide animation container after fade */
         body.loaded .animation-container {
             opacity: 0;
-            pointer-events: none; /* Disable interaction after hiding */
+            pointer-events: none;
         }
 
-        /* Styles for the intro animation logo - KEEPING THESE AS PROVIDED */
-        .logo-container {
-            position: relative;
-            display: flex;
-            align-items: center;
-            margin-bottom: 40px; /* Space below logo */
-        }
-
-        .logo-text {
-            display: flex;
-            font-size: 3rem; /* 48px */
-            font-weight: bold;
-            color: white;
-            z-index: 1;
-        }
-
-        .letter {
-            opacity: 0;
-            animation: fadeInLetter 0.4s ease forwards;
-        }
-
+        /* === START: Original Logo Animation Styles (Unchanged) === */
+        .logo-container { position: relative; display: flex; align-items: center; }
+        .logo-text { display: flex; font-size: 3rem; font-weight: bold; color: white; z-index: 1; }
+        .letter { opacity: 0; animation: fadeInLetter 0.4s ease forwards; }
         .letter:nth-child(1) { animation-delay: 1.6s; }
         .letter:nth-child(2) { animation-delay: 1.8s; }
         .letter:nth-child(3) { animation-delay: 2s; }
         .letter:nth-child(4) { animation-delay: 2.2s; }
         .letter:nth-child(5) { animation-delay: 2.4s; }
-        .letter:nth-child(6) { animation-delay: 2.6s; } /* Period */
-
-        @keyframes fadeInLetter {
-            0% { opacity: 0; transform: translateY(10px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-
-        .logo-text.glow {
-            animation: glowText 2s ease-in-out forwards;
-            animation-delay: 1.5s;
-        }
-
-        @keyframes glowText {
-            0% { text-shadow: 0 0 0px white; }
-            50% { text-shadow: 0 0 20px white; }
-            100% { text-shadow: 0 0 0px white; }
-        }
-
-        .burst-spinner {
-            position: absolute;
-            left: -25px; /* Adjust as needed */
-            top: -50px;  /* Adjust as needed */
-            width: 60px;
-            height: 60px;
-            animation: spinOnce 1.5s ease-out forwards;
-            pointer-events: none;
-        }
-
-        .burst-line {
-            position: absolute;
-            width: 2px;
-            height: 30px;
-            background-color: white;
-            top: 50%;
-            left: 50%;
-            transform-origin: bottom center;
-        }
-
-        /* Define rotation for each line */
+        .letter:nth-child(6) { animation-delay: 2.6s; }
+        @keyframes fadeInLetter { 0% { opacity: 0; transform: translateY(10px); } 100% { opacity: 1; transform: translateY(0); } }
+        .logo-text.glow { animation: glowText 2s ease-in-out forwards; animation-delay: 1.5s; }
+        @keyframes glowText { 0% { text-shadow: 0 0 0px white; } 50% { text-shadow: 0 0 20px white; } 100% { text-shadow: 0 0 0px white; } }
+        .burst-spinner { position: absolute; left: -25px; top: -50px; width: 60px; height: 60px; animation: spinOnce 1.5s ease-out forwards; pointer-events: none; }
+        .burst-line { position: absolute; width: 2px; height: 30px; background-color: white; top: 50%; left: 50%; transform-origin: bottom center; }
         .burst-line:nth-child(1) { transform: rotate(0deg) translateY(-50%); }
         .burst-line:nth-child(2) { transform: rotate(45deg) translateY(-50%); }
         .burst-line:nth-child(3) { transform: rotate(90deg) translateY(-50%); }
@@ -118,104 +81,135 @@
         .burst-line:nth-child(6) { transform: rotate(225deg) translateY(-50%); }
         .burst-line:nth-child(7) { transform: rotate(270deg) translateY(-50%); }
         .burst-line:nth-child(8) { transform: rotate(315deg) translateY(-50%); }
+        @keyframes spinOnce { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes fadeUp { from { opacity: 1; transform: rotate(var(--angle)) translateY(-50%); } to { opacity: 0; transform: rotate(var(--angle)) translateY(-70%); } }
+        /* === END: Original Logo Animation Styles === */
 
-        @keyframes spinOnce {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        /* Fade up animation for specific lines */
-        @keyframes fadeUp {
-            from {
-                opacity: 1;
-                transform: rotate(var(--angle)) translateY(-50%);
-            }
-            to {
-                opacity: 0;
-                transform: rotate(0deg) translateY(-60%); /* Adjusted for smoother fade */
-            }
-        }
-        /* End of intro animation styles */
-
-        /* Styles for the main content wrapper appearing after animation */
+        /* Main content wrapper - Fades in after animation */
         .main-content-wrapper {
             opacity: 0; /* Hidden initially */
-            padding: 2rem; /* Padding inside the wrapper */
+            padding: 2rem;
             width: 100%;
-            max-width: 900px; /* Max width for content */
-            margin: 0 auto; /* Centered horizontally */
+            max-width: 900px;
+            margin: 2rem auto 0; /* Add top margin, auto centers horizontally */
             animation: fadeInContent 1s ease forwards;
-            animation-delay: 3.6s; /* Delay after animation container fades */
-            position: relative; /* Needed for z-index stacking */
-            z-index: 10; /* Ensure content is above faded animation */
+            animation-delay: 3.4s; /* Delay slightly longer */
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            min-height: calc(100vh - 4rem); /* Ensure wrapper takes height, accounting for margin */
         }
 
         @keyframes fadeInContent {
-             from { opacity: 0; transform: translateY(20px); }
+             from { opacity: 0; transform: translateY(30px); }
              to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Header and Nav styles within the main content */
+        /* Header and Nav styles */
         header.main-header {
             text-align: center;
             margin-bottom: 3rem; /* Space below header */
+             animation: slideDownNav 0.8s ease-out forwards;
+             animation-delay: 3.6s; /* After wrapper fades in */
+             opacity:0; /* Start hidden for animation */
+        }
+
+         @keyframes slideDownNav {
+             from { opacity: 0; transform: translateY(-20px); }
+             to { opacity: 1; transform: translateY(0); }
         }
 
         nav.main-nav a {
-             color: #9ca3af; /* Tailwind gray-400 */
+             color: var(--text-secondary);
              text-decoration: none;
-             margin: 0 0.75rem; /* Space between links */
-             font-size: 1.125rem; /* Slightly larger nav links */
+             margin: 0 0.75rem;
+             font-size: 1.125rem;
              padding: 0.5rem 1rem;
-             border-radius: 0.375rem; /* Tailwind rounded-md */
-             transition: color 0.3s ease, background-color 0.3s ease;
+             border-radius: 0.375rem; /* rounded-md */
+             transition: color 0.3s ease, background-color 0.3s ease, transform 0.2s ease;
+             display: inline-block; /* Needed for transform */
         }
 
         nav.main-nav a:hover {
-            color: #ffffff; /* White on hover */
-            background-color: rgba(255, 255, 255, 0.1); /* Subtle background highlight */
+            color: var(--text-primary);
+            background-color: rgba(255, 255, 255, 0.1);
+             transform: translateY(-2px); /* Subtle lift */
         }
         nav.main-nav a.active {
-             color: #ffffff; /* White */
-             font-weight: 600; /* Semi-bold */
-             background-color: rgba(106, 0, 173, 0.5); /* Purple highlight for active page */
+             color: var(--text-primary);
+             font-weight: 600;
+             background-color: var(--highlight-bg);
         }
 
         /* Glass effect for content cards */
         .glass-effect {
-            background-color: rgba(23, 23, 23, 0.6); /* Darker, less opaque */
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08); /* Even subtler border */
-            border-radius: 0.75rem; /* Tailwind rounded-xl */
+            background-color: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 0.75rem; /* rounded-xl */
             padding: 2rem;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+             opacity: 0; /* Start hidden for animation */
+             animation: popUp 0.8s ease-out forwards;
+             animation-delay: 3.8s; /* After nav */
         }
+         @keyframes popUp {
+            from { opacity: 0; transform: translateY(20px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+         }
+         /* Stagger animation for second section */
+        #learn-more.glass-effect {
+            animation-delay: 4.0s;
+        }
+
 
         /* Footer styles */
         footer.main-footer {
             text-align: center;
-            margin-top: 4rem; /* Space above footer */
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #6b7280; /* Tailwind gray-500 */
-            font-size: 0.875rem; /* Smaller text */
+            margin-top: auto; /* Pushes footer to bottom */
+            padding-top: 3rem;
+             padding-bottom: 1.5rem; /* Add padding at the very bottom */
+            border-top: 1px solid var(--glass-border);
+            color: var(--footer-text);
+            font-size: 0.875rem;
+            width: 100%; /* Span full width within wrapper */
+             opacity: 0; /* Start hidden for animation */
+             animation: fadeInUpFooter 0.8s ease-out forwards;
+             animation-delay: 4.2s; /* After content */
         }
+         @keyframes fadeInUpFooter {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+         }
          footer.main-footer nav a {
-            color: #6b7280; /* Tailwind gray-500 */
+            color: var(--footer-text);
             margin: 0 0.5rem;
             transition: color 0.3s ease;
          }
          footer.main-footer nav a:hover {
-            color: #d1d5db; /* Tailwind gray-300 */
+            color: var(--text-secondary);
          }
+
+         /* Specific element styling */
+         .hero-button {
+            transition: background-color 0.3s ease, transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease; /* Springy effect */
+            box-shadow: 0 4px 15px rgba(128, 0, 128, 0.3); /* Purple shadow */
+         }
+         .hero-button:hover {
+             background-color: #9333ea; /* Slightly brighter purple */
+             transform: scale(1.05) translateY(-2px);
+             box-shadow: 0 8px 25px rgba(128, 0, 128, 0.5);
+         }
+
 
     </style>
 </head>
 <body class=""> <div class="animation-container">
         <div class="logo-container">
             <div class="burst-spinner" id="spinner">
-                <div class="burst-line" style="--angle: 0deg;"></div>
+                 <div class="burst-line" style="--angle: 0deg;"></div>
                 <div class="burst-line" style="--angle: 45deg;"></div>
                 <div class="burst-line" style="--angle: 90deg;"></div>
                 <div class="burst-line" style="--angle: 135deg;"></div>
@@ -239,27 +233,26 @@
         <header class="main-header">
             <nav class="main-nav mt-4">
                 <a href="/" class="active">Home</a>
-                <a href="/privacy.html">Privacy Policy</a>
+                <a href="/privacy.html">Privacy</a>
                 <a href="/support.html">Support</a>
             </nav>
         </header>
 
-        <main>
-            <section class="glass-effect text-center">
-                <h2 class="text-4xl font-bold text-white mb-4">Welcome</h2>
-                <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-                    Exploring the depths of digital darkness. Experience our unique perspective.
+        <main class="flex-grow"> <section class="glass-effect text-center mb-12">
+                <h1 class="text-5xl font-bold text-white mb-5">Ultimately, It's <span class="text-purple-400">Black</span>.</h1>
+                <p class="text-xl text-gray-300 mb-10 max-w-3xl mx-auto">
+                    Dive into the void where creativity meets the abstract. We craft unique digital experiences that challenge perception.
                 </p>
-                <a href="#learn-more" class="inline-block bg-purple-600 hover:bg-purple-700 text-white font-semibold text-lg px-6 py-3 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-1">
-                    Learn More
+                <a href="#learn-more" class="hero-button inline-block bg-purple-600 text-white font-semibold text-lg px-8 py-3 rounded-lg">
+                    Explore Our Vision
                 </a>
             </section>
 
-            <section id="learn-more" class="mt-12 glass-effect">
-                 <h3 class="text-2xl font-semibold text-white mb-4 text-center">Our Vision</h3>
-                 <p class="text-gray-300 text-center">
-                     We focus on [mention key focus area 1], [mention key focus area 2], and delivering [mention key benefit]. Dive deeper into our projects and philosophy.
-                     </p>
+            <section id="learn-more" class="glass-effect">
+                 <h2 class="text-3xl font-semibold text-white mb-6 text-center">Our Vision</h2>
+                 <p class="text-gray-300 text-lg text-center leading-relaxed max-w-3xl mx-auto">
+                     We are dedicated to pushing the boundaries of digital art and interaction. Our focus lies in blending minimalist aesthetics with complex underlying structures, creating experiences that are both visually striking and thought-provoking. We believe in the power of the unseen and the beauty of the void.
+                 </p>
             </section>
         </main>
 
@@ -274,35 +267,55 @@
     </div>
 
     <script>
-        // Logo Animation Script (KEEPING AS PROVIDED)
+        // Logo Animation Script (KEEPING AS PROVIDED with slight adjustment)
         setTimeout(() => {
             const spinner = document.getElementById('spinner');
             if (spinner) {
                 const lines = spinner.querySelectorAll('.burst-line');
-                [2, 3, 4].forEach(i => {
+                // Fade out specific lines (adjust indices if needed)
+                [1, 3, 5, 7].forEach(i => { // Example: Fade every other line
                     if (lines[i]) {
-                        const angle = lines[i].style.getPropertyValue('--angle');
-                        lines[i].style.animation = `fadeUp 1s ease forwards`;
+                        const angle = lines[i].style.getPropertyValue('--angle') || '0deg';
+                        lines[i].style.setProperty('--angle', angle); // Ensure var is set for animation
+                        lines[i].style.animation = `fadeUp 0.8s ease-out forwards 0.3s`; // Add slight delay
                     }
                 });
-                spinner.style.animation = "none";
+                // Stop the main spinning animation after it completes
+                setTimeout(() => {
+                     spinner.style.animation = "none"; // Stop spin
+                     spinner.style.opacity = 0; // Fade spinner itself
+                     spinner.style.transition = "opacity 0.5s ease-out";
+                }, 1500); // Corresponds to spinOnce duration
             }
 
-            // Add 'loaded' class to body after animation duration + fade-out delay
-            // Adjust timing: 1.5s (spin) + ~1s (fadeUp/glow) + 0.8s (fade container) = ~3.3s
+             // Add 'loaded' class to body to trigger fade out of container and fade in of content
+             // Use the transition delay on .animation-container (2.8s) as the base timing
             setTimeout(() => {
                  document.body.classList.add('loaded');
-                 // Ensure overflow is auto only after the animation container is hidden
-                 document.body.style.overflowY = 'auto';
-            }, 1800); // Delay adding class slightly after spinner animation finishes (1.5s + buffer)
+                 document.body.style.overflowY = 'auto'; // Enable scrolling AFTER animation fades
+            }, 2800); // Match the fade-out start time
 
-        }, 1500); // Start spinner fade-out logic after 1.5 seconds
+        }, 1500); // Start the line fade-out logic 1.5s into the spin
 
         // Dynamic Year Script
         const yearElement = document.getElementById('footer-year');
         if (yearElement) {
-            yearElement.innerHTML = `&copy; ${new Date().getFullYear()} Ultimately It's Black. All rights reserved.`;
+            yearElement.textContent = `© ${new Date().getFullYear()} Ultimately It's Black. All rights reserved.`;
         }
+
+        // Smooth scroll for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
     </script>
 </body>
 </html>
