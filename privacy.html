@@ -3,163 +3,284 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Support - Ultimately It's Black</title>
+    <title>Privacy Policy - Ultimately It's Black</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-     <style>
-        /* Base body styles with gradient */
-        body {
-            margin: 0;
-            background: linear-gradient(180deg, #000000 0%, #1a0a2e 100%);
-            min-height: 100vh;
-            font-family: 'Inter', sans-serif;
-            color: #e5e7eb; /* Tailwind gray-200 */
-            line-height: 1.7;
-            overflow-x: hidden;
-            display: flex; /* Use flexbox for centering */
-            flex-direction: column; /* Stack children vertically */
-            align-items: center; /* Center horizontally */
-            justify-content: space-between; /* Push footer down */
+    <style>
+        :root {
+            --bg-gradient-start: #000000;
+            --bg-gradient-end: #1a0a2e; /* Dark Purple */
+            --text-primary: #e5e7eb; /* gray-200 */
+            --text-secondary: #9ca3af; /* gray-400 */
+            --text-accent: #a78bfa; /* violet-400 */
+            --highlight-bg: rgba(106, 0, 173, 0.5); /* Purple highlight */
+            --glass-bg: rgba(23, 23, 23, 0.65); /* Slightly darker glass */
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --footer-text: #6b7280; /* gray-500 */
         }
 
-        /* Main content wrapper */
+        /* Base body styles */
+        body {
+            margin: 0;
+            background: linear-gradient(180deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+             display: flex;
+             flex-direction: column; /* Stack vertically */
+        }
+
+        /* Main content wrapper - Applies consistent padding and max-width */
         .main-content-wrapper {
             padding: 2rem;
             width: 100%;
             max-width: 900px;
-            margin: 0 auto; /* Center content */
-            flex-grow: 1; /* Allow content to grow and push footer */
-            display: flex;
-            flex-direction: column;
+            margin: 2rem auto 0; /* Vertical margin and horizontal centering */
+             flex-grow: 1; /* Allow content to push footer down */
+             display: flex;
+             flex-direction: column;
+             opacity: 0; /* Start hidden for animation */
+             animation: fadeInPage 1s ease-out forwards 0.3s; /* Fade in slightly delayed */
         }
+        @keyframes fadeInPage {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
 
         /* Header and Nav styles */
         header.main-header {
             text-align: center;
             margin-bottom: 3rem;
-            flex-shrink: 0; /* Prevent header from shrinking */
+            flex-shrink: 0;
         }
 
         nav.main-nav a {
-             color: #9ca3af; /* gray-400 */
+             color: var(--text-secondary);
              text-decoration: none;
              margin: 0 0.75rem;
              font-size: 1.125rem;
              padding: 0.5rem 1rem;
-             border-radius: 0.375rem; /* rounded-md */
-             transition: color 0.3s ease, background-color 0.3s ease;
+             border-radius: 0.375rem;
+             transition: color 0.3s ease, background-color 0.3s ease, transform 0.2s ease;
+             display: inline-block;
         }
 
         nav.main-nav a:hover {
-            color: #ffffff;
+            color: var(--text-primary);
             background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
         }
         nav.main-nav a.active {
-             color: #ffffff;
+             color: var(--text-primary);
              font-weight: 600;
-             background-color: rgba(106, 0, 173, 0.5); /* Purple highlight */
+             background-color: var(--highlight-bg);
         }
 
         /* Glass effect for content */
         .glass-effect {
-            background-color: rgba(23, 23, 23, 0.6);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background-color: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
             border-radius: 0.75rem; /* rounded-xl */
-            padding: 2rem md:p-10;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            text-align: center;
-            flex-grow: 1; /* Allow main content to take available space */
-            display: flex;
-            flex-direction: column;
-            justify-content: center; /* Center content vertically within the card */
+            padding: 2rem md:p-8; /* Slightly more padding */
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+            flex-grow: 1; /* Allow card to fill space in flex container */
         }
 
         /* Footer styles */
         footer.main-footer {
             text-align: center;
-            margin-top: 4rem; /* Ensure space even if content is short */
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #6b7280; /* gray-500 */
+            margin-top: 4rem; /* Ensure space from content */
+            padding: 2rem 1rem 1.5rem; /* Top, horizontal, bottom padding */
+            border-top: 1px solid var(--glass-border);
+            color: var(--footer-text);
             font-size: 0.875rem;
-            width: 100%; /* Make footer span width */
-            flex-shrink: 0; /* Prevent footer from shrinking */
-            padding-bottom: 1rem; /* Add some bottom padding */
+             width: 100%; /* Span full width */
+             max-width: 900px; /* Match wrapper width */
+             margin-left: auto; /* Center footer */
+             margin-right: auto;
+             flex-shrink: 0; /* Prevent footer shrinking */
         }
          footer.main-footer nav a {
-            color: #6b7280;
+            color: var(--footer-text);
             margin: 0 0.5rem;
             transition: color 0.3s ease;
          }
          footer.main-footer nav a:hover {
-            color: #d1d5db; /* gray-300 */
+            color: var(--text-secondary);
+         }
+
+         /* Content Styling */
+         main h2 {
+            font-size: 1.75rem; /* 28px */
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+         }
+          main h3 {
+            font-size: 1.25rem; /* 20px */
+            font-weight: 600;
+            color: #ffffff;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+         }
+         main ul {
+            list-style: disc;
+            list-style-position: outside; /* Indent properly */
+            margin-left: 1.5rem; /* Indentation */
+            margin-bottom: 1.5rem;
+            space-y: 0.75rem; /* More space between items */
+            color: var(--text-primary); /* Use primary text color */
+         }
+          main li::marker {
+            color: var(--text-accent); /* Purple markers */
+          }
+         main p {
+             margin-bottom: 1.25rem; /* More space between paragraphs */
+             color: var(--text-primary);
+         }
+         main a {
+             color: var(--text-accent);
+             font-weight: 500;
+             text-decoration: underline;
+             text-decoration-color: rgba(167, 139, 250, 0.5); /* Lighter underline */
+             transition: color 0.3s ease, text-decoration-color 0.3s ease;
+         }
+         main a:hover {
+             color: #c4b5fd; /* Lighter violet */
+             text-decoration-color: rgba(196, 181, 253, 1); /* Solid underline on hover */
+         }
+         strong {
+            font-weight: 600;
+            color: #ffffff; /* White for emphasis */
          }
 
     </style>
-    <script>
-        // Optional: Tailwind configuration
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                    },
-                }
-            }
-        }
-    </script>
 </head>
-<body class="bg-black">
+<body>
 
     <div class="main-content-wrapper">
 
         <header class="main-header">
-            <h1 class="text-4xl font-bold text-white mb-4">Help & Support</h1>
+            <h1 class="text-4xl font-bold text-white mb-4">Privacy Policy</h1>
             <nav class="main-nav mt-4">
                 <a href="/">Home</a>
-                <a href="/privacy.html">Privacy Policy</a>
-                <a href="/support.html" class="active">Support</a>
+                <a href="/privacy.html" class="active">Privacy</a>
+                <a href="/support.html">Support</a>
             </nav>
         </header>
 
         <main class="glass-effect">
-            <h2 class="text-3xl font-semibold text-white mb-6">Contact Us</h2>
-            <p class="text-lg text-gray-300 mb-6">
-                Need assistance or have questions? We're here to help.
+            <p><strong>Effective Date: May 1, 2025</strong></p>
+
+            <p>
+                Welcome to  Black ("we," "us," or "our"). We are committed to protecting your personal information and your right to privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website <strong>ultimatelyitsblack.com</strong> (the "Site"). Please read this privacy policy carefully.
             </p>
-            <p class="text-lg text-gray-300 mb-4">
-                Reach out to our support team via email:
+            <p>
+                By accessing or using the Site, you agree to the terms of this Privacy Policy. If you do not agree with the terms, please do not access the Site.
             </p>
-            <div class="my-8">
-                 <a href="mailto:support@ultimatelyitsblack.com"
-                    class="inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold text-xl px-8 py-4 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-purple-500/50">
-                    support@ultimatelyitsblack.com
-                 </a>
-            </div>
-            <p class="text-gray-400 text-base">
-                Our typical response time is within
-                <span class="font-semibold text-gray-300">24-48 business hours</span>.
+
+            <h2>Information We Collect</h2>
+            <p>
+                We may collect information about you in various ways:
+            </p>
+            <ul>
+                <li>
+                    <strong>Personal Data:</strong> Information you voluntarily provide, such as your name, email address, and any other details you submit through contact forms or potential registration processes.
+                </li>
+                <li>
+                    <strong>Usage Data:</strong> Information automatically collected when you access the Site. This may include your IP address, browser type, operating system, device information, pages viewed, access times, and referring website addresses. This data is typically aggregated and anonymized.
+                </li>
+                <li>
+                    <strong>Cookies and Tracking Technologies:</strong> We may use cookies and similar tracking technologies (like web beacons) to gather Usage Data, enhance your experience, and analyze Site traffic. You can control cookie preferences through your browser settings.
+                </li>
+            </ul>
+
+            <h2>How We Use Your Information</h2>
+            <p>
+                We use the information collected primarily to provide, maintain, and improve our Site and services. Specific uses include:
+            </p>
+             <ul>
+                <li>Operating and maintaining the Site.</li>
+                <li>Responding to your comments, questions, and support requests (e.g., via <a href="mailto:support@ultimatelyitsblack.com">support@ultimatelyitsblack.com</a>).</li>
+                <li>Monitoring and analyzing usage patterns and trends to improve user experience and Site functionality.</li>
+                <li>Preventing fraudulent activity and ensuring the security of our Site.</li>
+                <li>Complying with legal obligations and enforcing our terms.</li>
+            </ul>
+
+             <h2>Sharing Your Information</h2>
+             <p>
+                We do not sell your personal information. We may share information in the following limited circumstances:
+             </p>
+             <ul>
+                <li><strong>With Service Providers:</strong> We may share data with third-party vendors, consultants, and other service providers who perform services on our behalf (e.g., website hosting, data analysis, email delivery), requiring them to maintain the confidentiality of your information.</li>
+                <li><strong>For Legal Reasons:</strong> If required by law, regulation, legal process, or governmental request, or to protect the rights, property, or safety of us, our users, or others.</li>
+                <li><strong>Business Transfers:</strong> In connection with, or during negotiations of, any merger, sale of company assets, financing, or acquisition of all or a portion of our business by another company.</li>
+                <li><strong>With Your Consent:</strong> We may share your information for other purposes with your explicit consent.</li>
+             </ul>
+
+            <h2>Data Security</h2>
+            <p>
+                We implement reasonable administrative, technical, and physical security measures designed to protect your personal information from unauthorized access, use, or disclosure. However, please be aware that no security measures are perfect or impenetrable, and no method of data transmission over the internet can be guaranteed 100% secure.
+            </p>
+
+             <h2>Your Data Protection Rights</h2>
+             <p>
+                Depending on your location, you may have certain rights regarding your personal data, including:
+             </p>
+              <ul>
+                 <li>The right to access – You can request copies of your personal data.</li>
+                 <li>The right to rectification – You can request correction of inaccurate information or completion of incomplete information.</li>
+                 <li>The right to erasure – You can request that we delete your personal data, under certain conditions.</li>
+                 <li>The right to restrict processing – You can request restriction of the processing of your personal data, under certain conditions.</li>
+                 <li>The right to object to processing – You can object to our processing of your personal data, under certain conditions.</li>
+                 <li>The right to data portability – You can request transfer of the data we collected to another organization, or directly to you, under certain conditions.</li>
+              </ul>
+              <p>To exercise these rights, please contact us using the contact information below.</p>
+
+            <h2>Children's Privacy</h2>
+            <p>
+                Our Site is not intended for children under the age of 13 (or a higher age threshold where applicable by law). We do not knowingly collect personal information from children. If we learn we have collected data from a child without parental consent, we will take steps to delete it.
+            </p>
+
+             <h2>Changes to This Privacy Policy</h2>
+             <p>
+                We may update this Privacy Policy from time to time. The updated version will be indicated by an updated "Effective Date" and will be effective as soon as it is accessible. We encourage you to review this policy periodically.
+            </p>
+
+            <h2>Contact Us</h2>
+            <p>
+                If you have questions, comments, or concerns about this Privacy Policy or our data practices, please contact us at:
+            </p>
+            <p>
+                Email: <a href="mailto:support@ultimatelyitsblack.com" class="text-lg font-semibold">support@ultimatelyitsblack.com</a>
             </p>
         </main>
 
-    </div> <footer class="main-footer">
-        <p id="footer-year">&copy; Ultimately It's Black. All rights reserved.</p>
-         <nav class="mt-2">
-            <a href="/">Home</a>
-            <a href="/privacy.html">Privacy Policy</a>
-            <a href="/support.html">Support</a>
-        </nav>
-    </footer>
+
+    </div>
+        <footer class="main-footer">
+            <p id="footer-year">&copy;  Black. All rights reserved.</p>
+             <nav class="mt-2">
+                <a href="/">Home</a>
+                <a href="/privacy.html">Privacy Policy</a>
+                <a href="/support.html">Support</a>
+            </nav>
+        </footer>
 
     <script>
         // Simple script to insert the current year in the footer
         const yearElement = document.getElementById('footer-year');
-        if(yearElement) {
-            yearElement.innerHTML = `&copy; ${new Date().getFullYear()} Ultimately It's Black. All rights reserved.`;
+        if (yearElement) {
+            yearElement.textContent = `© ${new Date().getFullYear()}  Black. All rights reserved.`;
         }
     </script>
 </body>
