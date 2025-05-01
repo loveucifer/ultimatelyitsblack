@@ -3,39 +3,27 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Black</title>
+    <title>BLACK - Your Academic Space</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-        :root {
-            --bg-gradient-start: #000000;
-            --bg-gradient-end: #1a0a2e; /* Dark Purple */
-            --text-primary: #e5e7eb; /* gray-200 */
-            --text-secondary: #9ca3af; /* gray-400 */
-            --text-accent: #a78bfa; /* violet-400 */
-            --highlight-bg: rgba(106, 0, 173, 0.5); /* Purple highlight */
-            --glass-bg: rgba(23, 23, 23, 0.65); /* Slightly darker glass */
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --footer-text: #6b7280; /* gray-500 */
-        }
-
-        /* Base body styles */
+        /* Base body styles with enhanced gradient */
         body {
             margin: 0;
-            background: linear-gradient(180deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            background: linear-gradient(180deg, #0a0a0a 0%, #3a0f5c 100%); /* Darker black to richer purple */
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             font-family: 'Inter', sans-serif;
-            color: var(--text-primary);
-            overflow-x: hidden;
-            overflow-y: hidden; /* Hide scrollbar initially */
+            color: #e5e7eb; /* gray-200 */
+            overflow-x: hidden; /* Prevent horizontal scroll */
         }
 
-        /* Animation container */
+        /* Container for the initial animation - centers vertically and horizontally */
         .animation-container {
             display: flex;
             flex-direction: column;
@@ -47,275 +35,345 @@
             top: 0;
             left: 0;
             z-index: 50;
-            opacity: 1; /* Start visible */
-            transition: opacity 0.8s ease-out 2.8s; /* Fade out */
-            background: linear-gradient(180deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            transition: opacity 0.8s ease-out 2.8s;
+            /* Animation background remains black as requested */
+            background-color: #000;
         }
 
-        /* Hide animation container after fade */
+        /* Hide animation container after fade out */
         body.loaded .animation-container {
             opacity: 0;
             pointer-events: none;
         }
 
-        /* === START: Original Logo Animation Styles (Unchanged) === */
-        .logo-container { position: relative; display: flex; align-items: center; }
-        .logo-text { display: flex; font-size: 3rem; font-weight: bold; color: white; z-index: 1; }
+        /* Styles for the intro animation logo - KEEPING THESE AS PROVIDED */
+        .logo-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+        .logo-text { display: flex; font-size: 3rem; font-weight: bold; color: white; z-index: 1; font-family: 'Orbitron', sans-serif; letter-spacing: 2px;}
         .letter { opacity: 0; animation: fadeInLetter 0.4s ease forwards; }
         .letter:nth-child(1) { animation-delay: 1.6s; }
         .letter:nth-child(2) { animation-delay: 1.8s; }
         .letter:nth-child(3) { animation-delay: 2s; }
         .letter:nth-child(4) { animation-delay: 2.2s; }
         .letter:nth-child(5) { animation-delay: 2.4s; }
-        .letter:nth-child(6) { animation-delay: 2.6s; }
+        .letter:nth-child(6) { animation-delay: 2.6s; } /* Period */
         @keyframes fadeInLetter { 0% { opacity: 0; transform: translateY(10px); } 100% { opacity: 1; transform: translateY(0); } }
         .logo-text.glow { animation: glowText 2s ease-in-out forwards; animation-delay: 1.5s; }
         @keyframes glowText { 0% { text-shadow: 0 0 0px white; } 50% { text-shadow: 0 0 20px white; } 100% { text-shadow: 0 0 0px white; } }
         .burst-spinner { position: absolute; left: -25px; top: -50px; width: 60px; height: 60px; animation: spinOnce 1.5s ease-out forwards; pointer-events: none; }
         .burst-line { position: absolute; width: 2px; height: 30px; background-color: white; top: 50%; left: 50%; transform-origin: bottom center; }
-        .burst-line:nth-child(1) { transform: rotate(0deg) translateY(-50%); }
-        .burst-line:nth-child(2) { transform: rotate(45deg) translateY(-50%); }
-        .burst-line:nth-child(3) { transform: rotate(90deg) translateY(-50%); }
-        .burst-line:nth-child(4) { transform: rotate(135deg) translateY(-50%); }
-        .burst-line:nth-child(5) { transform: rotate(180deg) translateY(-50%); }
-        .burst-line:nth-child(6) { transform: rotate(225deg) translateY(-50%); }
-        .burst-line:nth-child(7) { transform: rotate(270deg) translateY(-50%); }
-        .burst-line:nth-child(8) { transform: rotate(315deg) translateY(-50%); }
+        .burst-line:nth-child(1) { transform: rotate(0deg) translateY(-50%); } .burst-line:nth-child(2) { transform: rotate(45deg) translateY(-50%); } .burst-line:nth-child(3) { transform: rotate(90deg) translateY(-50%); } .burst-line:nth-child(4) { transform: rotate(135deg) translateY(-50%); } .burst-line:nth-child(5) { transform: rotate(180deg) translateY(-50%); } .burst-line:nth-child(6) { transform: rotate(225deg) translateY(-50%); } .burst-line:nth-child(7) { transform: rotate(270deg) translateY(-50%); } .burst-line:nth-child(8) { transform: rotate(315deg) translateY(-50%); }
         @keyframes spinOnce { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        @keyframes fadeUp { from { opacity: 1; transform: rotate(var(--angle)) translateY(-50%); } to { opacity: 0; transform: rotate(var(--angle)) translateY(-70%); } }
-        /* === END: Original Logo Animation Styles === */
+        @keyframes fadeUp { from { opacity: 1; transform: rotate(var(--angle)) translateY(-50%); } to { opacity: 0; transform: rotate(0deg) translateY(-60%); } }
+        /* End of intro animation styles */
 
-        /* Main content wrapper - Fades in after animation */
+        /* Styles for the main content wrapper appearing after animation */
         .main-content-wrapper {
-            opacity: 0; /* Hidden initially */
-            padding: 2rem;
+            opacity: 0;
+            padding: 2rem 1rem; /* Adjusted padding */
             width: 100%;
-            max-width: 900px;
-            margin: 2rem auto 0; /* Add top margin, auto centers horizontally */
+            max-width: 1000px; /* Slightly wider */
+            margin: 0 auto;
             animation: fadeInContent 1s ease forwards;
-            animation-delay: 3.4s; /* Delay slightly longer */
+            animation-delay: 3.6s; /* Delay after animation container fades */
             position: relative;
             z-index: 10;
-            display: flex;
-            flex-direction: column;
-            min-height: calc(100vh - 4rem); /* Ensure wrapper takes height, accounting for margin */
         }
 
-        @keyframes fadeInContent {
-             from { opacity: 0; transform: translateY(30px); }
-             to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes fadeInContent { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
         /* Header and Nav styles */
         header.main-header {
             text-align: center;
-            margin-bottom: 3rem; /* Space below header */
-             animation: slideDownNav 0.8s ease-out forwards;
-             animation-delay: 3.6s; /* After wrapper fades in */
-             opacity:0; /* Start hidden for animation */
+            margin-bottom: 4rem; /* Increased space */
         }
-
-         @keyframes slideDownNav {
-             from { opacity: 0; transform: translateY(-20px); }
-             to { opacity: 1; transform: translateY(0); }
+        .main-logo-header {
+             font-family: 'Orbitron', sans-serif; /* Apply futuristic font to header logo */
+             font-size: 2.5rem; /* Larger header logo */
+             color: #fff;
+             text-shadow: 0 0 10px #9333ea; /* Purple glow */
+             margin-bottom: 1rem;
+             display: inline-block; /* Allows text-shadow */
         }
-
         nav.main-nav a {
-             color: var(--text-secondary);
+             color: #cbd5e1; /* slate-300 */
              text-decoration: none;
              margin: 0 0.75rem;
-             font-size: 1.125rem;
-             padding: 0.5rem 1rem;
-             border-radius: 0.375rem; /* rounded-md */
-             transition: color 0.3s ease, background-color 0.3s ease, transform 0.2s ease;
-             display: inline-block; /* Needed for transform */
+             font-size: 1rem; /* Adjusted size */
+             padding: 0.6rem 1.2rem;
+             border-radius: 0.5rem; /* rounded-lg */
+             transition: all 0.3s ease;
+             border: 1px solid transparent;
         }
-
         nav.main-nav a:hover {
-            color: var(--text-primary);
-            background-color: rgba(255, 255, 255, 0.1);
-             transform: translateY(-2px); /* Subtle lift */
+            color: #ffffff;
+            background-color: rgba(147, 51, 234, 0.2); /* Lighter purple translucent bg */
+            border-color: rgba(147, 51, 234, 0.5); /* Purple border */
+            transform: translateY(-2px);
         }
         nav.main-nav a.active {
-             color: var(--text-primary);
+             color: #ffffff;
              font-weight: 600;
-             background-color: var(--highlight-bg);
+             background-color: #7e22ce; /* Darker purple solid */
+             border-color: #a855f7; /* Lighter purple border */
+             box-shadow: 0 0 15px rgba(168, 85, 247, 0.4); /* Purple glow effect */
         }
 
-        /* Glass effect for content cards */
+        /* Glass effect enhanced */
         .glass-effect {
-            background-color: var(--glass-bg);
+            background-color: rgba(18, 18, 18, 0.7); /* Slightly more opaque dark background */
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
-            border: 1px solid var(--glass-border);
-            border-radius: 0.75rem; /* rounded-xl */
-            padding: 2rem;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
-             opacity: 0; /* Start hidden for animation */
-             animation: popUp 0.8s ease-out forwards;
-             animation-delay: 3.8s; /* After nav */
-        }
-         @keyframes popUp {
-            from { opacity: 0; transform: translateY(20px) scale(0.95); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
-         }
-         /* Stagger animation for second section */
-        #learn-more.glass-effect {
-            animation-delay: 4.0s;
+            border: 1px solid rgba(255, 255, 255, 0.1); /* Sharper border */
+            border-radius: 1rem; /* rounded-2xl */
+            padding: 2.5rem; /* Increased padding */
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5); /* Stronger shadow */
+            margin-bottom: 2.5rem; /* Increased bottom margin */
         }
 
+        /* Feature Card Styles */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Responsive grid */
+            gap: 1.5rem; /* Space between cards */
+        }
+        .feature-card {
+            background-color: rgba(25, 25, 25, 0.8); /* Darker card background */
+            border: 1px solid rgba(147, 51, 234, 0.3); /* Purple border */
+            border-radius: 0.75rem; /* rounded-xl */
+            padding: 1.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center content */
+            text-align: center;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(147, 51, 234, 0.3); /* Purple glow on hover */
+        }
+        .feature-icon {
+            font-size: 2.5rem; /* Larger icons */
+            margin-bottom: 1rem;
+            color: #a855f7; /* Lighter purple for icons */
+        }
+        .feature-title {
+            font-size: 1.125rem; /* text-lg */
+            font-weight: 600; /* semibold */
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+        .feature-description {
+            font-size: 0.95rem; /* Slightly smaller */
+            color: #d1d5db; /* gray-300 */
+            line-height: 1.6;
+        }
+
+        /* Call to Action Button */
+         .cta-button {
+            display: inline-flex; /* Allows icon alignment */
+            align-items: center;
+            background: linear-gradient(90deg, #8b5cf6, #6d28d9); /* Purple gradient */
+            color: white;
+            font-weight: 600; /* semibold */
+            font-size: 1.125rem; /* text-lg */
+            padding: 0.8rem 1.8rem;
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 5px 15px rgba(109, 40, 217, 0.4);
+            transition: all 0.3s ease;
+            text-decoration: none; /* Remove underline from link */
+         }
+        .cta-button:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 8px 25px rgba(109, 40, 217, 0.6);
+        }
+         .cta-button i { /* Style for icon inside button */
+            margin-right: 0.5rem;
+         }
 
         /* Footer styles */
         footer.main-footer {
             text-align: center;
-            margin-top: auto; /* Pushes footer to bottom */
-            padding-top: 3rem;
-             padding-bottom: 1.5rem; /* Add padding at the very bottom */
-            border-top: 1px solid var(--glass-border);
-            color: var(--footer-text);
-            font-size: 0.875rem;
-            width: 100%; /* Span full width within wrapper */
-             opacity: 0; /* Start hidden for animation */
-             animation: fadeInUpFooter 0.8s ease-out forwards;
-             animation-delay: 4.2s; /* After content */
+            margin-top: 5rem;
+            padding: 2.5rem 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            color: #9ca3af; /* gray-400 */
+            font-size: 0.9rem;
         }
-         @keyframes fadeInUpFooter {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-         }
          footer.main-footer nav a {
-            color: var(--footer-text);
-            margin: 0 0.5rem;
+            color: #9ca3af;
+            margin: 0 0.6rem;
             transition: color 0.3s ease;
+            font-size: 0.9rem;
          }
-         footer.main-footer nav a:hover {
-            color: var(--text-secondary);
+         footer.main-footer nav a:hover { color: #d1d5db; }
+         .social-links a {
+             color: #9ca3af;
+             margin: 0 0.75rem;
+             font-size: 1.5rem; /* Larger social icons */
+             transition: color 0.3s ease, transform 0.3s ease;
          }
-
-         /* Specific element styling */
-         .hero-button {
-            transition: background-color 0.3s ease, transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease; /* Springy effect */
-            box-shadow: 0 4px 15px rgba(128, 0, 128, 0.3); /* Purple shadow */
+         .social-links a:hover {
+             color: #a855f7; /* Purple on hover */
+             transform: scale(1.2);
          }
-         .hero-button:hover {
-             background-color: #9333ea; /* Slightly brighter purple */
-             transform: scale(1.05) translateY(-2px);
-             box-shadow: 0 8px 25px rgba(128, 0, 128, 0.5);
-         }
-
 
     </style>
 </head>
 <body class=""> <div class="animation-container">
         <div class="logo-container">
             <div class="burst-spinner" id="spinner">
-                 <div class="burst-line" style="--angle: 0deg;"></div>
-                <div class="burst-line" style="--angle: 45deg;"></div>
-                <div class="burst-line" style="--angle: 90deg;"></div>
-                <div class="burst-line" style="--angle: 135deg;"></div>
-                <div class="burst-line" style="--angle: 180deg;"></div>
-                <div class="burst-line" style="--angle: 225deg;"></div>
-                <div class="burst-line" style="--angle: 270deg;"></div>
-                <div class="burst-line" style="--angle: 315deg;"></div>
+                <div class="burst-line" style="--angle: 0deg;"></div> <div class="burst-line" style="--angle: 45deg;"></div> <div class="burst-line" style="--angle: 90deg;"></div> <div class="burst-line" style="--angle: 135deg;"></div> <div class="burst-line" style="--angle: 180deg;"></div> <div class="burst-line" style="--angle: 225deg;"></div> <div class="burst-line" style="--angle: 270deg;"></div> <div class="burst-line" style="--angle: 315deg;"></div>
             </div>
             <div class="logo-text glow">
-                <span class="letter">B</span>
-                <span class="letter">L</span>
-                <span class="letter">A</span>
-                <span class="letter">C</span>
-                <span class="letter">K</span>
-                <span class="letter">.</span>
+                <span class="letter">B</span><span class="letter">L</span><span class="letter">A</span><span class="letter">C</span><span class="letter">K</span><span class="letter">.</span>
             </div>
         </div>
     </div>
 
     <div class="main-content-wrapper">
         <header class="main-header">
-            <nav class="main-nav mt-4">
+            <div class="main-logo-header">BLACK.</div>
+            <nav class="main-nav mt-2">
                 <a href="/" class="active">Home</a>
-                <a href="/privacy.html">Privacy</a>
+                <a href="/privacy.html">Privacy Policy</a>
                 <a href="/support.html">Support</a>
             </nav>
         </header>
 
-        <main class="flex-grow"> <section class="glass-effect text-center mb-12">
-                <h1 class="text-5xl font-bold text-white mb-5">Ultimately, It's <span class="text-purple-400">Black</span>.</h1>
-                <p class="text-xl text-gray-300 mb-10 max-w-3xl mx-auto">
-                    Dive into the void where creativity meets the abstract. We craft unique digital experiences that challenge perception.
+        <main>
+            <section class="glass-effect text-center mb-16">
+                <h1 class="text-4xl md:text-5xl font-bold text-white mb-4 leading-tight">
+                    Studying doesn’t have to be <span class="text-purple-400">lonely</span> or <span class="text-purple-400">messy</span> anymore.
+                </h1>
+                <p class="text-lg md:text-xl text-gray-300 mb-8 max-w-3xl mx-auto">
+                    BLACK brings together everything a student needs in one clean, connected academic space. Built for students, by students.
                 </p>
-                <a href="#learn-more" class="hero-button inline-block bg-purple-600 text-white font-semibold text-lg px-8 py-3 rounded-lg">
-                    Explore Our Vision
+                <a href="https://play.google.com/store/apps/details?id=com.loveucifer.black" target="_blank" rel="noopener noreferrer" class="cta-button">
+                    <i class="fab fa-google-play"></i> Get the App on Google Play
                 </a>
             </section>
 
-            <section id="learn-more" class="glass-effect">
-                 <h2 class="text-3xl font-semibold text-white mb-6 text-center">Our Vision</h2>
-                 <p class="text-gray-300 text-lg text-center leading-relaxed max-w-3xl mx-auto">
-                     We are dedicated to pushing the boundaries of digital art and interaction. Our focus lies in blending minimalist aesthetics with complex underlying structures, creating experiences that are both visually striking and thought-provoking. We believe in the power of the unseen and the beauty of the void.
-                 </p>
+            <section id="features" class="mb-16">
+                 <h2 class="text-3xl font-bold text-white mb-10 text-center">How BLACK Fits Into Your Grind</h2>
+                 <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-upload"></i></div>
+                        <h3 class="feature-title">All Your Notes in One Place</h3>
+                        <p class="feature-description">Upload handwritten notes, PDFs, slides, images – keep everything organized effortlessly.</p>
+                    </div>
+                     <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-search"></i></div>
+                        <h3 class="feature-title">Find Exactly What You Need</h3>
+                        <p class="feature-description">Powerful search by subject, custom tags, or specific users. Never lose a note again.</p>
+                    </div>
+                     <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-calendar-alt"></i></div>
+                        <h3 class="feature-title">Organize Your Day</h3>
+                        <p class="feature-description">Built-in to-do list and calendar to manage your tasks and schedule effectively.</p>
+                    </div>
+                     <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-comments"></i></div>
+                        <h3 class="feature-title">Community Forum</h3>
+                        <p class="feature-description">Ask doubts, request notes, and help others. Learn and grow together.</p>
+                    </div>
+                     <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-user-friends"></i></div>
+                        <h3 class="feature-title">Connect & Follow</h3>
+                        <p class="feature-description">Follow classmates and friends. See their uploads, posts, and stay connected.</p>
+                    </div>
+                     <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-fire"></i></div>
+                        <h3 class="feature-title">Discover Trending Notes</h3>
+                        <p class="feature-description">See what’s buzzing – popular notes across classes and universities.</p>
+                    </div>
+                     <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-palette"></i></div>
+                        <h3 class="feature-title">Custom Themes</h3>
+                        <p class="feature-description">Switch up the app's look and feel to match your personal vibe.</p>
+                    </div>
+                     <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-share-alt"></i></div>
+                        <h3 class="feature-title">Create & Share</h3>
+                        <p class="feature-description">Make posts, share updates, and be an active part of the student community.</p>
+                    </div>
+                     <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-book-open"></i></div>
+                        <h3 class="feature-title">Explore Notes Anytime</h3>
+                        <p class="feature-description">View and explore a vast library of notes from students like you, anywhere.</p>
+                    </div>
+                 </div>
             </section>
+
+            <section class="glass-effect text-center">
+                <h2 class="text-3xl font-bold text-white mb-6">Ready to Elevate Your Study Game?</h2>
+                <p class="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
+                    Download BLACK today and transform your academic experience.
+                </p>
+                <a href="https://play.google.com/store/apps/details?id=com.loveucifer.black" target="_blank" rel="noopener noreferrer" class="cta-button">
+                     <i class="fas fa-download"></i> Download Now
+                </a>
+            </section>
+
         </main>
 
         <footer class="main-footer">
-            <p id="footer-year">&copy;  Black. All rights reserved.</p>
+            <div class="social-links mb-4">
+                <a href="#" target="_blank" title="Twitter / X"><i class="fab fa-twitter"></i></a>
+                <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+                 <a href="#" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                </div>
+            <p id="footer-year">&copy; Ultimately It's Black. All rights reserved.</p>
             <nav class="mt-2">
-                <a href="/">Home</a>
-                <a href="/privacy.html">Privacy Policy</a>
-                <a href="/support.html">Support</a>
+                <a href="/">Home</a> |
+                <a href="/privacy.html">Privacy Policy</a> |
+                <a href="/support.html">Support</a> |
+                <a href="mailto:support@ultimatelyitsblack.com">support@ultimatelyitsblack.com</a>
             </nav>
         </footer>
     </div>
 
     <script>
-        // Logo Animation Script (KEEPING AS PROVIDED with slight adjustment)
+        // Logo Animation Script (KEEPING AS PROVIDED, slightly adapted for fade out)
         setTimeout(() => {
             const spinner = document.getElementById('spinner');
             if (spinner) {
                 const lines = spinner.querySelectorAll('.burst-line');
-                // Fade out specific lines (adjust indices if needed)
-                [1, 3, 5, 7].forEach(i => { // Example: Fade every other line
+                 // Apply fadeUp animation to specific lines
+                [2, 3, 4, 6, 7].forEach(i => { // Fading more lines for effect
                     if (lines[i]) {
-                        const angle = lines[i].style.getPropertyValue('--angle') || '0deg';
-                        lines[i].style.setProperty('--angle', angle); // Ensure var is set for animation
-                        lines[i].style.animation = `fadeUp 0.8s ease-out forwards 0.3s`; // Add slight delay
+                        const angle = lines[i].style.getPropertyValue('--angle');
+                        lines[i].style.animation = `fadeUp 0.8s ease forwards`; // Slightly faster fade
+                        lines[i].style.setProperty('--angle', angle); // Ensure angle is available
                     }
                 });
-                // Stop the main spinning animation after it completes
-                setTimeout(() => {
-                     spinner.style.animation = "none"; // Stop spin
-                     spinner.style.opacity = 0; // Fade spinner itself
-                     spinner.style.transition = "opacity 0.5s ease-out";
-                }, 1500); // Corresponds to spinOnce duration
+                 // Stop the main spinner rotation after its duration
+                 setTimeout(() => {
+                    spinner.style.animation = "none"; // Stop spinning
+                    spinner.style.opacity = '0'; // Fade spinner itself
+                    spinner.style.transition = 'opacity 0.5s ease';
+                 }, 1500); // Stop spin after 1.5s
             }
 
-             // Add 'loaded' class to body to trigger fade out of container and fade in of content
-             // Use the transition delay on .animation-container (2.8s) as the base timing
+             // Add 'loaded' class to body after animation duration + fade-out delay
+             // Animation takes ~2.6s (last letter) + 0.8s (fade container) = ~3.4s
             setTimeout(() => {
                  document.body.classList.add('loaded');
-                 document.body.style.overflowY = 'auto'; // Enable scrolling AFTER animation fades
-            }, 2800); // Match the fade-out start time
+                 document.body.style.overflowY = 'auto'; // Allow scrolling only after animation fades
+            }, 3600); // Start fading content in after 3.6s
 
-        }, 1500); // Start the line fade-out logic 1.5s into the spin
+        }, 1500); // Start spinner fade-out logic after 1.5 seconds
 
         // Dynamic Year Script
         const yearElement = document.getElementById('footer-year');
         if (yearElement) {
-            yearElement.textContent = `© ${new Date().getFullYear()} Ultimately It's Black. All rights reserved.`;
+            yearElement.innerHTML = `&copy; ${new Date().getFullYear()} Ultimately It's Black. All rights reserved.`;
         }
-
-        // Smooth scroll for internal links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
     </script>
 </body>
 </html>
