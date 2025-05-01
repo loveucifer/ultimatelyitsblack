@@ -1,245 +1,238 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy - BLACK App</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* Base body styles */
+        /* Base Styles (Same as index.html) */
         body {
-            margin: 0;
-            background: linear-gradient(180deg, #0a0a0a 0%, #3a0f5c 100%);
-            min-height: 100vh;
             font-family: 'Inter', sans-serif;
+            background-color: #000;
             color: #e5e7eb;
-            line-height: 1.8; /* Increased for readability */
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
             overflow-x: hidden;
-            display: flex;
-            flex-direction: column;
         }
+        html { scroll-behavior: smooth; }
+        body.loaded { opacity: 1; }
 
-        /* Main content wrapper */
-        .main-content-wrapper {
-            padding: 2rem 1rem;
-            width: 100%;
-            max-width: 900px;
-            margin: 0 auto;
-            flex-grow: 1;
-        }
+        /* Loading Screen Styles (Same as index.html) */
+        .loading-screen { position: fixed; inset: 0; z-index: 100; display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: #000; transition: opacity 0.5s ease-out; }
+        .loading-screen.hidden { opacity: 0; pointer-events: none; }
+        .loading-logo { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        .loading-spinner svg { animation: spin 1s linear infinite; }
 
-        /* Header and Nav styles */
-        header.main-header { text-align: center; margin-bottom: 3rem; flex-shrink: 0; }
-        .main-logo-header { font-family: 'Orbitron', sans-serif; font-size: 2.5rem; color: #fff; text-shadow: 0 0 10px #9333ea; margin-bottom: 1rem; display: inline-block; }
-        nav.main-nav a { color: #cbd5e1; text-decoration: none; margin: 0 0.75rem; font-size: 1rem; padding: 0.6rem 1.2rem; border-radius: 0.5rem; transition: all 0.3s ease; border: 1px solid transparent; }
-        nav.main-nav a:hover { color: #ffffff; background-color: rgba(147, 51, 234, 0.2); border-color: rgba(147, 51, 234, 0.5); transform: translateY(-2px); }
-        nav.main-nav a.active { color: #ffffff; font-weight: 600; background-color: #7e22ce; border-color: #a855f7; box-shadow: 0 0 15px rgba(168, 85, 247, 0.4); }
+        /* Header Styles (Same as index.html) */
+        .header { position: sticky; top: 0; z-index: 50; width: 100%; border-bottom-width: 1px; border-color: rgba(255, 255, 255, 0.1); background-color: rgba(0, 0, 0, 0.6); backdrop-filter: blur(1rem); }
+        .nav-link.active { color: #c084fc; background-color: rgba(255, 255, 255, 0.05); }
+        .mobile-menu { position: absolute; top: 100%; left: 0; width: 100%; background-color: rgba(0, 0, 0, 0.95); backdrop-filter: blur(0.5rem); border-top: 1px solid rgba(255, 255, 255, 0.1); max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out, opacity 0.4s ease-out; opacity: 0; }
+        .mobile-menu.open { max-height: 500px; opacity: 1; }
 
-        /* Glass effect for content */
-        .glass-effect {
-            background-color: rgba(18, 18, 18, 0.7);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 1rem;
-            padding: 2rem md:p-8 lg:p-10; /* Responsive padding */
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-        }
+        /* Button Variants (Same as index.html) */
+        .btn { display: inline-flex; align-items: center; justify-content: center; border-radius: 0.375rem; font-size: 0.875rem; font-weight: 500; transition: all 0.3s ease-in-out; cursor: pointer; padding: 0.5rem 1rem; }
+        .btn-lg { padding: 0.6rem 2rem; border-radius: 0.5rem; }
+        .btn-sm { padding: 0.35rem 0.75rem; border-radius: 0.375rem; }
+        .btn-purple-gradient { background-image: linear-gradient(to right, #8b5cf6, #6d28d9); color: white; box-shadow: 0 4px 6px -1px rgba(139, 92, 246, 0.3), 0 2px 4px -2px rgba(139, 92, 246, 0.3); }
+        .btn-purple-gradient:hover { background-image: linear-gradient(to right, #7c3aed, #5b21b6); box-shadow: 0 10px 15px -3px rgba(139, 92, 246, 0.4), 0 4px 6px -4px rgba(139, 92, 246, 0.4); transform: translateY(-2px); }
+        .btn-outline-purple { border: 1px solid #a855f7; color: #c084fc; background-color: transparent; }
+        .btn-outline-purple:hover { background-color: rgba(168, 85, 247, 0.1); color: #d8b4fe; }
+        .btn-ghost { color: #d1d5db; }
+        .btn-ghost:hover { background-color: rgba(255, 255, 255, 0.1); color: white; }
 
-        /* Styling for policy content */
-         main h2 {
-            font-size: 1.75rem; /* text-2xl */
-            font-weight: 700; /* bold */
-            color: #ffffff;
-            margin-bottom: 1.5rem; /* mb-6 */
-            border-bottom: 1px solid rgba(147, 51, 234, 0.4); /* Purple underline */
-            padding-bottom: 0.75rem; /* pb-3 */
-         }
-          main h3 {
+        /* Footer Styles (Same as index.html) */
+        .footer { background-image: linear-gradient(to top, #000000, #000000, rgba(0, 0, 0, 0.5)); }
+
+        /* Animations (Same as index.html) */
+        @keyframes pulse { 50% { opacity: .5; } }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes fadeInBasic { from { opacity: 0; } to { opacity: 1; } }
+        .animate-fadeInBasic { animation: fadeInBasic 0.8s ease-out forwards; }
+
+        /* Custom Scrollbar (Same as index.html) */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #111; }
+        ::-webkit-scrollbar-thumb { background-color: #4c1d95; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background-color: #5b21b6; }
+
+        /* Embedded SVG styles */
+        svg { color: currentColor; width: 1em; height: 1em; display: inline-block; vertical-align: middle; }
+
+        /* Prose-like Styles for Policy Content */
+        .policy-content { color: #d1d5db; /* gray-300 */ }
+        .policy-content h3 {
             font-size: 1.25rem; /* text-xl */
             font-weight: 600; /* semibold */
-            color: #f3e8ff; /* Lighter purple/off-white */
-            margin-top: 2.5rem; /* Increased top margin */
-            margin-bottom: 1rem; /* mb-4 */
-         }
-         main ul {
-            list-style: none; /* Remove default bullets */
-            padding-left: 0.5rem; /* Slight indent */
-            margin-bottom: 1.5rem; /* mb-6 */
-            space-y: 0.75rem; /* Increased space between items */
-         }
-          main ul li::before {
-             content: "\f105"; /* Font Awesome chevron-right icon */
-             font-family: "Font Awesome 6 Free";
-             font-weight: 900; /* Solid */
-             color: #a855f7; /* Light purple */
-             display: inline-block;
-             width: 1em;
-             margin-left: -1.2em; /* Adjust positioning */
-             margin-right: 0.5em;
-          }
-         main p {
-             margin-bottom: 1.25rem; /* Increased paragraph spacing */
-             color: #d1d5db; /* gray-300 */
-         }
-         main strong {
-             color: #e5e7eb; /* gray-200 */
-         }
-         main a {
-             color: #c4b5fd; /* violet-300 */
-             font-weight: 500;
-             transition: color 0.3s ease, text-shadow 0.3s ease;
-             text-decoration: underline;
-             text-decoration-color: rgba(196, 181, 253, 0.5);
-         }
-         main a:hover {
-             color: #ffffff;
-             text-shadow: 0 0 8px rgba(196, 181, 253, 0.7); /* Subtle glow on hover */
-             text-decoration-color: #c4b5fd;
-         }
-
-        /* Footer styles */
-        footer.main-footer {
-            text-align: center;
-            margin-top: 5rem;
-            padding: 2.5rem 1rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.15);
-            color: #9ca3af;
-            font-size: 0.9rem;
-            flex-shrink: 0;
+            color: #d8b4fe; /* purple-300 */
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(168, 85, 247, 0.3); /* purple-500 */
         }
-         footer.main-footer nav a { color: #9ca3af; margin: 0 0.6rem; transition: color 0.3s ease; font-size: 0.9rem;}
-         footer.main-footer nav a:hover { color: #d1d5db; }
-         .social-links a { color: #9ca3af; margin: 0 0.75rem; font-size: 1.5rem; transition: color 0.3s ease, transform 0.3s ease; }
-         .social-links a:hover { color: #a855f7; transform: scale(1.2); }
+        .policy-content p { margin-bottom: 1rem; line-height: 1.7; }
+        .policy-content strong { color: #f3f4f6; /* gray-100 */ font-weight: 600; }
+        .policy-content ul { list-style: disc; margin-left: 1.5rem; margin-bottom: 1rem; space-y: 0.5rem; }
+        .policy-content a { color: #c084fc; /* purple-400 */ text-decoration: underline; text-decoration-color: rgba(192, 132, 252, 0.5); transition: color 0.3s ease; }
+        .policy-content a:hover { color: #e9d5ff; /* purple-200 */ }
 
     </style>
 </head>
-<body class="bg-black flex flex-col min-h-screen">
+<body class="bg-black">
 
-    <div class="main-content-wrapper">
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-logo text-5xl font-bold text-purple-500 tracking-widest">BLACK</div>
+        <p class="mt-4 text-sm text-gray-400">Loading...</p>
+        <div class="loading-spinner mt-6 h-8 w-8 text-purple-600">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+        </div>
+    </div>
 
-        <header class="main-header">
-             <div class="main-logo-header">BLACK.</div>
-            <nav class="main-nav mt-2">
-                <a href="/">Home</a>
-                <a href="/privacy.html" class="active">Privacy Policy</a>
-                <a href="/support.html">Support</a>
+    <header class="header">
+        <div class="container mx-auto flex h-16 max-w-7xl items-center justify-between px-4">
+            <a href="index.html" class="flex items-center space-x-2">
+                <span class="text-2xl font-bold text-white tracking-wider">BLACK</span>
+            </a>
+            <nav class="hidden space-x-1 md:flex">
+                <a href="index.html" class="nav-link btn btn-ghost">Home</a>
+                <a href="support.html" class="nav-link btn btn-ghost">Support</a>
+                <a href="privacy.html" class="nav-link active btn btn-ghost">Privacy Policy</a>
             </nav>
-        </header>
+            <a href="https://play.google.com/store/apps/details?id=com.loveucifer.black" target="_blank" rel="noopener noreferrer" class="hidden md:inline-block ml-4">
+                <button class="btn btn-sm btn-purple-gradient">Get the App</button>
+            </a>
+            <button id="mobile-menu-button" class="md:hidden text-white p-2 z-50" aria-label="Toggle menu">
+                <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+                <svg id="close-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg>
+            </button>
+        </div>
+         <div id="mobile-menu-panel" class="mobile-menu md:hidden">
+            <nav class="flex flex-col items-center space-y-4 p-6">
+                <a href="index.html" class="nav-link w-full text-center py-2 rounded text-gray-300 hover:text-white hover:bg-white/10 transition-colors">Home</a>
+                <a href="support.html" class="nav-link w-full text-center py-2 rounded text-gray-300 hover:text-white hover:bg-white/10 transition-colors">Support</a>
+                <a href="privacy.html" class="nav-link active w-full text-center py-2 rounded text-gray-300 hover:text-white hover:bg-white/10 transition-colors">Privacy Policy</a>
+                <a href="https://play.google.com/store/apps/details?id=com.loveucifer.black" target="_blank" rel="noopener noreferrer" class="w-full mt-4">
+                    <button class="btn btn-purple-gradient w-full">Get the App</button>
+                </a>
+            </nav>
+        </div>
+    </header>
 
-        <main class="glass-effect">
-            <h2>Privacy Policy for ultimatelyitsblack.com</h2>
+    <main class="flex-grow">
+        <div class="bg-gradient-to-b from-black via-purple-900/10 to-black min-h-screen py-20 md:py-28">
+            <div class="container mx-auto max-w-4xl px-4 animate-fadeInBasic">
+                <div class="bg-black/50 border border-white/10 rounded-xl shadow-xl overflow-hidden p-6 md:p-10 lg:p-12">
+                    <div class="mb-8 border-b border-purple-500/30 pb-4">
+                        <h1 class="text-3xl md:text-4xl font-bold text-white">Privacy Policy</h1>
+                        <p class="text-sm text-purple-300 mt-1">Last Updated: May 2, 2025</p>
+                    </div>
+                    <div class="policy-content">
+                        <p>Welcome to BLACK. This privacy policy explains how we collect, use, disclose, and safeguard your information when you use our mobile application (the "App") and website (collectively, the "Service"). Please read this privacy policy carefully.</p>
 
-            <p><strong>Effective Date: May 1, 2025</strong></p>
+                        <h3>Information We Collect</h3>
+                        <p>We may collect information about you in a variety of ways. The information we may collect via the App depends on the content and materials you use, and includes:</p>
+                        <ul>
+                            <li><strong>Personal Data:</strong> Personally identifiable information, such as your name, email address, university, course, etc., that you voluntarily give to us when you register with the App.</li>
+                            <li><strong>User Content:</strong> Notes, documents, images, posts, comments, and other content you upload or create within the App.</li>
+                            <li><strong>Usage Data:</strong> Information automatically collected when you access the App, such as your device type, operating system, IP address, access times, and activity within the App (features used, notes viewed, etc.).</li>
+                            <li><strong>Information from Social Networks:</strong> If you connect your account to third-party social networks, we may collect information like your name, username, profile picture, etc.</li>
+                        </ul>
 
-            <p>
-                Welcome to Ultimately It's Black. This privacy policy explains how we collect,
-                use, disclose, and safeguard your information when you visit our website
-                ultimatelyitsblack.com, including any other media form, media channel,
-                mobile website, or mobile application related or connected thereto (collectively, the “Site”).
-                Please read this privacy policy carefully. If you do not agree with the terms of this
-                privacy policy, please do not access the site.
-            </p>
+                        <h3>How We Use Your Information</h3>
+                        <p>Having accurate information permits us to provide you with a smooth, efficient, and customized experience. Specifically, we may use information collected about you via the App to:</p>
+                        <ul>
+                            <li>Create and manage your account.</li>
+                            <li>Provide, operate, and maintain the Service.</li>
+                            <li>Enable user-to-user communications and interactions (forum, following).</li>
+                            <li>Analyze usage and trends to improve the App and develop new features.</li>
+                            <li>Personalize your experience (e.g., suggesting notes, applying themes).</li>
+                            <li>Respond to your comments, questions, and provide customer support via <a href="mailto:support@ultimatelyitsblack.com">support@ultimatelyitsblack.com</a>.</li>
+                            <li>Prevent fraudulent activity and ensure security.</li>
+                            <li>Comply with legal obligations.</li>
+                        </ul>
 
-            <div>
-                <h3>Information We Collect</h3>
-                <p>
-                    We may collect information about you in a variety of ways. The information we may collect on the Site includes:
-                </p>
-                <ul>
-                    <li><strong>Personal Data:</strong> Personally identifiable information, such as your name, shipping address, email address, and telephone number, and demographic information, such as your age, gender, hometown, and interests, that you voluntarily give to us when you register with the Site or when you choose to participate in various activities related to the Site.</li>
-                    <li><strong>Usage Data:</strong> Information our servers automatically collect when you access the Site, such as your IP address, your browser type, your operating system, your access times, and the pages you have viewed.</li>
-                    <li><strong>Cookies and Tracking Technologies:</strong> We may use cookies, web beacons, and other tracking technologies to help customize the Site and improve your experience.</li>
-                </ul>
+                        <h3>Sharing Your Information</h3>
+                        <p>We may share information we have collected about you in certain situations:</p>
+                        <ul>
+                            <li><strong>With Other Users:</strong> Your profile information (name, university, etc.) and content you choose to share publicly (notes set to public, forum posts) will be visible to other users.</li>
+                            <li><strong>By Law or to Protect Rights:</strong> If release is necessary to respond to legal process, investigate potential violations, or protect rights, property, and safety.</li>
+                            <li><strong>Third-Party Service Providers:</strong> With third parties performing services for us (e.g., cloud hosting, analytics, data storage).</li>
+                            <li><strong>Business Transfers:</strong> In connection with a merger, sale of assets, financing, or acquisition.</li>
+                        </ul>
+
+                        <h3>Data Security</h3>
+                        <p>We use administrative, technical, and physical security measures to help protect your personal information. While we have taken reasonable steps to secure the personal information you provide to us, please be aware that despite our efforts, no security measures are perfect or impenetrable, and no method of data transmission can be guaranteed against any interception or other type of misuse.</p>
+
+                        <h3>Your Data Protection Rights</h3>
+                        <p>Depending on your location, you may have certain rights regarding your personal data, including the right to access, correct, delete, or restrict its processing. You can usually manage your account information and content within the App settings. For other requests, please contact us.</p>
+
+                        <h3>Contact Us</h3>
+                        <p>If you have questions or comments about this Privacy Policy, please contact us:</p>
+                        <p>Email: <a href="mailto:support@ultimatelyitsblack.com">support@ultimatelyitsblack.com</a></p>
+                        </div>
+                </div>
             </div>
+        </div>
+    </main>
 
-            <div>
-                <h3>How We Use Your Information</h3>
-                <p>
-                    Having accurate information permits us to provide you with a smooth, efficient, and customized experience. Specifically, we may use information collected about you to:
-                </p>
-                 <ul>
-                    <li>Provide and maintain our Service.</li>
-                    <li>Manage user accounts (if applicable).</li>
-                    <li>Respond to support requests and inquiries via <a href="mailto:support@ultimatelyitsblack.com">support@ultimatelyitsblack.com</a>.</li>
-                    <li>Monitor and analyze usage and trends to improve the Site.</li>
-                    <li>Comply with legal obligations.</li>
-                </ul>
+    <footer class="footer border-t border-white/10">
+         <div class="container mx-auto max-w-7xl px-4 py-16">
+            <div class="grid grid-cols-1 gap-12 md:grid-cols-4 lg:grid-cols-5">
+                <div class="lg:col-span-2">
+                    <a href="index.html" class="inline-block">
+                        <h3 class="text-2xl font-bold text-white mb-4 tracking-wider">BLACK</h3>
+                    </a>
+                    <p class="text-gray-400 text-sm mb-6 max-w-xs">
+                        The ultimate unified academic space, built for students, by students.
+                    </p>
+                    <div class="flex space-x-5">
+                        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Twitter" class="text-gray-400 hover:text-purple-400 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M22.46 6c-.77.35-1.6.58-2.46.67.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.22-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.01-.06C3.18 20.57 5.32 21 7.66 21c7.6 0 11.77-6.3 11.77-11.77 0-.18 0-.35-.01-.53.8-.58 1.48-1.3 2.04-2.13z"/></svg></a>
+                        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="text-gray-400 hover:text-purple-400 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c2.7 0 3 .01 4.06.06 1.01.05 1.7.22 2.26.42.58.21.96.48 1.4.93.44.44.72.82.93 1.4.2.55.37 1.25.42 2.26.05 1.06.06 1.36.06 4.06s-.01 3-.06 4.06c-.05 1.01-.22 1.7-.42 2.26-.21.58-.48.96-.93 1.4-.44.44-.82.72-1.4.93-.55.2-1.25.37-2.26.42-1.06.05-1.36.06-4.06.06s-3-.01-4.06-.06c-1.01-.05-1.7-.22-2.26-.42-.58-.21-.96-.48-1.4-.93-.44-.44-.72-.82-.93-1.4-.2-.55-.37-1.25-.42-2.26-.05-1.06-.06-1.36-.06-4.06s.01-3 .06-4.06c.05-1.01.22-1.7.42-2.26.21-.58.48.96.93-1.4.44-.44.82-.72 1.4-.93.55-.2 1.25-.37 2.26-.42C9 2.01 9.3 2 12 2zm0 1.8c-2.67 0-2.96.01-4 .06-1.02.05-1.5.21-1.8.34-.4.16-.65.37-.93.65-.28.28-.5.53-.65.93-.14.3-.3.79-.34 1.8C4.01 9.04 4 9.33 4 12s.01 2.96.06 4c.05 1.02.21 1.5.34 1.8.16.4.37.65.65.93.28.28.53.5.93.65.3.14.79.3 1.8.34 1.04.05 1.33.06 4 .06s2.96-.01 4-.06c1.02-.05 1.5-.21 1.8-.34.4-.16.65-.37.93-.65.28.28.5-.53.65-.93.14-.3.3-.79.34-1.8.05-1.04.06-1.33.06-4s-.01-2.96-.06-4c-.05-1.02-.21-1.5-.34-1.8-.16-.4-.37-.65-.65-.93-.28-.28-.53-.5-.93-.65-.3-.14-.79-.3-1.8-.34C14.96 3.81 14.67 3.8 12 3.8zm0 4.47c-2.3 0-4.17 1.87-4.17 4.17s1.87 4.17 4.17 4.17 4.17-1.87 4.17-4.17S14.3 8.27 12 8.27zm0 6.53c-1.3 0-2.36-1.06-2.36-2.36s1.06-2.36 2.36-2.36 2.36 1.06 2.36 2.36-1.06 2.36-2.36 2.36zm4.34-6.7c0 .6-.48 1.07-1.07 1.07s-1.07-.48-1.07-1.07.48-1.07 1.07-1.07 1.07.48 1.07 1.07z"/></svg></a>
+                        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="text-gray-400 hover:text-purple-400 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.04c-5.5 0-10 4.49-10 10s4.5 10 10 10 10-4.49 10-10S17.5 2.04 12 2.04zm.84 15.61v-6.81h2.3l.34-2.68h-2.64V6.48c0-.78.22-1.31 1.33-1.31h1.42V2.81c-.25-.03-.98-.1-1.86-.1-1.84 0-3.1 1.12-3.1 3.19v1.97h-2.09v2.68h2.09v6.81h2.51z"/></svg></a>
+                        <a href="#" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="text-gray-400 hover:text-purple-400 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zm-11 6H5v10h3V9zm-1.5-2A1.5 1.5 0 0 0 5 8.5 1.5 1.5 0 0 0 6.5 7 1.5 1.5 0 0 0 8 5.5 1.5 1.5 0 0 0 6.5 4a1.5 1.5 0 0 0-1.5 1.5A1.5 1.5 0 0 0 6.5 7zM19 19h-3v-5.3c0-1.3-.47-2.1-1.56-2.1-.86 0-1.34.58-1.56 1.14-.08.2-.1.47-.1.74V19h-3V9h3v1.38h.04c.42-.64 1.18-1.38 2.78-1.38 2.04 0 3.6 1.34 3.6 4.22V19z"/></svg></a>
+                    </div>
+                </div>
+                <div><h4 class="text-sm font-semibold text-gray-300 uppercase tracking-wider mb-4">Navigate</h4><ul class="space-y-3"><li><a href="index.html" class="text-gray-400 hover:text-purple-400 text-sm transition-colors">Home</a></li><li><a href="support.html" class="text-gray-400 hover:text-purple-400 text-sm transition-colors">Support</a></li><li><a href="privacy.html" class="text-gray-400 hover:text-purple-400 text-sm transition-colors">Privacy Policy</a></li></ul></div>
+                <div><h4 class="text-sm font-semibold text-gray-300 uppercase tracking-wider mb-4">Legal</h4><ul class="space-y-3"><li><a href="privacy.html" class="text-gray-400 hover:text-purple-400 text-sm transition-colors">Privacy Policy</a></li></ul></div>
+                <div><h4 class="text-sm font-semibold text-gray-300 uppercase tracking-wider mb-4">Get the App</h4><ul class="space-y-3"><li><a href="https://play.google.com/store/apps/details?id=com.loveucifer.black" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-purple-400 text-sm transition-colors inline-flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="mr-2"><path d="M6 4l15 8-15 8z"/></svg> Google Play</a></li><li><span class="text-gray-500 text-sm inline-flex items-center cursor-not-allowed" title="Coming Soon"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="mr-2"><path d="M19.3 11.9c-.1-.6-.4-1.2-.8-1.7-.4-.5-.9-.9-1.5-1.2-.9-.4-1.9-.5-2.9-.5-1.4 0-2.8.6-3.8 1.6-.9 1-1.4 2.2-1.5 3.5-.1 1.4.2 2.8.9 4-.2.2-.4.3-.6.5-.7.5-1.3 1.1-1.8 1.8-.6.7-.9 1.5-1.1 2.4H14c.4-.5.8-1 1.3-1.4.5-.4 1.1-.7 1.7-.9.6-.2 1.3-.3 1.9-.3s1.2.1 1.7.3c.6.2 1.1.5 1.6.8.5.4.9.8 1.3 1.3.1.1.2.2.3.3h.1c.2-.9.1-1.8-.1-2.7-.2-.9-.6-1.7-1.1-2.5-.4-.6-.9-1.1-1.4-1.6.1-.1.2-.2.3-.3.9-.8 1.4-1.8 1.5-2.9zm-5.2-3.2c.6-.7 1.4-1.1 2.3-1.1.1 0 .2 0 .3.1.6.1 1.1.4 1.5.8-.4.5-.7 1-.8 1.6-.6.7-1.4 1.1-2.3 1.1-.2 0-.4 0-.5-.1-.7-.1-1.2-.5-1.5-.9s-.4-.9-.4-1.5z"/></svg> App Store (Soon)</span></li></ul></div>
             </div>
-
-            <div>
-                 <h3>Sharing Your Information</h3>
-                 <p>
-                    We may share information we have collected about you in certain situations:
-                 </p>
-                 <ul>
-                    <li><strong>By Law or to Protect Rights:</strong> If release is necessary to respond to legal process, investigate potential violations, or protect rights, property, and safety.</li>
-                    <li><strong>Third-Party Service Providers:</strong> With third parties performing services for us (e.g., hosting, analytics, email delivery).</li>
-                    <li><strong>Business Transfers:</strong> In connection with a merger, sale of assets, financing, or acquisition.</li>
-                 </ul>
-            </div>
-
-            <div>
-                <h3>Data Security</h3>
-                <p>
-                    We use administrative, technical, and physical security measures to help protect your personal information. However, no security measures are perfect, and no method of data transmission can be guaranteed against interception or misuse.
-                </p>
-            </div>
-
-            <div>
-                <h3>Your Data Protection Rights</h3>
-                <p>
-                    Depending on your location, you may have rights regarding your personal data:
-                </p>
-                 <ul>
-                    <li>The right to access, update, or delete the information we have on you.</li>
-                    <li>The right to rectification if information is inaccurate or incomplete.</li>
-                    <li>The right to object to processing.</li>
-                    <li>The right to restrict processing.</li>
-                    <li>The right to data portability.</li>
-                    <li>The right to withdraw consent.</li>
-                 </ul>
-                 <p>To exercise these rights, please contact us using the details below.</p>
-            </div>
-
-            <div>
-                <h3>Contact Us</h3>
-                <p>
-                    If you have questions or comments about this Privacy Policy, please contact us:
-                </p>
-                <p>
-                    Email: <a href="mailto:support@ultimatelyitsblack.com">support@ultimatelyitsblack.com</a>
-                </p>
-            </div>
-        </main>
-
-    </div> <footer class="main-footer">
-         <div class="social-links mb-4">
-             <a href="#" target="_blank" title="Twitter / X"><i class="fab fa-twitter"></i></a>
-             <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-             <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
-             <a href="#" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-         </div>
-        <p id="footer-year">&copy; Ultimately It's Black. All rights reserved.</p>
-         <nav class="mt-2">
-            <a href="/">Home</a> |
-            <a href="/privacy.html">Privacy Policy</a> |
-            <a href="/support.html">Support</a> |
-            <a href="mailto:support@ultimatelyitsblack.com">support@ultimatelyitsblack.com</a>
-        </nav>
+            <div class="mt-16 border-t border-white/10 pt-8 text-center"><p class="text-xs text-gray-500">&copy; <span id="current-year"></span> BLACK. All rights reserved.</p><p class="text-xs text-gray-600 mt-1">Contact: <a href="mailto:support@ultimatelyitsblack.com" class="hover:text-gray-400 transition-colors">support@ultimatelyitsblack.com</a></p></div>
+        </div>
     </footer>
 
     <script>
-        // Simple script to insert the current year in the footer
-        const yearElement = document.getElementById('footer-year');
-        if (yearElement) {
-            yearElement.innerHTML = `&copy; ${new Date().getFullYear()} Ultimately It's Black. All rights reserved.`;
-        }
+        document.addEventListener('DOMContentLoaded', () => {
+            // Loading Screen
+            const loadingScreen = document.getElementById('loading-screen');
+            if (loadingScreen) {
+                setTimeout(() => {
+                    loadingScreen.classList.add('hidden');
+                    document.body.classList.add('loaded');
+                }, 500); // Faster load for sub-pages
+            }
+            // Mobile Menu
+            const menuButton = document.getElementById('mobile-menu-button');
+            const menuPanel = document.getElementById('mobile-menu-panel');
+            const menuIcon = document.getElementById('menu-icon');
+            const closeIcon = document.getElementById('close-icon');
+            if (menuButton && menuPanel && menuIcon && closeIcon) {
+                menuButton.addEventListener('click', () => {
+                    const isOpen = menuPanel.classList.contains('open');
+                    menuPanel.classList.toggle('open');
+                    menuIcon.classList.toggle('hidden', !isOpen);
+                    closeIcon.classList.toggle('hidden', isOpen);
+                });
+            }
+            // Footer Year
+             const yearSpan = document.getElementById('current-year');
+             if (yearSpan) {
+                yearSpan.textContent = new Date().getFullYear();
+             }
+        });
     </script>
+
 </body>
 </html>
