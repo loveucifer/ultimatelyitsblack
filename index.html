@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimately It's Black</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: #000;
+            height: 100vh;
+            display: flex;
+            flex-direction: column; /* Stack items vertically */
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            color: white; /* Default text color */
+            overflow: hidden; /* Hide scrollbars during animation */
+        }
+
+        .logo-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px; /* Space below logo */
+        }
+
+        .logo-text {
+            display: flex;
+            font-size: 3rem;
+            font-weight: bold;
+            color: white;
+            z-index: 1;
+        }
+
+        .letter {
+            opacity: 0;
+            animation: fadeInLetter 0.4s ease forwards;
+        }
+
+        .letter:nth-child(1) { animation-delay: 1.6s; }
+        .letter:nth-child(2) { animation-delay: 1.8s; }
+        .letter:nth-child(3) { animation-delay: 2s; }
+        .letter:nth-child(4) { animation-delay: 2.2s; }
+        .letter:nth-child(5) { animation-delay: 2.4s; }
+        .letter:nth-child(6) { animation-delay: 2.6s; } /* Period */
+
+        @keyframes fadeInLetter {
+            0% { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .logo-text.glow {
+            animation: glowText 2s ease-in-out forwards;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes glowText {
+            0% { text-shadow: 0 0 0px white; }
+            50% { text-shadow: 0 0 20px white; }
+            100% { text-shadow: 0 0 0px white; }
+        }
+
+        .burst-spinner {
+            position: absolute;
+            left: -25px; /* Adjust as needed */
+            top: -50px;  /* Adjust as needed */
+            width: 60px;
+            height: 60px;
+            animation: spinOnce 1.5s ease-out forwards;
+            pointer-events: none;
+        }
+
+        .burst-line {
+            position: absolute;
+            width: 2px;
+            height: 30px;
+            background-color: white;
+            top: 50%;
+            left: 50%;
+            transform-origin: bottom center;
+        }
+
+        .burst-line:nth-child(1) { transform: rotate(0deg) translateY(-50%); }
+        .burst-line:nth-child(2) { transform: rotate(45deg) translateY(-50%); }
+        .burst-line:nth-child(3) { transform: rotate(90deg) translateY(-50%); }
+        .burst-line:nth-child(4) { transform: rotate(135deg) translateY(-50%); }
+        .burst-line:nth-child(5) { transform: rotate(180deg) translateY(-50%); }
+        .burst-line:nth-child(6) { transform: rotate(225deg) translateY(-50%); }
+        .burst-line:nth-child(7) { transform: rotate(270deg) translateY(-50%); }
+        .burst-line:nth-child(8) { transform: rotate(315deg) translateY(-50%); }
+
+        @keyframes spinOnce {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Optional: CSS for fading out spinner lines - adjust timing/effect if needed */
+        @keyframes fadeUp {
+           from {
+               opacity: 1;
+               /* Keep original transform based on angle */
+               transform: rotate(var(--angle)) translateY(-50%);
+           }
+           to {
+               opacity: 0;
+               /* Fade out upwards slightly */
+               transform: rotate(var(--angle)) translateY(-60%);
+           }
+       }
+
+       /* Navigation Styles */
+       nav {
+            margin-top: 30px; /* Space above nav */
+            opacity: 0; /* Initially hidden */
+            animation: fadeInNav 1s ease forwards;
+            animation-delay: 3s; /* Delay until logo animation is mostly done */
+       }
+
+        nav a {
+            color: #aaa; /* Greyish color */
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #fff; /* White on hover */
+        }
+
+        @keyframes fadeInNav {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="logo-container">
+        <div class="burst-spinner" id="spinner">
+            <div class="burst-line" style="--angle: 0deg;"></div>
+            <div class="burst-line" style="--angle: 45deg;"></div>
+            <div class="burst-line" style="--angle: 90deg;"></div>
+            <div class="burst-line" style="--angle: 135deg;"></div>
+            <div class="burst-line" style="--angle: 180deg;"></div>
+            <div class="burst-line" style="--angle: 225deg;"></div>
+            <div class="burst-line" style="--angle: 270deg;"></div>
+            <div class="burst-line" style="--angle: 315deg;"></div>
+        </div>
+        <div class="logo-text glow">
+            <span class="letter">B</span>
+            <span class="letter">L</span>
+            <span class="letter">A</span>
+            <span class="letter">C</span>
+            <span class="letter">K</span>
+            <span class="letter">.</span>
+        </div>
+    </div>
+
+    <nav>
+        <a href="/">Home</a>
+        <a href="/privacy.html">Privacy Policy</a>
+        <a href="/support.html">Support</a>
+    </nav>
+
+    <script>
+        // Spinner line fade-out logic (optional modification)
+        // This uses the fadeUp animation defined in CSS
+        setTimeout(() => {
+            const spinner = document.getElementById('spinner');
+            if (!spinner) return; // Guard clause
+
+            const lines = spinner.querySelectorAll('.burst-line');
+
+            lines.forEach(line => {
+                // Apply fadeUp animation to all lines after the initial spin
+                line.style.animation = `fadeUp 0.8s ease forwards`;
+            });
+
+            // Optional: Remove the spinner element after animations complete
+             setTimeout(() => {
+                 // spinner.remove(); // Uncomment if you want the spinner to disappear entirely
+             }, 800); // Match fadeUp duration
+
+        }, 1500); // Start fade-out after 1.5 seconds (when spin ends)
+
+    </script>
+</body>
+</html>
