@@ -3,187 +3,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Support -  Black</title>
+    <title>Support - BLACK App</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
      <style>
-        :root {
-            --bg-gradient-start: #000000;
-            --bg-gradient-end: #1a0a2e; /* Dark Purple */
-            --text-primary: #e5e7eb; /* gray-200 */
-            --text-secondary: #9ca3af; /* gray-400 */
-            --text-accent: #a78bfa; /* violet-400 */
-            --highlight-bg: rgba(106, 0, 173, 0.5); /* Purple highlight */
-            --glass-bg: rgba(23, 23, 23, 0.65); /* Slightly darker glass */
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --footer-text: #6b7280; /* gray-500 */
-        }
-
         /* Base body styles */
         body {
             margin: 0;
-            background: linear-gradient(180deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            background: linear-gradient(180deg, #0a0a0a 0%, #3a0f5c 100%);
             min-height: 100vh;
             font-family: 'Inter', sans-serif;
-            color: var(--text-primary);
+            color: #e5e7eb;
             line-height: 1.7;
             overflow-x: hidden;
             display: flex;
             flex-direction: column; /* Stack children vertically */
         }
 
-        /* Main content wrapper */
+        /* Main content wrapper - takes remaining height */
         .main-content-wrapper {
-            padding: 2rem;
+            padding: 2rem 1rem;
             width: 100%;
             max-width: 900px;
-            margin: 2rem auto 0; /* Vertical margin and horizontal centering */
-            flex-grow: 1; /* Allow content to push footer down */
+            margin: 0 auto; /* Center content */
+            flex-grow: 1; /* Allow content to grow and push footer */
             display: flex;
-            flex-direction: column; /* Stack header, main, footer */
-            opacity: 0; /* Start hidden for animation */
-             animation: fadeInPage 1s ease-out forwards 0.3s; /* Fade in slightly delayed */
+            flex-direction: column;
         }
-        @keyframes fadeInPage {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
 
         /* Header and Nav styles */
-        header.main-header {
-            text-align: center;
-            margin-bottom: 3rem;
-            flex-shrink: 0; /* Prevent header from shrinking */
-        }
-
-        nav.main-nav a {
-             color: var(--text-secondary);
-             text-decoration: none;
-             margin: 0 0.75rem;
-             font-size: 1.125rem;
-             padding: 0.5rem 1rem;
-             border-radius: 0.375rem;
-             transition: color 0.3s ease, background-color 0.3s ease, transform 0.2s ease;
-             display: inline-block;
-        }
-
-        nav.main-nav a:hover {
-            color: var(--text-primary);
-            background-color: rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px);
-        }
-        nav.main-nav a.active {
-             color: var(--text-primary);
-             font-weight: 600;
-             background-color: var(--highlight-bg);
-        }
+        header.main-header { text-align: center; margin-bottom: 3rem; flex-shrink: 0; }
+        .main-logo-header { font-family: 'Orbitron', sans-serif; font-size: 2.5rem; color: #fff; text-shadow: 0 0 10px #9333ea; margin-bottom: 1rem; display: inline-block; }
+        nav.main-nav a { color: #cbd5e1; text-decoration: none; margin: 0 0.75rem; font-size: 1rem; padding: 0.6rem 1.2rem; border-radius: 0.5rem; transition: all 0.3s ease; border: 1px solid transparent; }
+        nav.main-nav a:hover { color: #ffffff; background-color: rgba(147, 51, 234, 0.2); border-color: rgba(147, 51, 234, 0.5); transform: translateY(-2px); }
+        nav.main-nav a.active { color: #ffffff; font-weight: 600; background-color: #7e22ce; border-color: #a855f7; box-shadow: 0 0 15px rgba(168, 85, 247, 0.4); }
 
         /* Glass effect for content */
         .glass-effect {
-            background-color: var(--glass-bg);
+            background-color: rgba(18, 18, 18, 0.7);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
-            border: 1px solid var(--glass-border);
-            border-radius: 0.75rem; /* rounded-xl */
-            padding: 3rem 2rem; /* More vertical padding */
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            padding: 3rem; /* More padding */
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
             text-align: center;
-            flex-grow: 1; /* Allow main content to take available space */
+            flex-grow: 1; /* Allow main content card to take available space */
             display: flex;
             flex-direction: column;
-            justify-content: center; /* Center content vertically */
-            align-items: center; /* Center horizontally */
+            justify-content: center; /* Center content vertically within the card */
+        }
+
+        /* Support Email Button */
+        .support-email-link {
+            display: inline-block;
+            background: linear-gradient(90deg, #8b5cf6, #6d28d9); /* Purple gradient */
+            color: white;
+            font-weight: 600;
+            font-size: 1.25rem; /* text-xl */
+            padding: 1rem 2rem;
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 5px 15px rgba(109, 40, 217, 0.4);
+            transition: all 0.3s ease;
+            text-decoration: none; /* Remove underline */
+        }
+        .support-email-link:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(109, 40, 217, 0.6);
         }
 
         /* Footer styles */
         footer.main-footer {
             text-align: center;
-            margin-top: 4rem; /* Ensure space from content */
-            padding: 2rem 1rem 1.5rem; /* Top, horizontal, bottom padding */
-            border-top: 1px solid var(--glass-border);
-            color: var(--footer-text);
-            font-size: 0.875rem;
-            width: 100%; /* Span full width */
-             max-width: 900px; /* Match wrapper width */
-             margin-left: auto; /* Center footer */
-             margin-right: auto;
+            margin-top: 4rem; /* Ensure space even if content is short */
+            padding: 2.5rem 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            color: #9ca3af;
+            font-size: 0.9rem;
+            width: 100%;
             flex-shrink: 0; /* Prevent footer from shrinking */
         }
-         footer.main-footer nav a {
-            color: var(--footer-text);
-            margin: 0 0.5rem;
-            transition: color 0.3s ease;
-         }
-         footer.main-footer nav a:hover {
-            color: var(--text-secondary);
-         }
-
-         /* Specific element styling */
-         .support-email-link {
-            display: inline-block;
-            background-color: var(--highlight-bg);
-            color: var(--text-primary);
-            font-weight: 600;
-            font-size: 1.25rem; /* Larger email */
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem; /* rounded-lg */
-            box-shadow: 0 4px 15px rgba(128, 0, 128, 0.3);
-            transition: background-color 0.3s ease, transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
-            text-decoration: none;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-         }
-         .support-email-link:hover {
-             background-color: rgba(128, 0, 173, 0.7); /* Slightly darker purple */
-             transform: scale(1.05);
-             box-shadow: 0 8px 25px rgba(128, 0, 128, 0.5);
-             color: #ffffff;
-         }
+         footer.main-footer nav a { color: #9ca3af; margin: 0 0.6rem; transition: color 0.3s ease; font-size: 0.9rem;}
+         footer.main-footer nav a:hover { color: #d1d5db; }
+         .social-links a { color: #9ca3af; margin: 0 0.75rem; font-size: 1.5rem; transition: color 0.3s ease, transform 0.3s ease; }
+         .social-links a:hover { color: #a855f7; transform: scale(1.2); }
 
     </style>
 </head>
-<body>
-
-    <div class="main-content-wrapper">
+<body class="bg-black flex flex-col min-h-screen"> <div class="main-content-wrapper">
 
         <header class="main-header">
-            <h1 class="text-4xl font-bold text-white mb-4">Help & Support</h1>
-            <nav class="main-nav mt-4">
+            <div class="main-logo-header">BLACK.</div>
+            <nav class="main-nav mt-2">
                 <a href="/">Home</a>
-                <a href="/privacy.html">Privacy</a>
+                <a href="/privacy.html">Privacy Policy</a>
                 <a href="/support.html" class="active">Support</a>
             </nav>
         </header>
 
         <main class="glass-effect">
-            <h2 class="text-3xl font-semibold text-white mb-6">Get in Touch</h2>
+            <h1 class="text-3xl md:text-4xl font-bold text-white mb-6">Need Help?</h1>
             <p class="text-lg text-gray-300 mb-8 max-w-xl mx-auto">
-                Have questions, feedback, or need assistance? Our team is ready to help. Reach out via email for the most direct support.
+                If you encounter any issues, have questions, or need assistance with the BLACK app, please reach out to our support team.
             </p>
             <div class="my-8">
                  <a href="mailto:support@ultimatelyitsblack.com" class="support-email-link">
-                    support@ultimatelyitsblack.com
+                    <i class="fas fa-envelope mr-2"></i> Contact Support
                  </a>
             </div>
             <p class="text-gray-400 text-base mt-4">
-                We strive to respond within
-                <span class="font-semibold text-gray-300">24-48 business hours</span>.
+                 Email us directly at:
+                 <strong class="text-gray-200">support@ultimatelyitsblack.com</strong>
             </p>
-            <p class="text-gray-500 text-sm mt-6">
-                (Please check your spam folder if you don't see a reply.)
+            <p class="text-gray-400 text-base mt-2">
+                We typically respond within
+                <span class="font-semibold text-gray-300">24-48 business hours</span>.
             </p>
         </main>
 
-
-     </div>
-     <footer class="main-footer">
-        <p id="footer-year">&copy;  All rights reserved.</p>
+    </div> <footer class="main-footer">
+         <div class="social-links mb-4">
+             <a href="#" target="_blank" title="Twitter / X"><i class="fab fa-twitter"></i></a>
+             <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+             <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+             <a href="#" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+         </div>
+        <p id="footer-year">&copy; Ultimately It's Black. All rights reserved.</p>
          <nav class="mt-2">
-            <a href="/">Home</a>
-            <a href="/privacy.html">Privacy Policy</a>
-            <a href="/support.html">Support</a>
+            <a href="/">Home</a> |
+            <a href="/privacy.html">Privacy Policy</a> |
+            <a href="/support.html">Support</a> |
+            <a href="mailto:support@ultimatelyitsblack.com">support@ultimatelyitsblack.com</a>
         </nav>
     </footer>
 
@@ -191,7 +144,7 @@
         // Simple script to insert the current year in the footer
         const yearElement = document.getElementById('footer-year');
         if(yearElement) {
-            yearElement.textContent = `© ${new Date().getFullYear()}  Black. All rights reserved.`;
+            yearElement.innerHTML = `&copy; ${new Date().getFullYear()} Ultimately It's Black. All rights reserved.`;
         }
     </script>
 </body>
