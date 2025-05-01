@@ -3,284 +3,242 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy - Ultimately It's Black</title>
+    <title>Privacy Policy - BLACK App</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Orbitron:wght@700&display=swap" rel="stylesheet">
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-        :root {
-            --bg-gradient-start: #000000;
-            --bg-gradient-end: #1a0a2e; /* Dark Purple */
-            --text-primary: #e5e7eb; /* gray-200 */
-            --text-secondary: #9ca3af; /* gray-400 */
-            --text-accent: #a78bfa; /* violet-400 */
-            --highlight-bg: rgba(106, 0, 173, 0.5); /* Purple highlight */
-            --glass-bg: rgba(23, 23, 23, 0.65); /* Slightly darker glass */
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --footer-text: #6b7280; /* gray-500 */
-        }
-
         /* Base body styles */
         body {
             margin: 0;
-            background: linear-gradient(180deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            background: linear-gradient(180deg, #0a0a0a 0%, #3a0f5c 100%);
             min-height: 100vh;
             font-family: 'Inter', sans-serif;
-            color: var(--text-primary);
-            line-height: 1.7;
+            color: #e5e7eb;
+            line-height: 1.8; /* Increased for readability */
             overflow-x: hidden;
-             display: flex;
-             flex-direction: column; /* Stack vertically */
+            display: flex;
+            flex-direction: column;
         }
 
-        /* Main content wrapper - Applies consistent padding and max-width */
+        /* Main content wrapper */
         .main-content-wrapper {
-            padding: 2rem;
+            padding: 2rem 1rem;
             width: 100%;
             max-width: 900px;
-            margin: 2rem auto 0; /* Vertical margin and horizontal centering */
-             flex-grow: 1; /* Allow content to push footer down */
-             display: flex;
-             flex-direction: column;
-             opacity: 0; /* Start hidden for animation */
-             animation: fadeInPage 1s ease-out forwards 0.3s; /* Fade in slightly delayed */
+            margin: 0 auto;
+            flex-grow: 1;
         }
-        @keyframes fadeInPage {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
 
         /* Header and Nav styles */
-        header.main-header {
-            text-align: center;
-            margin-bottom: 3rem;
-            flex-shrink: 0;
-        }
-
-        nav.main-nav a {
-             color: var(--text-secondary);
-             text-decoration: none;
-             margin: 0 0.75rem;
-             font-size: 1.125rem;
-             padding: 0.5rem 1rem;
-             border-radius: 0.375rem;
-             transition: color 0.3s ease, background-color 0.3s ease, transform 0.2s ease;
-             display: inline-block;
-        }
-
-        nav.main-nav a:hover {
-            color: var(--text-primary);
-            background-color: rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px);
-        }
-        nav.main-nav a.active {
-             color: var(--text-primary);
-             font-weight: 600;
-             background-color: var(--highlight-bg);
-        }
+        header.main-header { text-align: center; margin-bottom: 3rem; flex-shrink: 0; }
+        .main-logo-header { font-family: 'Orbitron', sans-serif; font-size: 2.5rem; color: #fff; text-shadow: 0 0 10px #9333ea; margin-bottom: 1rem; display: inline-block; }
+        nav.main-nav a { color: #cbd5e1; text-decoration: none; margin: 0 0.75rem; font-size: 1rem; padding: 0.6rem 1.2rem; border-radius: 0.5rem; transition: all 0.3s ease; border: 1px solid transparent; }
+        nav.main-nav a:hover { color: #ffffff; background-color: rgba(147, 51, 234, 0.2); border-color: rgba(147, 51, 234, 0.5); transform: translateY(-2px); }
+        nav.main-nav a.active { color: #ffffff; font-weight: 600; background-color: #7e22ce; border-color: #a855f7; box-shadow: 0 0 15px rgba(168, 85, 247, 0.4); }
 
         /* Glass effect for content */
         .glass-effect {
-            background-color: var(--glass-bg);
+            background-color: rgba(18, 18, 18, 0.7);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
-            border: 1px solid var(--glass-border);
-            border-radius: 0.75rem; /* rounded-xl */
-            padding: 2rem md:p-8; /* Slightly more padding */
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
-            flex-grow: 1; /* Allow card to fill space in flex container */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1rem;
+            padding: 2rem md:p-8 lg:p-10; /* Responsive padding */
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
         }
+
+        /* Styling for policy content */
+         main h2 {
+            font-size: 1.75rem; /* text-2xl */
+            font-weight: 700; /* bold */
+            color: #ffffff;
+            margin-bottom: 1.5rem; /* mb-6 */
+            border-bottom: 1px solid rgba(147, 51, 234, 0.4); /* Purple underline */
+            padding-bottom: 0.75rem; /* pb-3 */
+         }
+          main h3 {
+            font-size: 1.25rem; /* text-xl */
+            font-weight: 600; /* semibold */
+            color: #f3e8ff; /* Lighter purple/off-white */
+            margin-top: 2.5rem; /* Increased top margin */
+            margin-bottom: 1rem; /* mb-4 */
+         }
+         main ul {
+            list-style: none; /* Remove default bullets */
+            padding-left: 0.5rem; /* Slight indent */
+            margin-bottom: 1.5rem; /* mb-6 */
+            space-y: 0.75rem; /* Increased space between items */
+         }
+          main ul li::before {
+             content: "\f105"; /* Font Awesome chevron-right icon */
+             font-family: "Font Awesome 6 Free";
+             font-weight: 900; /* Solid */
+             color: #a855f7; /* Light purple */
+             display: inline-block;
+             width: 1em;
+             margin-left: -1.2em; /* Adjust positioning */
+             margin-right: 0.5em;
+          }
+         main p {
+             margin-bottom: 1.25rem; /* Increased paragraph spacing */
+             color: #d1d5db; /* gray-300 */
+         }
+         main strong {
+             color: #e5e7eb; /* gray-200 */
+         }
+         main a {
+             color: #c4b5fd; /* violet-300 */
+             font-weight: 500;
+             transition: color 0.3s ease, text-shadow 0.3s ease;
+             text-decoration: underline;
+             text-decoration-color: rgba(196, 181, 253, 0.5);
+         }
+         main a:hover {
+             color: #ffffff;
+             text-shadow: 0 0 8px rgba(196, 181, 253, 0.7); /* Subtle glow on hover */
+             text-decoration-color: #c4b5fd;
+         }
 
         /* Footer styles */
         footer.main-footer {
             text-align: center;
-            margin-top: 4rem; /* Ensure space from content */
-            padding: 2rem 1rem 1.5rem; /* Top, horizontal, bottom padding */
-            border-top: 1px solid var(--glass-border);
-            color: var(--footer-text);
-            font-size: 0.875rem;
-             width: 100%; /* Span full width */
-             max-width: 900px; /* Match wrapper width */
-             margin-left: auto; /* Center footer */
-             margin-right: auto;
-             flex-shrink: 0; /* Prevent footer shrinking */
+            margin-top: 5rem;
+            padding: 2.5rem 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            color: #9ca3af;
+            font-size: 0.9rem;
+            flex-shrink: 0;
         }
-         footer.main-footer nav a {
-            color: var(--footer-text);
-            margin: 0 0.5rem;
-            transition: color 0.3s ease;
-         }
-         footer.main-footer nav a:hover {
-            color: var(--text-secondary);
-         }
-
-         /* Content Styling */
-         main h2 {
-            font-size: 1.75rem; /* 28px */
-            font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.75rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-         }
-          main h3 {
-            font-size: 1.25rem; /* 20px */
-            font-weight: 600;
-            color: #ffffff;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-         }
-         main ul {
-            list-style: disc;
-            list-style-position: outside; /* Indent properly */
-            margin-left: 1.5rem; /* Indentation */
-            margin-bottom: 1.5rem;
-            space-y: 0.75rem; /* More space between items */
-            color: var(--text-primary); /* Use primary text color */
-         }
-          main li::marker {
-            color: var(--text-accent); /* Purple markers */
-          }
-         main p {
-             margin-bottom: 1.25rem; /* More space between paragraphs */
-             color: var(--text-primary);
-         }
-         main a {
-             color: var(--text-accent);
-             font-weight: 500;
-             text-decoration: underline;
-             text-decoration-color: rgba(167, 139, 250, 0.5); /* Lighter underline */
-             transition: color 0.3s ease, text-decoration-color 0.3s ease;
-         }
-         main a:hover {
-             color: #c4b5fd; /* Lighter violet */
-             text-decoration-color: rgba(196, 181, 253, 1); /* Solid underline on hover */
-         }
-         strong {
-            font-weight: 600;
-            color: #ffffff; /* White for emphasis */
-         }
+         footer.main-footer nav a { color: #9ca3af; margin: 0 0.6rem; transition: color 0.3s ease; font-size: 0.9rem;}
+         footer.main-footer nav a:hover { color: #d1d5db; }
+         .social-links a { color: #9ca3af; margin: 0 0.75rem; font-size: 1.5rem; transition: color 0.3s ease, transform 0.3s ease; }
+         .social-links a:hover { color: #a855f7; transform: scale(1.2); }
 
     </style>
 </head>
-<body>
+<body class="bg-black flex flex-col min-h-screen">
 
     <div class="main-content-wrapper">
 
         <header class="main-header">
-            <h1 class="text-4xl font-bold text-white mb-4">Privacy Policy</h1>
-            <nav class="main-nav mt-4">
+             <div class="main-logo-header">BLACK.</div>
+            <nav class="main-nav mt-2">
                 <a href="/">Home</a>
-                <a href="/privacy.html" class="active">Privacy</a>
+                <a href="/privacy.html" class="active">Privacy Policy</a>
                 <a href="/support.html">Support</a>
             </nav>
         </header>
 
         <main class="glass-effect">
+            <h2>Privacy Policy for ultimatelyitsblack.com</h2>
+
             <p><strong>Effective Date: May 1, 2025</strong></p>
 
             <p>
-                Welcome to  Black ("we," "us," or "our"). We are committed to protecting your personal information and your right to privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website <strong>ultimatelyitsblack.com</strong> (the "Site"). Please read this privacy policy carefully.
-            </p>
-            <p>
-                By accessing or using the Site, you agree to the terms of this Privacy Policy. If you do not agree with the terms, please do not access the Site.
-            </p>
-
-            <h2>Information We Collect</h2>
-            <p>
-                We may collect information about you in various ways:
-            </p>
-            <ul>
-                <li>
-                    <strong>Personal Data:</strong> Information you voluntarily provide, such as your name, email address, and any other details you submit through contact forms or potential registration processes.
-                </li>
-                <li>
-                    <strong>Usage Data:</strong> Information automatically collected when you access the Site. This may include your IP address, browser type, operating system, device information, pages viewed, access times, and referring website addresses. This data is typically aggregated and anonymized.
-                </li>
-                <li>
-                    <strong>Cookies and Tracking Technologies:</strong> We may use cookies and similar tracking technologies (like web beacons) to gather Usage Data, enhance your experience, and analyze Site traffic. You can control cookie preferences through your browser settings.
-                </li>
-            </ul>
-
-            <h2>How We Use Your Information</h2>
-            <p>
-                We use the information collected primarily to provide, maintain, and improve our Site and services. Specific uses include:
-            </p>
-             <ul>
-                <li>Operating and maintaining the Site.</li>
-                <li>Responding to your comments, questions, and support requests (e.g., via <a href="mailto:support@ultimatelyitsblack.com">support@ultimatelyitsblack.com</a>).</li>
-                <li>Monitoring and analyzing usage patterns and trends to improve user experience and Site functionality.</li>
-                <li>Preventing fraudulent activity and ensuring the security of our Site.</li>
-                <li>Complying with legal obligations and enforcing our terms.</li>
-            </ul>
-
-             <h2>Sharing Your Information</h2>
-             <p>
-                We do not sell your personal information. We may share information in the following limited circumstances:
-             </p>
-             <ul>
-                <li><strong>With Service Providers:</strong> We may share data with third-party vendors, consultants, and other service providers who perform services on our behalf (e.g., website hosting, data analysis, email delivery), requiring them to maintain the confidentiality of your information.</li>
-                <li><strong>For Legal Reasons:</strong> If required by law, regulation, legal process, or governmental request, or to protect the rights, property, or safety of us, our users, or others.</li>
-                <li><strong>Business Transfers:</strong> In connection with, or during negotiations of, any merger, sale of company assets, financing, or acquisition of all or a portion of our business by another company.</li>
-                <li><strong>With Your Consent:</strong> We may share your information for other purposes with your explicit consent.</li>
-             </ul>
-
-            <h2>Data Security</h2>
-            <p>
-                We implement reasonable administrative, technical, and physical security measures designed to protect your personal information from unauthorized access, use, or disclosure. However, please be aware that no security measures are perfect or impenetrable, and no method of data transmission over the internet can be guaranteed 100% secure.
+                Welcome to Ultimately It's Black. This privacy policy explains how we collect,
+                use, disclose, and safeguard your information when you visit our website
+                ultimatelyitsblack.com, including any other media form, media channel,
+                mobile website, or mobile application related or connected thereto (collectively, the “Site”).
+                Please read this privacy policy carefully. If you do not agree with the terms of this
+                privacy policy, please do not access the site.
             </p>
 
-             <h2>Your Data Protection Rights</h2>
-             <p>
-                Depending on your location, you may have certain rights regarding your personal data, including:
-             </p>
-              <ul>
-                 <li>The right to access – You can request copies of your personal data.</li>
-                 <li>The right to rectification – You can request correction of inaccurate information or completion of incomplete information.</li>
-                 <li>The right to erasure – You can request that we delete your personal data, under certain conditions.</li>
-                 <li>The right to restrict processing – You can request restriction of the processing of your personal data, under certain conditions.</li>
-                 <li>The right to object to processing – You can object to our processing of your personal data, under certain conditions.</li>
-                 <li>The right to data portability – You can request transfer of the data we collected to another organization, or directly to you, under certain conditions.</li>
-              </ul>
-              <p>To exercise these rights, please contact us using the contact information below.</p>
+            <div>
+                <h3>Information We Collect</h3>
+                <p>
+                    We may collect information about you in a variety of ways. The information we may collect on the Site includes:
+                </p>
+                <ul>
+                    <li><strong>Personal Data:</strong> Personally identifiable information, such as your name, shipping address, email address, and telephone number, and demographic information, such as your age, gender, hometown, and interests, that you voluntarily give to us when you register with the Site or when you choose to participate in various activities related to the Site.</li>
+                    <li><strong>Usage Data:</strong> Information our servers automatically collect when you access the Site, such as your IP address, your browser type, your operating system, your access times, and the pages you have viewed.</li>
+                    <li><strong>Cookies and Tracking Technologies:</strong> We may use cookies, web beacons, and other tracking technologies to help customize the Site and improve your experience.</li>
+                </ul>
+            </div>
 
-            <h2>Children's Privacy</h2>
-            <p>
-                Our Site is not intended for children under the age of 13 (or a higher age threshold where applicable by law). We do not knowingly collect personal information from children. If we learn we have collected data from a child without parental consent, we will take steps to delete it.
-            </p>
+            <div>
+                <h3>How We Use Your Information</h3>
+                <p>
+                    Having accurate information permits us to provide you with a smooth, efficient, and customized experience. Specifically, we may use information collected about you to:
+                </p>
+                 <ul>
+                    <li>Provide and maintain our Service.</li>
+                    <li>Manage user accounts (if applicable).</li>
+                    <li>Respond to support requests and inquiries via <a href="mailto:support@ultimatelyitsblack.com">support@ultimatelyitsblack.com</a>.</li>
+                    <li>Monitor and analyze usage and trends to improve the Site.</li>
+                    <li>Comply with legal obligations.</li>
+                </ul>
+            </div>
 
-             <h2>Changes to This Privacy Policy</h2>
-             <p>
-                We may update this Privacy Policy from time to time. The updated version will be indicated by an updated "Effective Date" and will be effective as soon as it is accessible. We encourage you to review this policy periodically.
-            </p>
+            <div>
+                 <h3>Sharing Your Information</h3>
+                 <p>
+                    We may share information we have collected about you in certain situations:
+                 </p>
+                 <ul>
+                    <li><strong>By Law or to Protect Rights:</strong> If release is necessary to respond to legal process, investigate potential violations, or protect rights, property, and safety.</li>
+                    <li><strong>Third-Party Service Providers:</strong> With third parties performing services for us (e.g., hosting, analytics, email delivery).</li>
+                    <li><strong>Business Transfers:</strong> In connection with a merger, sale of assets, financing, or acquisition.</li>
+                 </ul>
+            </div>
 
-            <h2>Contact Us</h2>
-            <p>
-                If you have questions, comments, or concerns about this Privacy Policy or our data practices, please contact us at:
-            </p>
-            <p>
-                Email: <a href="mailto:support@ultimatelyitsblack.com" class="text-lg font-semibold">support@ultimatelyitsblack.com</a>
-            </p>
+            <div>
+                <h3>Data Security</h3>
+                <p>
+                    We use administrative, technical, and physical security measures to help protect your personal information. However, no security measures are perfect, and no method of data transmission can be guaranteed against interception or misuse.
+                </p>
+            </div>
+
+            <div>
+                <h3>Your Data Protection Rights</h3>
+                <p>
+                    Depending on your location, you may have rights regarding your personal data:
+                </p>
+                 <ul>
+                    <li>The right to access, update, or delete the information we have on you.</li>
+                    <li>The right to rectification if information is inaccurate or incomplete.</li>
+                    <li>The right to object to processing.</li>
+                    <li>The right to restrict processing.</li>
+                    <li>The right to data portability.</li>
+                    <li>The right to withdraw consent.</li>
+                 </ul>
+                 <p>To exercise these rights, please contact us using the details below.</p>
+            </div>
+
+            <div>
+                <h3>Contact Us</h3>
+                <p>
+                    If you have questions or comments about this Privacy Policy, please contact us:
+                </p>
+                <p>
+                    Email: <a href="mailto:support@ultimatelyitsblack.com">support@ultimatelyitsblack.com</a>
+                </p>
+            </div>
         </main>
 
-
-    </div>
-        <footer class="main-footer">
-            <p id="footer-year">&copy;  Black. All rights reserved.</p>
-             <nav class="mt-2">
-                <a href="/">Home</a>
-                <a href="/privacy.html">Privacy Policy</a>
-                <a href="/support.html">Support</a>
-            </nav>
-        </footer>
+    </div> <footer class="main-footer">
+         <div class="social-links mb-4">
+             <a href="#" target="_blank" title="Twitter / X"><i class="fab fa-twitter"></i></a>
+             <a href="#" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+             <a href="#" target="_blank" title="Facebook"><i class="fab fa-facebook"></i></a>
+             <a href="#" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+         </div>
+        <p id="footer-year">&copy; Ultimately It's Black. All rights reserved.</p>
+         <nav class="mt-2">
+            <a href="/">Home</a> |
+            <a href="/privacy.html">Privacy Policy</a> |
+            <a href="/support.html">Support</a> |
+            <a href="mailto:support@ultimatelyitsblack.com">support@ultimatelyitsblack.com</a>
+        </nav>
+    </footer>
 
     <script>
         // Simple script to insert the current year in the footer
         const yearElement = document.getElementById('footer-year');
         if (yearElement) {
-            yearElement.textContent = `© ${new Date().getFullYear()}  Black. All rights reserved.`;
+            yearElement.innerHTML = `&copy; ${new Date().getFullYear()} Ultimately It's Black. All rights reserved.`;
         }
     </script>
 </body>
