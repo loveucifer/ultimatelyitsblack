@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy - Ultimately It's Black</title>
+    <title>Support - Ultimately It's Black</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-    <style>
+     <style>
         /* Base body styles with gradient */
         body {
             margin: 0;
@@ -16,8 +16,12 @@
             min-height: 100vh;
             font-family: 'Inter', sans-serif;
             color: #e5e7eb; /* Tailwind gray-200 */
-            line-height: 1.7; /* Increased line spacing */
+            line-height: 1.7;
             overflow-x: hidden;
+            display: flex; /* Use flexbox for centering */
+            flex-direction: column; /* Stack children vertically */
+            align-items: center; /* Center horizontally */
+            justify-content: space-between; /* Push footer down */
         }
 
         /* Main content wrapper */
@@ -25,13 +29,17 @@
             padding: 2rem;
             width: 100%;
             max-width: 900px;
-            margin: 0 auto;
+            margin: 0 auto; /* Center content */
+            flex-grow: 1; /* Allow content to grow and push footer */
+            display: flex;
+            flex-direction: column;
         }
 
         /* Header and Nav styles */
         header.main-header {
             text-align: center;
             margin-bottom: 3rem;
+            flex-shrink: 0; /* Prevent header from shrinking */
         }
 
         nav.main-nav a {
@@ -61,18 +69,26 @@
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 0.75rem; /* rounded-xl */
-            padding: 2rem md:p-10; /* Responsive padding */
+            padding: 2rem md:p-10;
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            text-align: center;
+            flex-grow: 1; /* Allow main content to take available space */
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* Center content vertically within the card */
         }
 
         /* Footer styles */
         footer.main-footer {
             text-align: center;
-            margin-top: 4rem;
+            margin-top: 4rem; /* Ensure space even if content is short */
             padding-top: 2rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             color: #6b7280; /* gray-500 */
             font-size: 0.875rem;
+            width: 100%; /* Make footer span width */
+            flex-shrink: 0; /* Prevent footer from shrinking */
+            padding-bottom: 1rem; /* Add some bottom padding */
         }
          footer.main-footer nav a {
             color: #6b7280;
@@ -83,46 +99,9 @@
             color: #d1d5db; /* gray-300 */
          }
 
-         /* Styling for headings and lists */
-         main h2 {
-            font-size: 1.875rem; /* text-3xl */
-            font-weight: 700; /* bold */
-            color: #ffffff;
-            margin-bottom: 1.5rem; /* mb-6 */
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-            padding-bottom: 0.75rem; /* pb-3 */
-         }
-          main h3 {
-            font-size: 1.25rem; /* text-xl */
-            font-weight: 600; /* semibold */
-            color: #ffffff;
-            margin-top: 2rem; /* mt-8 */
-            margin-bottom: 1rem; /* mb-4 */
-         }
-         main ul {
-            list-style: disc;
-            list-style-position: inside;
-            padding-left: 1rem; /* pl-4 */
-            margin-bottom: 1.5rem; /* mb-6 */
-            space-y: 0.5rem; /* space-y-2 */
-            color: #d1d5db; /* gray-300 */
-         }
-         main p {
-             margin-bottom: 1rem; /* mb-4 */
-             color: #d1d5db; /* gray-300 */
-         }
-         main a {
-             color: #a78bfa; /* Tailwind violet-400 */
-             font-weight: 500; /* medium */
-             transition: color 0.3s ease;
-         }
-         main a:hover {
-             color: #c4b5fd; /* Tailwind violet-300 */
-         }
-
     </style>
     <script>
-        // Optional: Tailwind configuration (can be removed if defaults are fine)
+        // Optional: Tailwind configuration
         tailwind.config = {
             theme: {
                 extend: {
@@ -139,115 +118,47 @@
     <div class="main-content-wrapper">
 
         <header class="main-header">
-            <h1 class="text-4xl font-bold text-white mb-4">Privacy Policy</h1>
+            <h1 class="text-4xl font-bold text-white mb-4">Help & Support</h1>
             <nav class="main-nav mt-4">
                 <a href="/">Home</a>
-                <a href="/privacy.html" class="active">Privacy Policy</a>
-                <a href="/support.html">Support</a>
+                <a href="/privacy.html">Privacy Policy</a>
+                <a href="/support.html" class="active">Support</a>
             </nav>
         </header>
 
         <main class="glass-effect">
-            <h2>Privacy Policy for ultimatelyitsblack.com</h2>
-
-            <p><strong>Effective Date: May 1, 2025</strong></p>
-
-            <p>
-                Welcome to Ultimately It's Black. This privacy policy explains how we collect,
-                use, disclose, and safeguard your information when you visit our website
-                ultimatelyitsblack.com, including any other media form, media channel,
-                mobile website, or mobile application related or connected thereto (collectively, the “Site”).
-                Please read this privacy policy carefully. If you do not agree with the terms of this
-                privacy policy, please do not access the site.
+            <h2 class="text-3xl font-semibold text-white mb-6">Contact Us</h2>
+            <p class="text-lg text-gray-300 mb-6">
+                Need assistance or have questions? We're here to help.
             </p>
-
-            <div>
-                <h3>Information We Collect</h3>
-                <p>
-                    We may collect information about you in a variety of ways. The information we may collect on the Site includes:
-                </p>
-                <ul>
-                    <li><strong>Personal Data:</strong> Personally identifiable information, such as your name, shipping address, email address, and telephone number, and demographic information, such as your age, gender, hometown, and interests, that you voluntarily give to us when you register with the Site or when you choose to participate in various activities related to the Site.</li>
-                    <li><strong>Usage Data:</strong> Information our servers automatically collect when you access the Site, such as your IP address, your browser type, your operating system, your access times, and the pages you have viewed.</li>
-                    <li><strong>Cookies and Tracking Technologies:</strong> We may use cookies, web beacons, and other tracking technologies to help customize the Site and improve your experience.</li>
-                </ul>
+            <p class="text-lg text-gray-300 mb-4">
+                Reach out to our support team via email:
+            </p>
+            <div class="my-8">
+                 <a href="mailto:support@ultimatelyitsblack.com"
+                    class="inline-block bg-purple-600 hover:bg-purple-700 text-white font-bold text-xl px-8 py-4 rounded-lg shadow-lg transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-purple-500/50">
+                    support@ultimatelyitsblack.com
+                 </a>
             </div>
-
-            <div>
-                <h3>How We Use Your Information</h3>
-                <p>
-                    Having accurate information permits us to provide you with a smooth, efficient, and customized experience. Specifically, we may use information collected about you to:
-                </p>
-                 <ul>
-                    <li>Provide and maintain our Service.</li>
-                    <li>Manage user accounts (if applicable).</li>
-                    <li>Respond to support requests and inquiries via <a href="mailto:support@ultimatelyitsblack.com">support@ultimatelyitsblack.com</a>.</li>
-                    <li>Monitor and analyze usage and trends to improve the Site.</li>
-                    <li>Comply with legal obligations.</li>
-                </ul>
-            </div>
-
-            <div>
-                 <h3>Sharing Your Information</h3>
-                 <p>
-                    We may share information we have collected about you in certain situations:
-                 </p>
-                 <ul>
-                    <li><strong>By Law or to Protect Rights:</strong> If release is necessary to respond to legal process, investigate potential violations, or protect rights, property, and safety.</li>
-                    <li><strong>Third-Party Service Providers:</strong> With third parties performing services for us (e.g., hosting, analytics, email delivery).</li>
-                    <li><strong>Business Transfers:</strong> In connection with a merger, sale of assets, financing, or acquisition.</li>
-                 </ul>
-            </div>
-
-            <div>
-                <h3>Data Security</h3>
-                <p>
-                    We use administrative, technical, and physical security measures to help protect your personal information. However, no security measures are perfect, and no method of data transmission can be guaranteed against interception or misuse.
-                </p>
-            </div>
-
-            <div>
-                <h3>Your Data Protection Rights</h3>
-                <p>
-                    Depending on your location, you may have rights regarding your personal data:
-                </p>
-                 <ul>
-                    <li>The right to access, update, or delete the information we have on you.</li>
-                    <li>The right to rectification if information is inaccurate or incomplete.</li>
-                    <li>The right to object to processing.</li>
-                    <li>The right to restrict processing.</li>
-                    <li>The right to data portability.</li>
-                    <li>The right to withdraw consent.</li>
-                 </ul>
-                 <p>To exercise these rights, please contact us using the details below.</p>
-            </div>
-
-            <div>
-                <h3>Contact Us</h3>
-                <p>
-                    If you have questions or comments about this Privacy Policy, please contact us:
-                </p>
-                <p>
-                    Email: <a href="mailto:support@ultimatelyitsblack.com" class="text-lg">support@ultimatelyitsblack.com</a>
-                </p>
-            </div>
+            <p class="text-gray-400 text-base">
+                Our typical response time is within
+                <span class="font-semibold text-gray-300">24-48 business hours</span>.
+            </p>
         </main>
 
-        <footer class="main-footer">
-            <p id="footer-year">&copy; Ultimately It's Black. All rights reserved.</p>
-             <nav class="mt-2">
-                <a href="/">Home</a>
-                <a href="/privacy.html">Privacy Policy</a>
-                <a href="/support.html">Support</a>
-            </nav>
-        </footer>
-
-    </div>
+    </div> <footer class="main-footer">
+        <p id="footer-year">&copy; Ultimately It's Black. All rights reserved.</p>
+         <nav class="mt-2">
+            <a href="/">Home</a>
+            <a href="/privacy.html">Privacy Policy</a>
+            <a href="/support.html">Support</a>
+        </nav>
+    </footer>
 
     <script>
         // Simple script to insert the current year in the footer
         const yearElement = document.getElementById('footer-year');
-        if (yearElement) {
+        if(yearElement) {
             yearElement.innerHTML = `&copy; ${new Date().getFullYear()} Ultimately It's Black. All rights reserved.`;
         }
     </script>
