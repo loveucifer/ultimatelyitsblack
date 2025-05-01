@@ -1,23 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ultimately It's Black</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        /* Base body styles with gradient */
         body {
             margin: 0;
-            background-color: #000;
-            height: 100vh;
+            /* Subtle gradient from black to dark purple */
+            background: linear-gradient(180deg, #000000 0%, #1a0a2e 100%);
+            min-height: 100vh; /* Ensure gradient covers full height */
             display: flex;
             flex-direction: column; /* Stack items vertically */
-            justify-content: center;
-            align-items: center;
-            font-family: Arial, sans-serif;
-            color: white; /* Default text color */
-            overflow: hidden; /* Hide scrollbars during animation */
+            align-items: center; /* Center items horizontally */
+            font-family: 'Inter', sans-serif; /* Modern font */
+            color: #e5e7eb; /* Default light gray text (Tailwind gray-200) */
+            overflow-x: hidden; /* Prevent horizontal scroll */
         }
 
+        /* Container for the initial animation - centers vertically and horizontally */
+        .animation-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Takes full viewport height initially */
+            width: 100%;
+            position: fixed; /* Keeps it centered during animation */
+            top: 0;
+            left: 0;
+            z-index: 50; /* Above other content initially */
+            transition: opacity 0.8s ease-out 2.8s; /* Fade out after animation */
+            background: linear-gradient(180deg, #000000 0%, #1a0a2e 100%); /* Match body gradient */
+        }
+
+        /* Hide animation container after fade out */
+        body.loaded .animation-container {
+            opacity: 0;
+            pointer-events: none; /* Disable interaction after hiding */
+        }
+
+        /* Styles for the intro animation logo - KEEPING THESE AS PROVIDED */
         .logo-container {
             position: relative;
             display: flex;
@@ -27,7 +55,7 @@
 
         .logo-text {
             display: flex;
-            font-size: 3rem;
+            font-size: 3rem; /* 48px */
             font-weight: bold;
             color: white;
             z-index: 1;
@@ -81,6 +109,7 @@
             transform-origin: bottom center;
         }
 
+        /* Define rotation for each line */
         .burst-line:nth-child(1) { transform: rotate(0deg) translateY(-50%); }
         .burst-line:nth-child(2) { transform: rotate(45deg) translateY(-50%); }
         .burst-line:nth-child(3) { transform: rotate(90deg) translateY(-50%); }
@@ -95,96 +124,185 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Optional: CSS for fading out spinner lines - adjust timing/effect if needed */
+        /* Fade up animation for specific lines */
         @keyframes fadeUp {
-           from {
-               opacity: 1;
-               /* Keep original transform based on angle */
-               transform: rotate(var(--angle)) translateY(-50%);
-           }
-           to {
-               opacity: 0;
-               /* Fade out upwards slightly */
-               transform: rotate(var(--angle)) translateY(-60%);
-           }
-       }
+            from {
+                opacity: 1;
+                transform: rotate(var(--angle)) translateY(-50%);
+            }
+            to {
+                opacity: 0;
+                transform: rotate(0deg) translateY(-60%); /* Adjusted for smoother fade */
+            }
+        }
+        /* End of intro animation styles */
 
-       /* Navigation Styles */
-       nav {
-            margin-top: 30px; /* Space above nav */
-            opacity: 0; /* Initially hidden */
-            animation: fadeInNav 1s ease forwards;
-            animation-delay: 3s; /* Delay until logo animation is mostly done */
-       }
+        /* Styles for the main content wrapper appearing after animation */
+        .main-content-wrapper {
+            opacity: 0; /* Hidden initially */
+            padding: 2rem; /* Padding inside the wrapper */
+            width: 100%;
+            max-width: 900px; /* Max width for content */
+            margin: 0 auto; /* Centered horizontally */
+            animation: fadeInContent 1s ease forwards;
+            animation-delay: 3.6s; /* Delay after animation container fades */
+            position: relative; /* Needed for z-index stacking */
+            z-index: 10; /* Ensure content is above faded animation */
+        }
 
-        nav a {
-            color: #aaa; /* Greyish color */
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 1rem;
+        @keyframes fadeInContent {
+             from { opacity: 0; transform: translateY(20px); }
+             to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Header and Nav styles within the main content */
+        header.main-header {
+            text-align: center;
+            margin-bottom: 3rem; /* Space below header */
+        }
+
+        nav.main-nav a {
+             color: #9ca3af; /* Tailwind gray-400 */
+             text-decoration: none;
+             margin: 0 0.75rem; /* Space between links */
+             font-size: 1.125rem; /* Slightly larger nav links */
+             padding: 0.5rem 1rem;
+             border-radius: 0.375rem; /* Tailwind rounded-md */
+             transition: color 0.3s ease, background-color 0.3s ease;
+        }
+
+        nav.main-nav a:hover {
+            color: #ffffff; /* White on hover */
+            background-color: rgba(255, 255, 255, 0.1); /* Subtle background highlight */
+        }
+        nav.main-nav a.active {
+             color: #ffffff; /* White */
+             font-weight: 600; /* Semi-bold */
+             background-color: rgba(106, 0, 173, 0.5); /* Purple highlight for active page */
+        }
+
+        /* Glass effect for content cards */
+        .glass-effect {
+            background-color: rgba(23, 23, 23, 0.6); /* Darker, less opaque */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08); /* Even subtler border */
+            border-radius: 0.75rem; /* Tailwind rounded-xl */
+            padding: 2rem;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        /* Footer styles */
+        footer.main-footer {
+            text-align: center;
+            margin-top: 4rem; /* Space above footer */
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #6b7280; /* Tailwind gray-500 */
+            font-size: 0.875rem; /* Smaller text */
+        }
+         footer.main-footer nav a {
+            color: #6b7280; /* Tailwind gray-500 */
+            margin: 0 0.5rem;
             transition: color 0.3s ease;
-        }
-
-        nav a:hover {
-            color: #fff; /* White on hover */
-        }
-
-        @keyframes fadeInNav {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+         }
+         footer.main-footer nav a:hover {
+            color: #d1d5db; /* Tailwind gray-300 */
+         }
 
     </style>
 </head>
-<body>
-    <div class="logo-container">
-        <div class="burst-spinner" id="spinner">
-            <div class="burst-line" style="--angle: 0deg;"></div>
-            <div class="burst-line" style="--angle: 45deg;"></div>
-            <div class="burst-line" style="--angle: 90deg;"></div>
-            <div class="burst-line" style="--angle: 135deg;"></div>
-            <div class="burst-line" style="--angle: 180deg;"></div>
-            <div class="burst-line" style="--angle: 225deg;"></div>
-            <div class="burst-line" style="--angle: 270deg;"></div>
-            <div class="burst-line" style="--angle: 315deg;"></div>
-        </div>
-        <div class="logo-text glow">
-            <span class="letter">B</span>
-            <span class="letter">L</span>
-            <span class="letter">A</span>
-            <span class="letter">C</span>
-            <span class="letter">K</span>
-            <span class="letter">.</span>
+<body class=""> <div class="animation-container">
+        <div class="logo-container">
+            <div class="burst-spinner" id="spinner">
+                <div class="burst-line" style="--angle: 0deg;"></div>
+                <div class="burst-line" style="--angle: 45deg;"></div>
+                <div class="burst-line" style="--angle: 90deg;"></div>
+                <div class="burst-line" style="--angle: 135deg;"></div>
+                <div class="burst-line" style="--angle: 180deg;"></div>
+                <div class="burst-line" style="--angle: 225deg;"></div>
+                <div class="burst-line" style="--angle: 270deg;"></div>
+                <div class="burst-line" style="--angle: 315deg;"></div>
+            </div>
+            <div class="logo-text glow">
+                <span class="letter">B</span>
+                <span class="letter">L</span>
+                <span class="letter">A</span>
+                <span class="letter">C</span>
+                <span class="letter">K</span>
+                <span class="letter">.</span>
+            </div>
         </div>
     </div>
 
-    <nav>
-        <a href="/">Home</a>
-        <a href="/privacy.html">Privacy Policy</a>
-        <a href="/support.html">Support</a>
-    </nav>
+    <div class="main-content-wrapper">
+        <header class="main-header">
+            <nav class="main-nav mt-4">
+                <a href="/" class="active">Home</a>
+                <a href="/privacy.html">Privacy Policy</a>
+                <a href="/support.html">Support</a>
+            </nav>
+        </header>
+
+        <main>
+            <section class="glass-effect text-center">
+                <h2 class="text-4xl font-bold text-white mb-4">Welcome</h2>
+                <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+                    Exploring the depths of digital darkness. Experience our unique perspective.
+                </p>
+                <a href="#learn-more" class="inline-block bg-purple-600 hover:bg-purple-700 text-white font-semibold text-lg px-6 py-3 rounded-lg shadow-md transition duration-300 ease-in-out transform hover:-translate-y-1">
+                    Learn More
+                </a>
+            </section>
+
+            <section id="learn-more" class="mt-12 glass-effect">
+                 <h3 class="text-2xl font-semibold text-white mb-4 text-center">Our Vision</h3>
+                 <p class="text-gray-300 text-center">
+                     We focus on [mention key focus area 1], [mention key focus area 2], and delivering [mention key benefit]. Dive deeper into our projects and philosophy.
+                     </p>
+            </section>
+        </main>
+
+        <footer class="main-footer">
+            <p id="footer-year">&copy; Ultimately It's Black. All rights reserved.</p>
+            <nav class="mt-2">
+                <a href="/">Home</a>
+                <a href="/privacy.html">Privacy Policy</a>
+                <a href="/support.html">Support</a>
+            </nav>
+        </footer>
+    </div>
 
     <script>
-        // Spinner line fade-out logic (optional modification)
-        // This uses the fadeUp animation defined in CSS
+        // Logo Animation Script (KEEPING AS PROVIDED)
         setTimeout(() => {
             const spinner = document.getElementById('spinner');
-            if (!spinner) return; // Guard clause
+            if (spinner) {
+                const lines = spinner.querySelectorAll('.burst-line');
+                [2, 3, 4].forEach(i => {
+                    if (lines[i]) {
+                        const angle = lines[i].style.getPropertyValue('--angle');
+                        lines[i].style.animation = `fadeUp 1s ease forwards`;
+                    }
+                });
+                spinner.style.animation = "none";
+            }
 
-            const lines = spinner.querySelectorAll('.burst-line');
+            // Add 'loaded' class to body after animation duration + fade-out delay
+            // Adjust timing: 1.5s (spin) + ~1s (fadeUp/glow) + 0.8s (fade container) = ~3.3s
+            setTimeout(() => {
+                 document.body.classList.add('loaded');
+                 // Ensure overflow is auto only after the animation container is hidden
+                 document.body.style.overflowY = 'auto';
+            }, 1800); // Delay adding class slightly after spinner animation finishes (1.5s + buffer)
 
-            lines.forEach(line => {
-                // Apply fadeUp animation to all lines after the initial spin
-                line.style.animation = `fadeUp 0.8s ease forwards`;
-            });
+        }, 1500); // Start spinner fade-out logic after 1.5 seconds
 
-            // Optional: Remove the spinner element after animations complete
-             setTimeout(() => {
-                 // spinner.remove(); // Uncomment if you want the spinner to disappear entirely
-             }, 800); // Match fadeUp duration
-
-        }, 1500); // Start fade-out after 1.5 seconds (when spin ends)
-
+        // Dynamic Year Script
+        const yearElement = document.getElementById('footer-year');
+        if (yearElement) {
+            yearElement.innerHTML = `&copy; ${new Date().getFullYear()} Ultimately It's Black. All rights reserved.`;
+        }
     </script>
 </body>
 </html>
