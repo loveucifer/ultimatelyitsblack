@@ -4,107 +4,252 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy - Ultimately It's Black</title>
-    <link rel="stylesheet" href="style.css"> </head>
-<body>
-    <header>
-        <h1>Privacy Policy</h1>
-        <nav>
-            <a href="/">Home</a>
-            <a href="/privacy.html">Privacy Policy</a>
-            <a href="/support.html">Support</a>
-        </nav>
-    </header>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base body styles with gradient */
+        body {
+            margin: 0;
+            background: linear-gradient(180deg, #000000 0%, #1a0a2e 100%);
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            color: #e5e7eb; /* Tailwind gray-200 */
+            line-height: 1.7; /* Increased line spacing */
+            overflow-x: hidden;
+        }
 
-    <main>
-        <h2>Privacy Policy for ultimatelyitsblack.com</h2>
+        /* Main content wrapper */
+        .main-content-wrapper {
+            padding: 2rem;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+        }
 
-        <p><strong>Effective Date: [Insert Date Policy Becomes Effective]</strong></p>
+        /* Header and Nav styles */
+        header.main-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
 
-        <p>
-            Welcome to Ultimately It's Black. This privacy policy explains how we collect,
-            use, disclose, and safeguard your information when you visit our website
-            ultimatelyitsblack.com, including any other media form, media channel,
-            mobile website, or mobile application related or connected thereto (collectively, the “Site”).
-            Please read this privacy policy carefully. If you do not agree with the terms of this
-            privacy policy, please do not access the site.
-        </p>
+        nav.main-nav a {
+             color: #9ca3af; /* gray-400 */
+             text-decoration: none;
+             margin: 0 0.75rem;
+             font-size: 1.125rem;
+             padding: 0.5rem 1rem;
+             border-radius: 0.375rem; /* rounded-md */
+             transition: color 0.3s ease, background-color 0.3s ease;
+        }
 
-        <p>
+        nav.main-nav a:hover {
+            color: #ffffff;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        nav.main-nav a.active {
+             color: #ffffff;
+             font-weight: 600;
+             background-color: rgba(106, 0, 173, 0.5); /* Purple highlight */
+        }
+
+        /* Glass effect for content */
+        .glass-effect {
+            background-color: rgba(23, 23, 23, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 0.75rem; /* rounded-xl */
+            padding: 2rem md:p-10; /* Responsive padding */
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        /* Footer styles */
+        footer.main-footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #6b7280; /* gray-500 */
+            font-size: 0.875rem;
+        }
+         footer.main-footer nav a {
+            color: #6b7280;
+            margin: 0 0.5rem;
+            transition: color 0.3s ease;
+         }
+         footer.main-footer nav a:hover {
+            color: #d1d5db; /* gray-300 */
+         }
+
+         /* Styling for headings and lists */
+         main h2 {
+            font-size: 1.875rem; /* text-3xl */
+            font-weight: 700; /* bold */
+            color: #ffffff;
+            margin-bottom: 1.5rem; /* mb-6 */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 0.75rem; /* pb-3 */
+         }
+          main h3 {
+            font-size: 1.25rem; /* text-xl */
+            font-weight: 600; /* semibold */
+            color: #ffffff;
+            margin-top: 2rem; /* mt-8 */
+            margin-bottom: 1rem; /* mb-4 */
+         }
+         main ul {
+            list-style: disc;
+            list-style-position: inside;
+            padding-left: 1rem; /* pl-4 */
+            margin-bottom: 1.5rem; /* mb-6 */
+            space-y: 0.5rem; /* space-y-2 */
+            color: #d1d5db; /* gray-300 */
+         }
+         main p {
+             margin-bottom: 1rem; /* mb-4 */
+             color: #d1d5db; /* gray-300 */
+         }
+         main a {
+             color: #a78bfa; /* Tailwind violet-400 */
+             font-weight: 500; /* medium */
+             transition: color 0.3s ease;
+         }
+         main a:hover {
+             color: #c4b5fd; /* Tailwind violet-300 */
+         }
+
+    </style>
+    <script>
+        // Optional: Tailwind configuration (can be removed if defaults are fine)
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-black">
+
+    <div class="main-content-wrapper">
+
+        <header class="main-header">
+            <h1 class="text-4xl font-bold text-white mb-4">Privacy Policy</h1>
+            <nav class="main-nav mt-4">
+                <a href="/">Home</a>
+                <a href="/privacy.html" class="active">Privacy Policy</a>
+                <a href="/support.html">Support</a>
+            </nav>
+        </header>
+
+        <main class="glass-effect">
+            <h2>Privacy Policy for ultimatelyitsblack.com</h2>
+
+            <p><strong>Effective Date: May 1, 2025</strong></p>
+
+            <p>
+                Welcome to Ultimately It's Black. This privacy policy explains how we collect,
+                use, disclose, and safeguard your information when you visit our website
+                ultimatelyitsblack.com, including any other media form, media channel,
+                mobile website, or mobile application related or connected thereto (collectively, the “Site”).
+                Please read this privacy policy carefully. If you do not agree with the terms of this
+                privacy policy, please do not access the site.
             </p>
 
-        <h3>Information We Collect</h3>
-        <p>
-            [** Placeholder: Describe the types of information you collect. **]
-            <br>
-            Examples:
-            <li>Personal Data: Name, email address (e.g., if you have a contact form or user accounts).</li>
-            <li>Usage Data: IP address, browser type, pages visited, time spent on pages (collected automatically via server logs or analytics).</li>
-            <li>Cookies and Tracking Technologies: Explain if you use cookies and why (e.g., session management, analytics).</li>
-        </p>
+            <div>
+                <h3>Information We Collect</h3>
+                <p>
+                    We may collect information about you in a variety of ways. The information we may collect on the Site includes:
+                </p>
+                <ul>
+                    <li><strong>Personal Data:</strong> Personally identifiable information, such as your name, shipping address, email address, and telephone number, and demographic information, such as your age, gender, hometown, and interests, that you voluntarily give to us when you register with the Site or when you choose to participate in various activities related to the Site.</li>
+                    <li><strong>Usage Data:</strong> Information our servers automatically collect when you access the Site, such as your IP address, your browser type, your operating system, your access times, and the pages you have viewed.</li>
+                    <li><strong>Cookies and Tracking Technologies:</strong> We may use cookies, web beacons, and other tracking technologies to help customize the Site and improve your experience.</li>
+                </ul>
+            </div>
 
-        <h3>How We Use Your Information</h3>
-        <p>
-            [** Placeholder: Explain the purposes for collecting the data. **]
-            <br>
-            Examples:
-            <li>To provide and maintain our Service.</li>
-            <li>To manage user accounts (if applicable).</li>
-            <li>To respond to support requests (via support@ultimatelyitsblack.com).</li>
-            <li>To monitor the usage of our Site (analytics).</li>
-            <li>To comply with legal obligations.</li>
-        </p>
+            <div>
+                <h3>How We Use Your Information</h3>
+                <p>
+                    Having accurate information permits us to provide you with a smooth, efficient, and customized experience. Specifically, we may use information collected about you to:
+                </p>
+                 <ul>
+                    <li>Provide and maintain our Service.</li>
+                    <li>Manage user accounts (if applicable).</li>
+                    <li>Respond to support requests and inquiries via <a href="mailto:support@ultimatelyitsblack.com">support@ultimatelyitsblack.com</a>.</li>
+                    <li>Monitor and analyze usage and trends to improve the Site.</li>
+                    <li>Comply with legal obligations.</li>
+                </ul>
+            </div>
 
-        <h3>Sharing Your Information</h3>
-        <p>
-            [** Placeholder: Describe if and with whom you share data. **]
-            <br>
-            Examples:
-            <li>With service providers (e.g., hosting provider, analytics provider). Mention types, not necessarily specific names unless required.</li>
-            <li>If required by law.</li>
-            <li>In connection with a business transfer (merger, acquisition).</li>
-        </p>
+            <div>
+                 <h3>Sharing Your Information</h3>
+                 <p>
+                    We may share information we have collected about you in certain situations:
+                 </p>
+                 <ul>
+                    <li><strong>By Law or to Protect Rights:</strong> If release is necessary to respond to legal process, investigate potential violations, or protect rights, property, and safety.</li>
+                    <li><strong>Third-Party Service Providers:</strong> With third parties performing services for us (e.g., hosting, analytics, email delivery).</li>
+                    <li><strong>Business Transfers:</strong> In connection with a merger, sale of assets, financing, or acquisition.</li>
+                 </ul>
+            </div>
 
-        <h3>Data Security</h3>
-        <p>
-            [** Placeholder: Briefly describe the measures you take to protect user data. **]
-            <br>
-            Example: "We use administrative, technical, and physical security measures to help protect your personal information..." (Be realistic about your measures).
-        </p>
+            <div>
+                <h3>Data Security</h3>
+                <p>
+                    We use administrative, technical, and physical security measures to help protect your personal information. However, no security measures are perfect, and no method of data transmission can be guaranteed against interception or misuse.
+                </p>
+            </div>
 
-        <h3>Your Data Protection Rights</h3>
-        <p>
-            [** Placeholder: Inform users of their rights (these vary by region). **]
-            <br>
-            Examples (depending on applicable law):
-            <li>The right to access, update, or delete the information we have on you.</li>
-            <li>The right to rectification.</li>
-            <li>The right to object.</li>
-            <li>The right to restrict processing.</li>
-            <li>The right to data portability.</li>
-            <li>The right to withdraw consent.</li>
-            <li>Contact information for exercising these rights (e.g., your support email).</li>
-        </p>
+            <div>
+                <h3>Your Data Protection Rights</h3>
+                <p>
+                    Depending on your location, you may have rights regarding your personal data:
+                </p>
+                 <ul>
+                    <li>The right to access, update, or delete the information we have on you.</li>
+                    <li>The right to rectification if information is inaccurate or incomplete.</li>
+                    <li>The right to object to processing.</li>
+                    <li>The right to restrict processing.</li>
+                    <li>The right to data portability.</li>
+                    <li>The right to withdraw consent.</li>
+                 </ul>
+                 <p>To exercise these rights, please contact us using the details below.</p>
+            </div>
 
-        <h3>Contact Us</h3>
-        <p>
-            If you have any questions about this Privacy Policy, please contact us:
-            By email: <a href="mailto:support@ultimatelyitsblack.com">support@ultimatelyitsblack.com</a>
-        </p>
+            <div>
+                <h3>Contact Us</h3>
+                <p>
+                    If you have questions or comments about this Privacy Policy, please contact us:
+                </p>
+                <p>
+                    Email: <a href="mailto:support@ultimatelyitsblack.com" class="text-lg">support@ultimatelyitsblack.com</a>
+                </p>
+            </div>
+        </main>
 
-    </main>
+        <footer class="main-footer">
+            <p id="footer-year">&copy; Ultimately It's Black. All rights reserved.</p>
+             <nav class="mt-2">
+                <a href="/">Home</a>
+                <a href="/privacy.html">Privacy Policy</a>
+                <a href="/support.html">Support</a>
+            </nav>
+        </footer>
 
-    <footer>
-        <p>&copy; [Current Year] Ultimately It's Black. All rights reserved.</p>
-         <nav>
-            <a href="/">Home</a>
-            <a href="/privacy.html">Privacy Policy</a>
-            <a href="/support.html">Support</a>
-        </nav>
-    </footer>
+    </div>
 
     <script>
         // Simple script to insert the current year in the footer
-        document.querySelector('footer p').innerHTML = `&copy; ${new Date().getFullYear()} Ultimately It's Black. All rights reserved.`;
+        const yearElement = document.getElementById('footer-year');
+        if (yearElement) {
+            yearElement.innerHTML = `&copy; ${new Date().getFullYear()} Ultimately It's Black. All rights reserved.`;
+        }
     </script>
 </body>
 </html>
