@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Confirm Your Email -  Black</title>
+    <title>Account Verified - BLACK</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -80,6 +80,33 @@
             to { opacity: 1; transform: scale(1); }
         }
 
+        /* Button Variants (Copied from index.html) */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.375rem; /* rounded-md */
+            font-size: 0.875rem; /* text-sm */
+            font-weight: 500; /* font-medium */
+            transition: all 0.3s ease-in-out;
+            cursor: pointer;
+            padding: 0.5rem 1rem; /* h-10 px-4 py-2 equiv. */
+        }
+        .btn-lg {
+            padding: 0.6rem 2rem; /* h-11 px-8 equiv. */
+            border-radius: 0.5rem; /* rounded-lg */
+        }
+        .btn-purple-gradient {
+            background-image: linear-gradient(to right, #8b5cf6, #6d28d9); /* purple-500 to violet-700 */
+            color: white;
+            box-shadow: 0 4px 6px -1px rgba(139, 92, 246, 0.3), 0 2px 4px -2px rgba(139, 92, 246, 0.3);
+        }
+        .btn-purple-gradient:hover {
+            background-image: linear-gradient(to right, #7c3aed, #5b21b6); /* darker */
+            box-shadow: 0 10px 15px -3px rgba(139, 92, 246, 0.4), 0 4px 6px -4px rgba(139, 92, 246, 0.4);
+            transform: translateY(-2px);
+        }
+
         /* Footer styles (Optional for this page, but keeps consistency) */
         footer.main-footer {
             text-align: center;
@@ -105,16 +132,16 @@
                 </svg>
             </div>
 
-            <h1 class="text-3xl font-bold text-white mb-4">Almost There!</h1>
+            <h1 class="text-3xl font-bold text-white mb-4">Account Verified!</h1>
             <p class="text-lg text-gray-300 mb-6">
-                Thank you for signing up. We've sent a confirmation link to your email address.
+                You have successfully verified your account.
             </p>
-            <p class="text-md text-gray-400">
-                Please check your inbox (and spam folder, just in case!) and click the link to verify your account.
+            <p class="text-md text-gray-400 mb-8">
+                You can now login with your password and email ID.
             </p>
-             <p class="text-sm text-gray-500 mt-8">
-                Didn't receive an email? <a href="/support.html" class="text-purple-400 hover:text-purple-300 underline">Contact Support</a>.
-             </p>
+            <a href="index.html" class="btn btn-lg btn-purple-gradient">
+                Go to Login
+            </a>
         </main>
 
         <footer class="main-footer">
