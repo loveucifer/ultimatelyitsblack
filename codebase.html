@@ -11,12 +11,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
-        /* * Base styles for the page, maintaining the black/white theme.
+        /*
+         * Base styles for the page, maintaining the black/white theme.
          * Typography is set for readability on a dark background.
         */
         html {
             scroll-behavior: smooth;
-            /* This offsets the scroll position to account for the fixed header height. */
+            /* This offsets the scroll position to account for the sticky sidebar on desktop. */
             scroll-padding-top: 8rem; 
             /* This prevents the layout shift by always reserving space for the scrollbar. */
             overflow-y: scroll;
@@ -93,13 +94,8 @@
         pre code {
             font-family: 'IBM Plex Mono', monospace;
         }
-        /* Sidebar Navigation */
-        .sidebar {
-            position: sticky;
-            top: 8rem; /* Adjust based on header height + spacing */
-            height: calc(100vh - 10rem);
-            overflow-y: auto;
-        }
+        
+        /* Sidebar Navigation Styles */
         .sidebar-link {
             display: block;
             padding: 0.5rem 0;
@@ -111,9 +107,21 @@
             color: #FFFFFF;
             font-weight: 500;
         }
+
+        /* * FIX: Makes the sidebar sticky only on medium screens (md) and up.
+         * On mobile, it will now be a normal block element.
+        */
+        @media (min-width: 768px) {
+            .sidebar {
+                position: sticky;
+                top: 8rem; 
+                height: calc(100vh - 10rem);
+                overflow-y: auto;
+            }
+        }
     </style>
 </head>
-<body class="p-8 md:p-12 lg:p-16">
+<body class="p-6 md:p-12 lg:p-16">
 
     <div class="max-w-7xl mx-auto">
         <!-- Site Header & Navigation -->
@@ -134,7 +142,7 @@
         <div class="flex flex-col md:flex-row gap-8 lg:gap-16">
             
             <!-- Sidebar Navigation -->
-            <aside class="w-full md:w-1/4 lg:w-1/5 sidebar">
+            <aside class="w-full md:w-1/4 lg:w-1/5 sidebar mb-8 md:mb-0">
                 <h3 class="text-white font-semibold mb-4">On This Page</h3>
                 <nav id="sidebar-nav">
                     <a href="#introduction" class="sidebar-link">Introduction</a>
