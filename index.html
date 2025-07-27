@@ -3,589 +3,194 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BLACK - Your Ultimate Academic Space</title>
+    <title>BLACK - Open Source Academic Space</title>
+    <!-- Using Tailwind CSS for utility-first styling -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Using IBM Plex Mono font for a look similar to the reference site -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
-        /* Base Styles */
+        /*
+         * The style remains minimalist, focusing on typography and generous spacing.
+         * The layout is a single, centered column for a focused, document-like feel.
+        */
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #000;
-            color: #e5e7eb; /* gray-200 */
-            opacity: 0; /* Initially hidden for loading transition */
-            transition: opacity 0.5s ease-in-out;
-            overflow-x: hidden;
-        }
-        html {
-            scroll-behavior: smooth;
-        }
-        /* Add class when loaded */
-        body.loaded {
-            opacity: 1;
+            font-family: 'IBM Plex Mono', monospace;
+            background-color: #000000;
+            color: #E5E5E5; /* Light gray for body text */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        /* Loading Screen Styles */
-        .loading-screen {
-            position: fixed;
-            inset: 0;
-            z-index: 100; /* Highest */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background-color: #000;
-            transition: opacity 0.5s ease-out;
-        }
-        .loading-screen.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-        .loading-logo {
-            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-        .loading-spinner svg {
-            animation: spin 1s linear infinite;
+        /* Style for the main content sections */
+        .content-section {
+            margin-bottom: 4rem; /* 64px */
         }
 
-        /* Header Styles */
-        .header {
-            position: sticky;
-            top: 0;
-            z-index: 50;
-            width: 100%;
-            border-bottom-width: 1px;
-            border-color: rgba(255, 255, 255, 0.1);
-            background-color: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(1rem); /* blur-xl */
+        /* Headings for different sections */
+        .section-heading {
+            color: #999999; /* Medium gray for headings */
+            font-weight: 500;
+            margin-bottom: 1rem; /* 16px */
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Styling for list items to make them stand out */
+        .feature-list li {
+            margin-bottom: 0.75rem; /* 12px */
+        }
+
+        /* Links */
+        a {
+            color: #FFFFFF;
+            text-decoration: none;
+            border-bottom: 1px solid #555;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+
+        a:hover, .nav-link:hover {
+            color: #999999;
+            border-bottom-color: #999999;
+        }
+        
+        /* Navigation link specific styles */
+        .nav-link {
+             border-bottom: none;
+             color: #999999;
+             transition: color 0.3s ease;
         }
         .nav-link.active {
-            color: #c084fc; /* purple-400 */
-            background-color: rgba(255, 255, 255, 0.05);
+            color: #FFFFFF;
         }
-        /* Mobile Menu Panel */
-        .mobile-menu {
-            position: absolute;
-            top: 100%; /* Position below header */
-            left: 0;
-            width: 100%;
-            background-color: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(0.5rem);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.4s ease-out, opacity 0.4s ease-out;
-            opacity: 0;
-        }
-        .mobile-menu.open {
-            max-height: 500px; /* Adjust as needed */
-            opacity: 1;
-        }
-
-        /* Button Variants */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 0.375rem; /* rounded-md */
-            font-size: 0.875rem; /* text-sm */
-            font-weight: 500; /* font-medium */
-            transition: all 0.3s ease-in-out;
-            cursor: pointer;
-            padding: 0.5rem 1rem; /* h-10 px-4 py-2 equiv. */
-            /* Add focus styles if needed */
-        }
-        .btn-lg {
-            padding: 0.6rem 2rem; /* h-11 px-8 equiv. */
-            border-radius: 0.5rem; /* rounded-lg */
-        }
-        .btn-sm {
-            padding: 0.35rem 0.75rem; /* h-9 px-3 equiv. */
-            border-radius: 0.375rem; /* rounded-md */
-        }
-        .btn-purple-gradient {
-            background-image: linear-gradient(to right, #8b5cf6, #6d28d9); /* purple-500 to violet-700 */
-            color: white;
-            box-shadow: 0 4px 6px -1px rgba(139, 92, 246, 0.3), 0 2px 4px -2px rgba(139, 92, 246, 0.3);
-        }
-        .btn-purple-gradient:hover {
-            background-image: linear-gradient(to right, #7c3aed, #5b21b6); /* darker */
-            box-shadow: 0 10px 15px -3px rgba(139, 92, 246, 0.4), 0 4px 6px -4px rgba(139, 92, 246, 0.4);
-            transform: translateY(-2px);
-        }
-        .btn-outline-purple {
-            border: 1px solid #a855f7; /* purple-500 */
-            color: #c084fc; /* purple-400 */
-            background-color: transparent;
-        }
-        .btn-outline-purple:hover {
-            background-color: rgba(168, 85, 247, 0.1);
-            color: #d8b4fe; /* purple-300 */
-        }
-        .btn-ghost {
-            color: #d1d5db; /* gray-300 */
-        }
-        .btn-ghost:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            color: white;
-        }
-
-        /* Hero Section */
-        .hero-section {
-            background-image: linear-gradient(to bottom right, #000000, #1e0a31, #000000);
-        }
-        .hero-bg-grid {
-            background-image: url('data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%2032%2032%22%20width=%2232%22%20height=%2232%22%20fill=%22none%22%20stroke=%22%23a855f7%22%20stroke-opacity=%220.2%22%3E%3Cpath%20d=%22M0%20.5H31.5V32%22/%3E%3C/svg%3E');
-            animation: pulse 5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-        .hero-text-gradient {
-            background-image: linear-gradient(to right, #c084fc, #a78bfa); /* purple-400 to violet-400 */
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        /* Feature Section - Alternating Layout */
-        .feature-item {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-        .feature-item.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .feature-icon-wrapper {
-            background-image: linear-gradient(to bottom right, rgba(139, 92, 246, 0.5), rgba(109, 40, 217, 0.5)); /* purple-500 to violet-700 */
-            border: 1px solid rgba(168, 85, 247, 0.3); /* purple-500 */
-            box-shadow: 0 10px 15px -3px rgba(109, 40, 217, 0.4), 0 4px 6px -4px rgba(109, 40, 217, 0.4);
-        }
-
-        /* Visual Section */
-        .visual-section {
-             background-image: linear-gradient(to bottom, #000000, rgba(30, 10, 49, 0.2), #000000); /* black to purple-900/20 to black */
-        }
-        .visual-mockup-wrapper {
-            opacity: 0;
-            transform: scale(0.9);
-            transition: opacity 1s ease-out, transform 1s ease-out;
-        }
-         .visual-mockup-wrapper.is-visible {
-            opacity: 1;
-            transform: scale(1);
-        }
-        .visual-mockup-glow {
-            background-image: linear-gradient(to bottom right, #8b5cf6, #6d28d9); /* purple-500 to violet-700 */
-            filter: blur(1.5rem); /* blur-xl */
-        }
-        .visual-mockup-content {
-            background-color: rgba(17, 24, 39, 0.7); /* gray-900/70 */
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        /* Style for the screenshot image */
-        .visual-mockup-content img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain; /* Or 'cover', depending on desired look */
-            border-radius: 0.5rem; /* Match parent rounded-xl if needed */
-        }
-
-
-        /* Footer */
-        .footer {
-             background-image: linear-gradient(to top, #000000, #000000, rgba(0, 0, 0, 0.5));
-        }
-
-        /* Animations */
-        @keyframes pulse {
-            50% { opacity: .5; }
-        }
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-slideUp {
-            animation: slideUp 0.7s ease-out forwards;
-        }
-        .animate-slideUp.delay-100 { animation-delay: 0.1s; }
-        .animate-slideUp.delay-200 { animation-delay: 0.2s; }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #111; }
-        ::-webkit-scrollbar-thumb { background-color: #4c1d95; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background-color: #5b21b6; }
-
-        /* Ensure embedded SVGs inherit color */
-        svg {
-            color: currentColor;
-            width: 1em; /* Default size, can be overridden */
-            height: 1em;
+        
+        /* Button styles for prominent CTAs */
+        .cta-button {
             display: inline-block;
-            vertical-align: middle;
+            background-color: #FFFFFF;
+            color: #000000;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.25rem;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+            border-bottom: none;
+        }
+        .cta-button:hover {
+            background-color: #cccccc;
+            color: #000000;
         }
 
     </style>
 </head>
-<body class="bg-black">
+<body class="p-8 md:p-12 lg:p-16">
 
-    <div id="loading-screen" class="loading-screen">
-        <div class="loading-logo text-5xl font-bold text-purple-500 tracking-widest">
-            BLACK
-        </div>
-        <p class="mt-4 text-sm text-gray-400">Loading your academic space...</p>
-        <div class="loading-spinner mt-6 h-8 w-8 text-purple-600">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
-        </div>
+    <!-- Main container is now a single, centered column -->
+    <div class="max-w-3xl mx-auto">
+
+        <!-- Site Header & Navigation -->
+        <header class="content-section">
+            <h1 class="text-white text-lg font-semibold tracking-wider">BLACK_</h1>
+            <p class="text-gray-400 mb-8">THE ULTIMATE OPEN SOURCE ACADEMIC SPACE</p>
+            <nav class="flex flex-wrap gap-x-4 gap-y-2 text-sm">
+                <a href="index.html" class="nav-link active">Home</a>
+                <a href="contributing.html" class="nav-link">Contributing</a>
+                <a href="license.html" class="nav-link">License</a>
+                <a href="codebase.html" class="nav-link">Codebase</a>
+                <a href="support.html" class="nav-link">Support</a>
+                <a href="privacy.html" class="nav-link">Privacy</a>
+            </nav>
+        </header>
+
+        <main>
+            <!-- About Section -->
+            <section class="content-section">
+                <h2 class="section-heading">About The Project</h2>
+                <p>BLACK is a digital ecosystem making academic life simpler and more connected. Our team is passionate about creating innovative, open-source solutions that push the boundaries of what's possible for students. We centralize your notes, tasks, and community in one clean, powerful platform, built by students, for students.</p>
+            </section>
+            
+            <!-- Get The App Section -->
+            <section class="content-section">
+                <h2 class="section-heading">Get The App</h2>
+                <p>Download the latest version of BLACK for Android directly from the Google Play Store.</p>
+                <div class="mt-6">
+                    <a href="https://play.google.com/store/apps/details?id=com.loveucifer.black&pli=1" target="_blank" rel="noopener noreferrer" class="cta-button">
+                        Download on Google Play
+                    </a>
+                </div>
+            </section>
+
+            <!-- Core Philosophy Section -->
+            <section class="content-section">
+                <h2 class="section-heading">Philosophy</h2>
+                <p>We believe that essential academic tools should be accessible, transparent, and community-driven. By making BLACK open source, we empower users to not only use the app but to shape its future. We prioritize privacy, performance, and a user-centric design that adapts to the real needs of students.</p>
+            </section>
+
+            <!-- Features Section -->
+            <section class="content-section">
+                <h2 class="section-heading">Core Features</h2>
+                <ul class="list-none space-y-4 feature-list">
+                    <li>
+                        <strong>→ Unified Uploads & Management:</strong> Consolidate handwritten notes, PDFs, lecture slides, and images effortlessly. All your materials, in one place.
+                    </li>
+                    <li>
+                        <strong>→ Intelligent Cross-Platform Search:</strong> Instantly find notes by subject, tags, or user across all your uploaded content. Never lose track of a single piece of information.
+                    </li>
+                    <li>
+                        <strong>→ Integrated Task & Schedule Management:</strong> Organize your academic life with a built-in to-do list and calendar to manage tasks, assignments, and deadlines seamlessly.
+                    </li>
+                    <li>
+                        <strong>→ Collaborative & Community Forum:</strong> A dedicated space to ask questions, request notes from peers, share knowledge, and connect with other students from your university and beyond.
+                    </li>
+                    <li>
+                        <strong>→ Social Connectivity:</strong> Follow classmates and friends to stay updated with their public posts and shared notes, fostering a collaborative learning environment.
+                    </li>
+                     <li>
+                        <strong>→ Privacy-Focused:</strong> You have full control over what you share. Keep notes private, or make them public to help others. Your data is yours.
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Technology Stack Section -->
+            <section class="content-section">
+                <h2 class="section-heading">Technology Stack</h2>
+                <p>BLACK is built with a modern, scalable, and cross-platform technology stack, chosen for performance and developer experience. Our architecture is designed to be robust and maintainable.</p>
+                <ul class="list-none space-y-2 mt-4">
+                    <li><strong>Framework:</strong> Flutter</li>
+                    <li><strong>Primary Backend:</strong> Supabase (Authentication, PostgreSQL Database, Storage)</li>
+                    <li><strong>Secondary Backend:</strong> Firebase (Cloud Messaging for Push Notifications)</li>
+                    <li><strong>State Management:</strong> Provider</li>
+                    <li><strong>Architecture:</strong> Clean Architecture Principles</li>
+                </ul>
+            </section>
+
+            <!-- Sustainability Section -->
+            <section class="content-section">
+                <h2 class="section-heading">Our Sustainability Model</h2>
+                <p>
+                    To keep the BLACK platform free and accessible to all students, we need to cover our operational costs for servers, database hosting, and file storage. To achieve this, we've integrated non-intrusive native ads into the application. This model allows us to maintain and improve the service without charging subscription fees. We are committed to ensuring that ads are implemented thoughtfully and do not disrupt the core user experience.
+                </p>
+            </section>
+
+            <!-- Open Source & Contribution Section -->
+            <section class="content-section">
+                <h2 class="section-heading">Open Source</h2>
+                <p>
+                    BLACK is proudly open source. We welcome developers, designers, and students to contribute to the project. Whether it's fixing a bug, proposing a new feature, or improving the documentation, your help is valued. See the <a href="contributing.html">Contributing Guide</a> to get started.
+                </p>
+                <p class="mt-4">
+                    You can find our repository and contribution guidelines on <a href="https://github.com/heptagramorg/BLACK" target="_blank" rel="noopener noreferrer">GitHub</a>.
+                </p>
+            </section>
+        </main>
+        
+        <!-- Footer Quote -->
+        <footer>
+            <p class="text-gray-500 italic">"The reason to finish is to start something new." - Rick Rubin</p>
+        </footer>
+
     </div>
-
-    <header class="header">
-        <div class="container mx-auto flex h-16 max-w-7xl items-center justify-between px-4">
-            <a href="index.html" class="flex items-center space-x-2">
-                <span class="text-2xl font-bold text-white tracking-wider">BLACK</span>
-            </a>
-
-            <nav class="hidden space-x-1 md:flex">
-                <a href="index.html" class="nav-link active btn btn-ghost">Home</a>
-                <a href="support.html" class="nav-link btn btn-ghost">Support</a>
-                <a href="privacy.html" class="nav-link btn btn-ghost">Privacy Policy</a>
-            </nav>
-
-            <a href="https://play.google.com/store/apps/details?id=com.loveucifer.black" target="_blank" rel="noopener noreferrer" class="hidden md:inline-block ml-4">
-                <button class="btn btn-sm btn-purple-gradient">
-                    Get the App
-                </button>
-            </a>
-
-            <button id="mobile-menu-button" class="md:hidden text-white p-2 z-50" aria-label="Toggle menu">
-                <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
-                <svg id="close-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden"><line x1="18" x2="6" y1="6" y2="18"/><line x1="6" x2="18" y1="6" y2="18"/></svg>
-            </button>
-        </div>
-
-        <div id="mobile-menu-panel" class="mobile-menu md:hidden">
-            <nav class="flex flex-col items-center space-y-4 p-6">
-                <a href="index.html" class="nav-link active w-full text-center py-2 rounded text-gray-300 hover:text-white hover:bg-white/10 transition-colors">Home</a>
-                <a href="support.html" class="nav-link w-full text-center py-2 rounded text-gray-300 hover:text-white hover:bg-white/10 transition-colors">Support</a>
-                <a href="privacy.html" class="nav-link w-full text-center py-2 rounded text-gray-300 hover:text-white hover:bg-white/10 transition-colors">Privacy Policy</a>
-                <a href="confirm-signup.html" class="nav-link w-full text-center py-2 rounded text-gray-300 hover:text-white hover:bg-white/10 transition-colors">Confirm Signup</a>
-                <a href="login-successful.html" class="nav-link w-full text-center py-2 rounded text-gray-300 hover:text-white hover:bg-white/10 transition-colors">Login Successful</a>
-                <a href="https://play.google.com/store/apps/details?id=com.loveucifer.black" target="_blank" rel="noopener noreferrer" class="w-full mt-4">
-                    <button class="btn btn-purple-gradient w-full">
-                        Get the App
-                    </button>
-                </a>
-            </nav>
-        </div>
-    </header>
-
-    <main class="flex-grow">
-
-        <section class="hero-section relative flex items-center justify-center min-h-screen overflow-hidden text-center px-4 py-20">
-            <div class="hero-bg-grid absolute inset-0 z-0 opacity-10"></div>
-            <div class="relative z-10 max-w-4xl mx-auto">
-                <h1 class="text-5xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 leading-tight animate-slideUp">
-                    The <span class="hero-text-gradient">Ultimate Academic Space</span> for Students.
-                </h1>
-                <p class="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl mx-auto animate-slideUp delay-100">
-                    Stop juggling apps. BLACK centralizes your notes, tasks, and community in one clean, powerful platform. Built by students, for students.
-                </p>
-                <div class="flex flex-col sm:flex-row justify-center items-center gap-4 animate-slideUp delay-200">
-                    <a href="https://play.google.com/store/apps/details?id=com.loveucifer.black" target="_blank" rel="noopener noreferrer">
-                        <button class="btn btn-lg btn-purple-gradient w-full sm:w-auto shadow-purple-500/30 hover:shadow-purple-400/50">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="mr-2"><path d="M6 4l15 8-15 8z"/></svg>
-                            Get on Google Play
-                        </button>
-                    </a>
-                    <button class="btn btn-lg btn-outline-purple w-full sm:w-auto cursor-not-allowed opacity-70" title="Coming Soon to App Store">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="mr-2"><path d="M19.3 11.9c-.1-.6-.4-1.2-.8-1.7-.4-.5-.9-.9-1.5-1.2-.9-.4-1.9-.5-2.9-.5-1.4 0-2.8.6-3.8 1.6-.9 1-1.4 2.2-1.5 3.5-.1 1.4.2 2.8.9 4-.2.2-.4.3-.6.5-.7.5-1.3 1.1-1.8 1.8-.6.7-.9 1.5-1.1 2.4H14c.4-.5.8-1 1.3-1.4.5-.4 1.1-.7 1.7-.9.6-.2 1.3-.3 1.9-.3s1.2.1 1.7.3c.6.2 1.1.5 1.6.8.5.4.9.8 1.3 1.3.1.1.2.2.3.3h.1c.2-.9.1-1.8-.1-2.7-.2-.9-.6-1.7-1.1-2.5-.4-.6-.9-1.1-1.4-1.6.1-.1.2-.2.3-.3.9-.8 1.4-1.8 1.5-2.9zm-5.2-3.2c.6-.7 1.4-1.1 2.3-1.1.1 0 .2 0 .3.1.6.1 1.1.4 1.5.8-.4.5-.7 1-.8 1.6-.6.7-1.4 1.1-2.3 1.1-.2 0-.4 0-.5-.1-.7-.1-1.2-.5-1.5-.9s-.4-.9-.4-1.5z"/></svg>
-                        App Store (Soon)
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <section id="features" class="py-24 md:py-32 bg-black overflow-hidden">
-            <div class="container mx-auto max-w-6xl px-4">
-                <div class="text-center mb-16 section-observer">
-                    <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">
-                        Everything You Need,
-                    </h2>
-                    <p class="text-xl text-purple-400 font-medium">
-                        All in BLACK
-                    </p>
-                </div>
-
-                <div class="space-y-16">
-                    <div class="feature-item section-observer flex flex-col md:flex-row items-center gap-12">
-                        <div class="flex-shrink-0 w-full md:w-1/3 flex justify-center">
-                            <div class="feature-icon-wrapper p-6 rounded-full">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-purple-300"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
-                            </div>
-                        </div>
-                        <div class="flex-grow text-center md:text-left">
-                            <h3 class="text-2xl font-semibold text-white mb-3">Unified Uploads</h3>
-                            <p class="text-gray-400 leading-relaxed">Consolidate handwritten notes, PDFs, slides, and images effortlessly.</p>
-                        </div>
-                    </div>
-                    <div class="feature-item section-observer flex flex-col md:flex-row-reverse items-center gap-12">
-                         <div class="flex-shrink-0 w-full md:w-1/3 flex justify-center">
-                            <div class="feature-icon-wrapper p-6 rounded-full">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-purple-300"><circle cx="11" cy="11" r="8"/><line x1="21" x2="16.65" y1="21" y2="16.65"/></svg>
-                            </div>
-                        </div>
-                        <div class="flex-grow text-center md:text-left">
-                            <h3 class="text-2xl font-semibold text-white mb-3">Intelligent Search</h3>
-                            <p class="text-gray-400 leading-relaxed">Instantly find notes by subject, tags, or user. Never lose track.</p>
-                        </div>
-                    </div>
-                    <div class="feature-item section-observer flex flex-col md:flex-row items-center gap-12">
-                        <div class="flex-shrink-0 w-full md:w-1/3 flex justify-center">
-                            <div class="feature-icon-wrapper p-6 rounded-full">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-purple-300"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 18h.01"/><path d="M12 18h.01"/><path d="M16 18h.01"/></svg>
-                            </div>
-                        </div>
-                        <div class="flex-grow text-center md:text-left">
-                            <h3 class="text-2xl font-semibold text-white mb-3">Organize Your Life</h3>
-                            <p class="text-gray-400 leading-relaxed">Manage tasks and deadlines seamlessly with the integrated to-do list and calendar.</p>
-                        </div>
-                    </div>
-                    <div class="feature-item section-observer flex flex-col md:flex-row-reverse items-center gap-12">
-                         <div class="flex-shrink-0 w-full md:w-1/3 flex justify-center">
-                            <div class="feature-icon-wrapper p-6 rounded-full">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-purple-300"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-                            </div>
-                        </div>
-                        <div class="flex-grow text-center md:text-left">
-                            <h3 class="text-2xl font-semibold text-white mb-3">Collaborative Forum</h3>
-                            <p class="text-gray-400 leading-relaxed">Ask questions, request notes, share knowledge, and connect with peers.</p>
-                        </div>
-                    </div>
-                    <div class="feature-item section-observer flex flex-col md:flex-row items-center gap-12">
-                        <div class="flex-shrink-0 w-full md:w-1/3 flex justify-center">
-                           <div class="feature-icon-wrapper p-6 rounded-full">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-purple-300"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                           </div>
-                        </div>
-                        <div class="flex-grow text-center md:text-left">
-                           <h3 class="text-2xl font-semibold text-white mb-3">Connect & Follow</h3>
-                           <p class="text-gray-400 leading-relaxed">Stay updated with classmates and friends – view their uploads and posts.</p>
-                        </div>
-                    </div>
-                    <div class="feature-item section-observer flex flex-col md:flex-row-reverse items-center gap-12">
-                        <div class="flex-shrink-0 w-full md:w-1/3 flex justify-center">
-                           <div class="feature-icon-wrapper p-6 rounded-full">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-purple-300"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
-                           </div>
-                        </div>
-                        <div class="flex-grow text-center md:text-left">
-                           <h3 class="text-2xl font-semibold text-white mb-3">Discover Trending Notes</h3>
-                           <p class="text-gray-400 leading-relaxed">Explore popular and highly-rated notes across different universities.</p>
-                        </div>
-                    </div>
-                     <div class="feature-item section-observer flex flex-col md:flex-row items-center gap-12">
-                        <div class="flex-shrink-0 w-full md:w-1/3 flex justify-center">
-                           <div class="feature-icon-wrapper p-6 rounded-full">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-purple-300"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
-                           </div>
-                        </div>
-                        <div class="flex-grow text-center md:text-left">
-                           <h3 class="text-2xl font-semibold text-white mb-3">Personalized Themes</h3>
-                           <p class="text-gray-400 leading-relaxed">Customize the app's look and feel to match your unique style.</p>
-                        </div>
-                    </div>
-                    <div class="feature-item section-observer flex flex-col md:flex-row-reverse items-center gap-12">
-                        <div class="flex-shrink-0 w-full md:w-1/3 flex justify-center">
-                           <div class="feature-icon-wrapper p-6 rounded-full">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-purple-300"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" x2="15.42" y1="13.51" y2="17.49"/><line x1="15.41" x2="8.59" y1="6.51" y2="10.49"/></svg>
-                           </div>
-                        </div>
-                        <div class="flex-grow text-center md:text-left">
-                           <h3 class="text-2xl font-semibold text-white mb-3">Community Posts</h3>
-                           <p class="text-gray-400 leading-relaxed">Share insights, updates, and engage actively with the student community.</p>
-                        </div>
-                    </div>
-                    <div class="feature-item section-observer flex flex-col md:flex-row items-center gap-12">
-                        <div class="flex-shrink-0 w-full md:w-1/3 flex justify-center">
-                           <div class="feature-icon-wrapper p-6 rounded-full">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-purple-300"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 4 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 4 0 0 1 3-3h7z"/></svg>
-                           </div>
-                        </div>
-                        <div class="flex-grow text-center md:text-left">
-                           <h3 class="text-2xl font-semibold text-white mb-3">Explore Anywhere</h3>
-                           <p class="text-gray-400 leading-relaxed">Access a vast library of shared notes anytime, anywhere, on any device.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="visual-section py-24 md:py-32 overflow-hidden">
-            <div class="container mx-auto max-w-6xl px-4 text-center">
-                <div class="section-observer mb-12">
-                    <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">
-                        Experience the <span class="text-purple-400">Difference</span>
-                    </h2>
-                    <p class="text-lg text-gray-400 max-w-2xl mx-auto">
-                        Visualize your notes, tasks, and connections in our intuitive, beautifully designed interface.
-                    </p>
-                </div>
-                <div class="visual-mockup-wrapper section-observer relative max-w-4xl mx-auto">
-                    <div class="visual-mockup-glow absolute -inset-4 rounded-xl opacity-30"></div>
-                    <div class="visual-mockup-content relative rounded-xl p-2 md:p-4 shadow-2xl aspect-[16/10] flex items-center justify-center overflow-hidden">
-                        <img src="./screenshot.png" alt="App Screenshot" class="shadow-lg">
-                        </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="py-24 md:py-32 bg-black text-center">
-            <div class="container mx-auto max-w-3xl px-4">
-                <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Ready to Transform Your Studies?</h2>
-                <p class="text-lg text-gray-400 mb-10">
-                    Download BLACK today and join a growing community of organized and connected students.
-                </p>
-                <a href="https://play.google.com/store/apps/details?id=com.loveucifer.black" target="_blank" rel="noopener noreferrer">
-                    <button class="btn btn-lg btn-purple-gradient shadow-purple-500/30 hover:shadow-purple-400/50">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="mr-2"><path d="M6 4l15 8-15 8z"/></svg>
-                        Download for Android
-                    </button>
-                </a>
-            </div>
-        </section>
-
-    </main>
-
-    <footer class="footer border-t border-white/10">
-        <div class="container mx-auto max-w-7xl px-4 py-16">
-            <div class="grid grid-cols-1 gap-12 md:grid-cols-4 lg:grid-cols-5">
-                <div class="lg:col-span-2">
-                    <a href="index.html" class="inline-block">
-                        <h3 class="text-2xl font-bold text-white mb-4 tracking-wider">BLACK</h3>
-                    </a>
-                    <p class="text-gray-400 text-sm mb-6 max-w-xs">
-                        The ultimate unified academic space, built for students, by students.
-                    </p>
-                    <div class="flex space-x-5">
-                        <a href="https://x.com/thecalledbluff?t=3Cklbx3gvpkMKBYYPSM7pQ&s=08" target="_blank" rel="noopener noreferrer" aria-label="Twitter" class="text-gray-400 hover:text-purple-400 transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M22.46 6c-.77.35-1.6.58-2.46.67.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.22-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.01-.06C3.18 20.57 5.32 21 7.66 21c7.6 0 11.77-6.3 11.77-11.77 0-.18 0-.35-.01-.53.8-.58 1.48-1.3 2.04-2.13z"/></svg>
-                        </a>
-                        <a href="https://www.instagram.com/notes.by.black?igsh=MXBsaTZkYThrZTZqdg==" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="text-gray-400 hover:text-purple-400 transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c2.7 0 3 .01 4.06.06 1.01.05 1.7.22 2.26.42.58.21.96.48 1.4.93.44.44.72.82.93 1.4.2.55.37 1.25.42 2.26.05 1.06.06 1.36.06 4.06s-.01 3-.06 4.06c-.05 1.01-.22 1.7-.42 2.26-.21.58-.48.96-.93 1.4-.44.44-.82.72-1.4.93-.55.2-1.25.37-2.26.42-1.06.05-1.36.06-4.06.06s-3-.01-4.06-.06c-1.01-.05-1.7-.22-2.26-.42-.58-.21-.96-.48-1.4-.93-.44-.44-.72-.82-.93-1.4-.2-.55-.37-1.25-.42-2.26-.05-1.06-.06-1.36-.06-4.06s.01-3 .06-4.06c.05-1.01.22-1.7.42-2.26.21-.58.48.96.93-1.4.44-.44.82-.72 1.4-.93.55-.2 1.25-.37 2.26-.42C9 2.01 9.3 2 12 2zm0 1.8c-2.67 0-2.96.01-4 .06-1.02.05-1.5.21-1.8.34-.4.16-.65.37-.93.65-.28.28-.5.53-.65.93-.14.3-.3.79-.34 1.8C4.01 9.04 4 9.33 4 12s.01 2.96.06 4c.05 1.02.21 1.5.34 1.8.16.4.37.65.65.93.28.28.53.5.93.65.3.14.79.3 1.8.34 1.04.05 1.33.06 4 .06s2.96-.01 4-.06c1.02-.05 1.5-.21 1.8-.34.4-.16.65-.37.93-.65.28.28.5-.53.65-.93.14-.3.3-.79.34-1.8.05-1.04.06-1.33.06-4s-.01-2.96-.06-4c-.05-1.02-.21-1.5-.34-1.8-.16-.4-.37-.65-.65-.93-.28-.28-.53-.5-.93-.65-.3-.14-.79-.3-1.8-.34C14.96 3.81 14.67 3.8 12 3.8zm0 4.47c-2.3 0-4.17 1.87-4.17 4.17s1.87 4.17 4.17 4.17 4.17-1.87 4.17-4.17S14.3 8.27 12 8.27zm0 6.53c-1.3 0-2.36-1.06-2.36-2.36s1.06-2.36 2.36-2.36 2.36 1.06 2.36 2.36-1.06 2.36-2.36 2.36zm4.34-6.7c0 .6-.48 1.07-1.07 1.07s-1.07-.48-1.07-1.07.48-1.07 1.07-1.07 1.07.48 1.07 1.07z"/></svg>
-                        </a>
-                        <a href="https://www.facebook.com/share/16RBhaaaaa/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="text-gray-400 hover:text-purple-400 transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.04c-5.5 0-10 4.49-10 10s4.5 10 10 10 10-4.49 10-10S17.5 2.04 12 2.04zm.84 15.61v-6.81h2.3l.34-2.68h-2.64V6.48c0-.78.22-1.31 1.33-1.31h1.42V2.81c-.25-.03-.98-.1-1.86-.1-1.84 0-3.1 1.12-3.1 3.19v1.97h-2.09v2.68h2.09v6.81h2.51z"/></svg>
-                        </a>
-                        <a href="https://www.linkedin.com/company/107219343/admin/dashboard/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="text-gray-400 hover:text-purple-400 transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zm-11 6H5v10h3V9zm-1.5-2A1.5 1.5 0 0 0 5 8.5 1.5 1.5 0 0 0 6.5 7 1.5 1.5 0 0 0 8 5.5 1.5 1.5 0 0 0 6.5 4a1.5 1.5 0 0 0-1.5 1.5A1.5 1.5 0 0 0 6.5 7zM19 19h-3v-5.3c0-1.3-.47-2.1-1.56-2.1-.86 0-1.34.58-1.56 1.14-.08.2-.1.47-.1.74V19h-3V9h3v1.38h.04c.42-.64 1.18-1.38 2.78-1.38 2.04 0 3.6 1.34 3.6 4.22V19z"/></svg>
-                        </a>
-                    </div>
-                     </div>
-
-                <div>
-                    <h4 class="text-sm font-semibold text-gray-300 uppercase tracking-wider mb-4">Navigate</h4>
-                    <ul class="space-y-3">
-                        <li><a href="index.html" class="text-gray-400 hover:text-purple-400 text-sm transition-colors">Home</a></li>
-                        <li><a href="support.html" class="text-gray-400 hover:text-purple-400 text-sm transition-colors">Support</a></li>
-                        <li><a href="privacy.html" class="text-gray-400 hover:text-purple-400 text-sm transition-colors">Privacy Policy</a></li>
-                        <li><a href="confirm-signup.html" class="text-gray-400 hover:text-purple-400 text-sm transition-colors">Confirm Signup</a></li>
-                        <li><a href="login-successful.html" class="text-gray-400 hover:text-purple-400 text-sm transition-colors">Login Successful</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h4 class="text-sm font-semibold text-gray-300 uppercase tracking-wider mb-4">Legal</h4>
-                    <ul class="space-y-3">
-                        <li><a href="privacy.html" class="text-gray-400 hover:text-purple-400 text-sm transition-colors">Privacy Policy</a></li>
-                        </ul>
-                </div>
-
-                <div>
-                    <h4 class="text-sm font-semibold text-gray-300 uppercase tracking-wider mb-4">Get the App</h4>
-                    <ul class="space-y-3">
-                        <li>
-                            <a href="https://play.google.com/store/apps/details?id=com.loveucifer.black" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-purple-400 text-sm transition-colors inline-flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="mr-2"><path d="M6 4l15 8-15 8z"/></svg>
-                                Google Play
-                            </a>
-                        </li>
-                        <li>
-                            <span class="text-gray-500 text-sm inline-flex items-center cursor-not-allowed" title="Coming Soon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" class="mr-2"><path d="M19.3 11.9c-.1-.6-.4-1.2-.8-1.7-.4-.5-.9-.9-1.5-1.2-.9-.4-1.9-.5-2.9-.5-1.4 0-2.8.6-3.8 1.6-.9 1-1.4 2.2-1.5 3.5-.1 1.4.2 2.8.9 4-.2.2-.4.3-.6.5-.7.5-1.3 1.1-1.8 1.8-.6.7-.9 1.5-1.1 2.4H14c.4-.5.8-1 1.3-1.4.5-.4 1.1-.7 1.7-.9.6-.2 1.3-.3 1.9-.3s1.2.1 1.7.3c.6.2 1.1.5 1.6.8.5.4.9.8 1.3 1.3.1.1.2.2.3.3h.1c.2-.9.1-1.8-.1-2.7-.2-.9-.6-1.7-1.1-2.5-.4-.6-.9-1.1-1.4-1.6.1-.1.2-.2.3-.3.9-.8 1.4-1.8 1.5-2.9zm-5.2-3.2c.6-.7 1.4-1.1 2.3-1.1.1 0 .2 0 .3.1.6.1 1.1.4 1.5.8-.4.5-.7 1-.8 1.6-.6.7-1.4 1.1-2.3 1.1-.2 0-.4 0-.5-.1-.7-.1-1.2-.5-1.5-.9s-.4-.9-.4-1.5z"/></svg>
-                                App Store (Soon)
-                            </span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="mt-16 border-t border-white/10 pt-8 text-center">
-                <p class="text-xs text-gray-500">&copy; <span id="current-year"></span> BLACK. All rights reserved.</p>
-                <p class="text-xs text-gray-600 mt-1">
-                    Contact: <a href="mailto:support@ultimatelyitsblack.com" class="hover:text-gray-400 transition-colors">support@ultimatelyitsblack.com</a>
-                </p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // --- Loading Screen ---
-            const loadingScreen = document.getElementById('loading-screen');
-            if (loadingScreen) {
-                setTimeout(() => {
-                    loadingScreen.classList.add('hidden');
-                    document.body.classList.add('loaded');
-                }, 2500); // Match React version delay
-            }
-
-            // --- Mobile Menu ---
-            const menuButton = document.getElementById('mobile-menu-button');
-            const menuPanel = document.getElementById('mobile-menu-panel');
-            const menuIcon = document.getElementById('menu-icon');
-            const closeIcon = document.getElementById('close-icon');
-
-            if (menuButton && menuPanel && menuIcon && closeIcon) {
-                menuButton.addEventListener('click', () => {
-                    const isOpen = menuPanel.classList.contains('open');
-                    menuPanel.classList.toggle('open');
-                    menuIcon.classList.toggle('hidden', !isOpen); // Hide menu icon if opening
-                    closeIcon.classList.toggle('hidden', isOpen); // Hide close icon if closing
-                });
-            }
-
-            // --- Intersection Observer for Animations ---
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.2 // Trigger when 20% visible
-            };
-
-            const observerCallback = (entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                        observer.unobserve(entry.target); // Stop observing once visible
-                    }
-                });
-            };
-
-            const observer = new IntersectionObserver(observerCallback, observerOptions);
-            const elementsToObserve = document.querySelectorAll('.section-observer');
-            elementsToObserve.forEach(el => observer.observe(el));
-
-            // --- Footer Year ---
-             const yearSpan = document.getElementById('current-year');
-             if (yearSpan) {
-                yearSpan.textContent = new Date().getFullYear();
-             }
-        });
-    </script>
 
 </body>
 </html>

@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codebase Overview - BLACK</title>
+    <!-- Tailwind CSS for utility-first styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- IBM Plex Mono font for a consistent look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* * Base styles for the page, maintaining the black/white theme.
+         * Typography is set for readability on a dark background.
+        */
+        html {
+            scroll-behavior: smooth;
+            /* This offsets the scroll position to account for the fixed header height. */
+            scroll-padding-top: 8rem; 
+            /* This prevents the layout shift by always reserving space for the scrollbar. */
+            overflow-y: scroll;
+        }
+        body { 
+            font-family: 'IBM Plex Mono', monospace; 
+            background-color: #000000; 
+            color: #E5E5E5;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .section-heading { 
+            color: #999999;
+            font-weight: 500; 
+            margin-bottom: 1rem;
+            text-transform: uppercase; 
+            letter-spacing: 0.05em; 
+        }
+        .subsection-heading {
+            color: #FFFFFF;
+            font-weight: 500;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        /* Styling for links */
+        a { 
+            color: #FFFFFF; 
+            text-decoration: none; 
+            border-bottom: 1px solid #555; 
+            transition: color 0.3s ease, border-color 0.3s ease; 
+        }
+        a:hover, .nav-link:hover, .sidebar-link:hover { 
+            color: #999999; 
+            border-bottom-color: #999999; 
+        }
+        /* Main navigation link styles */
+        .nav-link { 
+            border-bottom: none; 
+            color: #999999; 
+            transition: color 0.3s ease; 
+        }
+        .nav-link.active { 
+            color: #FFFFFF;
+        }
+        /* Prose styles for readable content blocks */
+        .prose p, .prose ul, .prose ol, .prose pre { 
+            margin-bottom: 1em; 
+            line-height: 1.6;
+        }
+        .prose ul, .prose ol { 
+            padding-left: 1.5rem;
+        }
+        .prose li { 
+            margin-bottom: 0.5rem;
+        }
+        /* Style for inline code snippets and blocks */
+        code.inline-code {
+            background-color: #222;
+            color: #E5E5E5;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        pre {
+            background-color: #111;
+            border: 1px solid #333;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            font-size: 0.9em;
+            line-height: 1.5;
+            color: #ccc;
+        }
+        pre code {
+            font-family: 'IBM Plex Mono', monospace;
+        }
+        /* Sidebar Navigation */
+        .sidebar {
+            position: sticky;
+            top: 8rem; /* Adjust based on header height + spacing */
+            height: calc(100vh - 10rem);
+            overflow-y: auto;
+        }
+        .sidebar-link {
+            display: block;
+            padding: 0.5rem 0;
+            color: #999999;
+            border-bottom: none;
+            font-size: 0.9rem;
+        }
+        .sidebar-link.active {
+            color: #FFFFFF;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body class="p-8 md:p-12 lg:p-16">
+
+    <div class="max-w-7xl mx-auto">
+        <!-- Site Header & Navigation -->
+        <header class="mb-12">
+            <h1 class="text-white text-lg font-semibold tracking-wider">BLACK_</h1>
+            <p class="text-gray-400 mb-8">THE ULTIMATE OPEN SOURCE ACADEMIC SPACE</p>
+            <nav class="flex flex-wrap gap-x-4 gap-y-2 text-sm">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="contributing.html" class="nav-link">Contributing</a>
+                <a href="license.html" class="nav-link">License</a>
+                <a href="codebase.html" class="nav-link active">Codebase</a>
+                <a href="support.html" class="nav-link">Support</a>
+                <a href="privacy.html" class="nav-link">Privacy</a>
+            </nav>
+        </header>
+
+        <!-- Main Layout with Sidebar -->
+        <div class="flex flex-col md:flex-row gap-8 lg:gap-16">
+            
+            <!-- Sidebar Navigation -->
+            <aside class="w-full md:w-1/4 lg:w-1/5 sidebar">
+                <h3 class="text-white font-semibold mb-4">On This Page</h3>
+                <nav id="sidebar-nav">
+                    <a href="#introduction" class="sidebar-link">Introduction</a>
+                    <a href="#architecture" class="sidebar-link">Architecture</a>
+                    <a href="#dependencies" class="sidebar-link">Dependencies</a>
+                    <a href="#project-structure" class="sidebar-link">Project Structure</a>
+                    <a href="#backend-schema" class="sidebar-link">Backend Schema</a>
+                    <a href="#core-logic" class="sidebar-link">Core Logic</a>
+                    <a href="#services" class="sidebar-link">Services Deep Dive</a>
+                    <a href="#screens" class="sidebar-link">Screens Deep Dive</a>
+                    <a href="#providers" class="sidebar-link">State Management</a>
+                    <a href="#utils" class="sidebar-link">Utilities</a>
+                    <a href="#widgets" class="sidebar-link">Custom Widgets</a>
+                    <a href="#conclusion" class="sidebar-link">Conclusion</a>
+                </nav>
+            </aside>
+
+            <!-- Main Content Area -->
+            <main class="w-full md:w-3/4 lg:w-4/5 prose">
+                
+                <section id="introduction">
+                    <h2 class="section-heading">Introduction</h2>
+                    <p>Welcome to the comprehensive technical documentation for BLACK. This document provides an exhaustive, in-depth analysis of the application's architecture, codebase, backend structure, and core components. It is intended for developers who wish to contribute to the project or understand its inner workings at a professional level.</p>
+                    <p>BLACK is a cross-platform mobile application built with Flutter and Dart, designed to be a central hub for students. It combines note sharing, task management, and social features into a single, cohesive experience. The backend is powered by a combination of Firebase for notifications and Supabase for authentication, database, and storage, leveraging the strengths of each platform.</p>
+                </section>
+
+                <section id="architecture">
+                    <h2 class="section-heading">Architectural Overview</h2>
+                    <p>The project strictly follows the principles of <strong class="text-white">Clean Architecture</strong>. This approach decouples the code into distinct layers, promoting maintainability, scalability, and testability. The data flows between these layers in a structured, predictable way.</p>
+                    <h3 class="subsection-heading">The Three Layers</h3>
+                    <ul>
+                        <li><strong class="text-white">Presentation (UI Layer):</strong> Composed of Flutter widgets located in the <code class="inline-code">screens/</code> and <code class="inline-code">widgets/</code> directories. Its sole responsibility is to display data provided by the Application layer and to capture user input. It is "dumb" and contains no business logic.</li>
+                        <li><strong class="text-white">Application (Business Logic Layer):</strong> This is the brain of the application. It contains the application-specific business rules and orchestrates the flow of data. This logic is implemented within the <code class="inline-code">providers/</code> and the service classes themselves. For example, when a user taps "Upload Note", the UI layer calls a method in a provider, which in turn uses a service to handle the upload logic.</li>
+                        <li><strong class="text-white">Data (Data Access Layer):</strong> This layer is responsible for all communication with the outside world, primarily the Supabase and Firebase backends. It abstracts the data sources from the rest of the application. The <code class="inline-code">services/</code> directory contains this layer's implementation. The Application layer knows it needs to fetch a user profile, but it doesn't know or care if that profile comes from Supabase, Firebase, or a local cache—that's the Data layer's job.</li>
+                    </ul>
+                    <h3 class="subsection-heading">Data Flow Example: User Login</h3>
+                    <ol>
+                        <li>User enters email/password on <code class="inline-code">LoginScreen</code> (UI Layer) and taps "Login".</li>
+                        <li>The `onPressed` callback calls a method, e.g., <code class="inline-code">AuthService.signInWithPassword()</code>.</li>
+                        <li>The <code class="inline-code">AuthService</code> (Data Layer) makes an API call to Supabase Auth.</li>
+                        <li>Supabase responds with success or failure.</li>
+                        <li>The <code class="inline-code">AuthService</code> returns the result to the <code class="inline-code">LoginScreen</code>.</li>
+                        <li>The <code class="inline-code">LoginScreen</code> (UI Layer) updates its state to show a success message and navigate to the home screen, or display an error.</li>
+                    </ol>
+                </section>
+
+                <section id="dependencies">
+                    <h2 class="section-heading">Key Dependencies Analysis</h2>
+                    <p>The project's functionality is heavily supported by a set of carefully chosen packages from <code class="inline-code">pubspec.yaml</code>. Understanding these is key to understanding the app.</p>
+                    <ul>
+                        <li><strong class="text-white">supabase_flutter:</strong> The cornerstone of the backend connection. It provides a singleton client for all Supabase interactions. Example: <code class="inline-code">final client = Supabase.instance.client;</code> is used in every service to perform database queries, authentication, and file storage operations.</li>
+                        <li><strong class="text-white">provider:</strong> The chosen state management solution. It uses the InheritedWidget system to provide state down the widget tree efficiently. For example, <code class="inline-code">ThemeProvider</code> is provided at the top of the app in <code class="inline-code">main.dart</code>, and any widget can listen to theme changes using <code class="inline-code">context.watch<ThemeProvider>()</code>.</li>
+                        <li><strong class="text-white">firebase_core & firebase_messaging:</strong> Used exclusively for Push Notifications. <code class="inline-code">NotificationService</code> contains the logic to initialize Firebase, request user permission for notifications, and handle incoming messages when the app is in the foreground, background, or terminated.</li>
+                        <li><strong class="text-white">flutter_pdfview & photo_view:</strong> These are critical for the core note-viewing feature. The <code class="inline-code">ViewNotesScreen</code> dynamically chooses which widget to render based on the file extension of the note's URL, providing a seamless experience for both PDFs and images.</li>
+                        <li><strong class="text-white">shared_preferences:</strong> A simple key-value store for non-sensitive data. Its only major use case in this app is persisting the user's theme choice (<code class="inline-code">true</code>/<code class="inline-code">false</code> for dark mode) so it's remembered when the app is closed and reopened.</li>
+                    </ul>
+                </section>
+                
+                <section id="project-structure">
+                    <h2 class="section-heading">Project Structure Analysis</h2>
+                    <p>The <code class="inline-code">lib</code> directory is meticulously organized to reflect the Clean Architecture principles. Below is a file-by-file breakdown.</p>
+                    <pre><code>lib/
+├── assets/
+│   └── default_profile.png
+├── main.dart
+├── providers/
+│   ├── note_engagement_provider.dart
+│   └── theme_provider.dart
+├── screens/
+│   ├── calendar_screen.dart
+│   ├── create_post_screen.dart
+│   ├── followers_list_screen.dart
+│   ├── forum_post_screen.dart
+│   ├── forum_screen.dart
+│   ├── home_screen.dart
+│   ├── login_screen.dart
+│   ├── manage_notes_screen.dart
+│   ├── profile_screen.dart
+│   ├── search_notes_screen.dart
+│   ├── search_users_screen.dart
+│   ├── settings_screen.dart
+│   ├── signup_screen.dart
+│   ├── splash_screen.dart
+│   ├── splash_screen_animation.dart
+│   ├── todo_screen.dart
+│   ├── trending_notes_screen.dart
+│   ├── upload_notes_screen.dart
+│   ├── user_selection_screen.dart
+│   ├── verify_otp_reset_screen.dart
+│   └── view_notes_screen.dart
+├── services/
+│   ├── auth_service.dart
+│   ├── followers_service.dart
+│   ├── forum_service.dart
+│   ├── note_engagement_service.dart
+│   ├── note_service.dart
+│   ├── notification_service.dart
+│   ├── search_service.dart
+│   ├── supabase_service.dart
+│   └── user_service.dart
+├── utils/
+│   ├── document_preview_widget.dart
+│   ├── file_loading_dialog.dart
+│   ├── in_app_file_viewer.dart
+│   ├── profile_picture_handler.dart
+│   ├── secure_file_handler.dart
+│   └── secure_file_viewer.dart
+└── widgets/
+    ├── background_widget.dart
+    ├── native_ad_widget.dart
+    └── profile_notes_grid.dart
+</code></pre>
+                </section>
+                
+                <section id="backend-schema">
+                    <h2 class="section-heading">Backend Schema (Supabase)</h2>
+                    <p>Understanding the database structure is crucial. The app relies on several tables in Supabase PostgreSQL.</p>
+                    
+                    <h3 class="subsection-heading">`profiles` table</h3>
+                    <p>Stores public user data. Linked via a one-to-one relationship to the `auth.users` table.</p>
+                    <ul>
+                        <li>`id` (uuid, Primary Key): Foreign key to `auth.users.id`.</li>
+                        <li>`username` (text)</li>
+                        <li>`full_name` (text)</li>
+                        <li>`avatar_url` (text): URL to the user's profile picture in Supabase Storage.</li>
+                        <li>`updated_at` (timestamp)</li>
+                    </ul>
+
+                    <h3 class="subsection-heading">`notes` table</h3>
+                    <p>Stores metadata for every uploaded note.</p>
+                    <ul>
+                        <li>`id` (uuid, Primary Key)</li>
+                        <li>`user_id` (uuid): Foreign key to `profiles.id`.</li>
+                        <li>`title` (text)</li>
+                        <li>`subject` (text)</li>
+                        <li>`file_url` (text): URL to the note file in Supabase Storage.</li>
+                        <li>`created_at` (timestamp)</li>
+                    </ul>
+
+                    <h3 class="subsection-heading">`followers` table</h3>
+                    <p>A many-to-many relationship table for the social graph.</p>
+                    <ul>
+                        <li>`follower_id` (uuid): The user who is doing the following.</li>
+                        <li>`followed_id` (uuid): The user who is being followed.</li>
+                        <li>(Composite Primary Key on both columns)</li>
+                    </ul>
+                    
+                    <h3 class="subsection-heading">`posts` and `replies` tables</h3>
+                    <p>Powers the community forum.</p>
+                    <ul>
+                        <li>`posts` table contains `id`, `user_id`, `title`, `content`.</li>
+                        <li>`replies` table contains `id`, `post_id`, `user_id`, `content`.</li>
+                    </ul>
+                </section>
+
+                <section id="core-logic">
+                    <h2 class="section-heading">Core Logic & Entry Point</h2>
+                    <h3 class="subsection-heading">main.dart</h3>
+                    <p>This is the application's entry point. It performs critical initialization tasks in a specific order:</p>
+                    <ol>
+                        <li><strong>WidgetsFlutterBinding.ensureInitialized():</strong> Ensures the Flutter engine is ready.</li>
+                        <li><strong>Supabase.initialize():</strong> Sets up the global Supabase client with the URL and anon key. This is mandatory before any service is called.</li>
+                        <li><strong>Provider Setup:</strong> The entire app is wrapped in a <code class="inline-code">MultiProvider</code>. This is where providers like <code class="inline-code">ThemeProvider</code> are created and made available to the entire widget tree.</li>
+                        <li><strong>runApp(MyApp()):</strong> Starts the Flutter application by mounting the root widget.</li>
+                    </ol>
+                    <h3 class="subsection-heading">firebase_options.dart</h3>
+                    <p>This file is auto-generated by the FlutterFire CLI. It contains the platform-specific configuration details (API keys, project IDs) required to connect the app to your Firebase project. It's crucial for enabling Firebase services, especially Firebase Cloud Messaging for notifications.</p>
+                </section>
+
+                <section id="services">
+                    <h2 class="section-heading">Services Deep Dive</h2>
+                    <p>The <code class="inline-code">services</code> directory is the data layer. Each service is a stateless class that communicates with the backend.</p>
+                    
+                    <h3 class="subsection-heading">AuthService.dart</h3>
+                    <p>Handles all user authentication. It is a wrapper around <code class="inline-code">Supabase.instance.client.auth</code>.</p>
+                    <ul>
+                        <li><code class="inline-code">signUpUser(...)</code>: Calls <code class="inline-code">supabase.auth.signUp()</code>. On success, it immediately inserts a new row into the `profiles` table using the returned user's ID.</li>
+                        <li><code class="inline-code">signInWithPassword(...)</code>: Calls <code class="inline-code">supabase.auth.signInWithPassword()</code>.</li>
+                    </ul>
+
+                    <h3 class="subsection-heading">NoteService.dart</h3>
+                    <p>Manages all CRUD operations for notes. This involves both the database and storage.</p>
+                     <ul>
+                        <li><code class="inline-code">uploadNote(...)</code>: A critical multi-step process. First, it uploads the file bytes to Supabase Storage at a unique path (e.g., `user_id/note_id.pdf`). Second, it gets the public URL of the uploaded file. Third, it inserts a new record into the `notes` table with the metadata and the file URL.</li>
+                        <li><code class="inline-code">deleteNote(...)</code>: The reverse of upload. It first deletes the file from Supabase Storage, then deletes the record from the `notes` table.</li>
+                    </ul>
+                </section>
+
+                <section id="screens">
+                    <h2 class="section-heading">Screens Deep Dive</h2>
+                    <p>Each file in <code class="inline-code">screens/</code> represents a full page in the app. They are stateful widgets that fetch data from services and display it.</p>
+
+                    <h3 class="subsection-heading">profile_screen.dart</h3>
+                    <ul>
+                        <li><strong>Purpose:</strong> Displays a user's profile, including their name, avatar, follower counts, and a grid of their uploaded notes.</li>
+                        <li><strong>State Management:</strong> It's a `StatefulWidget`. In `initState`, it calls `UserService.fetchUserProfile()` and `FollowersService.fetchFollowers()` to get the necessary data. It uses `setState` to update the UI when the data arrives.</li>
+                        <li><strong>Key Widgets:</strong> Uses a `FutureBuilder` to handle the loading state of the profile data. The body contains a `ProfileNotesGrid` widget, passing the user ID to it.</li>
+                    </ul>
+
+                    <h3 class="subsection-heading">view_notes_screen.dart</h3>
+                     <ul>
+                        <li><strong>Purpose:</strong> Renders a specific note file (PDF or image).</li>
+                        <li><strong>Logic:</strong> It receives a `note` object. It downloads the file from the note's `file_url` into the device's cache using the `flutter_cache_manager` package. It then checks the file extension. If it's a PDF, it renders the `FlutterPdfView` widget. If it's an image, it renders the `PhotoView` widget.</li>
+                        <li><strong>Engagement:</strong> This screen is also responsible for tracking views. When the screen is initialized, it calls `NoteEngagementService.incrementViewCount()` and notifies the `NoteEngagementProvider`.</li>
+                    </ul>
+                </section>
+
+                <section id="providers">
+                    <h2 class="section-heading">State Management: Providers</h2>
+                    <p>Providers are used to manage and share application state, avoiding the need to pass data down through many layers of widgets.</p>
+                    
+                    <h3 class="subsection-heading">ThemeProvider.dart</h3>
+                    <p>Manages the app's theme. It's a `ChangeNotifier`.</p>
+                    <ul>
+                        <li>It holds a private boolean, <code class="inline-code">_isDarkMode</code>.</li>
+                        <li>It exposes a public getter <code class="inline-code">isDarkMode</code>.</li>
+                        <li>The <code class="inline-code">toggleTheme()</code> method changes the boolean, saves the new value to `SharedPreferences`, and then calls `notifyListeners()` to trigger a rebuild in all listening widgets.</li>
+                    </ul>
+                </section>
+
+                <section id="utils">
+                    <h2 class="section-heading">Utilities Deep Dive</h2>
+                    <p>The <code class="inline-code">utils</code> directory contains helper classes and functions that are reused across the application.</p>
+                    <ul>
+                        <li><code class="inline-code">profile_picture_handler.dart</code>: Encapsulates the entire flow of updating a profile picture: uses `image_picker` to let the user select a file, uploads the file to Supabase Storage, gets the URL, and finally calls `UserService` to update the `avatar_url` in the user's profile.</li>
+                        <li><code class="inline-code">file_loading_dialog.dart</code>: A simple utility function that shows a standardized, non-dismissible `AlertDialog` with a `CircularProgressIndicator`. Used across the app to give the user feedback during long operations like file uploads or downloads.</li>
+                    </ul>
+                </section>
+
+                <section id="widgets">
+                    <h2 class="section-heading">Custom Widgets Analysis</h2>
+                    <p>This directory contains reusable UI components to maintain a consistent look and feel and reduce code duplication.</p>
+                    <ul>
+                        <li><code class="inline-code">profile_notes_grid.dart</code>: A highly reusable widget. It takes a `userId` as a parameter. It is a `StatefulWidget` that calls `NoteService.fetchUserNotes(userId)` and displays the results in a `GridView.builder`. This isolates the logic for fetching and displaying notes, so it can be used on the main profile screen, a different user's profile screen, etc.</li>
+                        <li><code class="inline-code">native_ad_widget.dart</code>: Encapsulates all the boilerplate for loading and displaying a native ad from `google_mobile_ads`. It handles creating the ad, loading it, and building the widget layout, making it easy to drop an ad into any list view with a single line.</li>
+                    </ul>
+                </section>
+
+                <section id="conclusion">
+                    <h2 class="section-heading">Conclusion</h2>
+                    <p>The BLACK codebase is a well-structured and robust Flutter application that effectively leverages modern tools and architectural patterns. The strict adherence to Clean Architecture, with a clear separation of concerns into services (Data), providers (Application), and screens (Presentation), makes the project highly maintainable, testable, and scalable. The pragmatic choice of Supabase for the primary backend and Firebase for notifications demonstrates a solid understanding of using the best tool for each job.</p>
+                    <p>This deep analysis reveals a solid foundation. Future contributors can confidently build upon this structure. Potential areas for improvement include expanding test coverage with more unit and widget tests, implementing more sophisticated caching strategies to reduce network calls, and further refining the UI/UX for an even more polished feel. Overall, the project is an excellent example of a modern Flutter application and a fantastic starting point for new contributors.</p>
+                </section>
+
+            </main>
+        </div>
+    </div>
+    <script>
+        // Simple script to update active link in sidebar on scroll
+        // This helps the user know where they are on the page.
+        const sections = document.querySelectorAll('main section');
+        const navLinks = document.querySelectorAll('#sidebar-nav a');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href').substring(1) === entry.target.id) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }, {
+            rootMargin: '-50% 0px -50% 0px' // Triggers when section is in the middle of the viewport
+        });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

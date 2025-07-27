@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contributing - BLACK</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'IBM Plex Mono', monospace; background-color: #000000; color: #E5E5E5; }
+        .content-section { margin-bottom: 4rem; }
+        .section-heading { color: #999999; font-weight: 500; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em; }
+        a { color: #FFFFFF; text-decoration: none; border-bottom: 1px solid #555; transition: color 0.3s ease, border-color 0.3s ease; }
+        a:hover, .nav-link:hover { color: #999999; border-bottom-color: #999999; }
+        .nav-link { border-bottom: none; color: #999999; transition: color 0.3s ease; }
+        .nav-link.active { color: #FFFFFF; }
+        .prose p, .prose ul { margin-bottom: 1em; }
+        .prose ul { list-style-position: inside; }
+        .prose li { padding-left: 1em; }
+    </style>
+</head>
+<body class="p-8 md:p-12 lg:p-16">
+
+    <div class="max-w-3xl mx-auto">
+        <!-- Site Header & Navigation -->
+        <header class="content-section">
+            <h1 class="text-white text-lg font-semibold tracking-wider">BLACK_</h1>
+            <p class="text-gray-400 mb-8">THE ULTIMATE OPEN SOURCE ACADEMIC SPACE</p>
+            <nav class="flex flex-wrap gap-x-4 gap-y-2 text-sm">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="contributing.html" class="nav-link active">Contributing</a>
+                <a href="license.html" class="nav-link">License</a>
+                <a href="codebase.html" class="nav-link">Codebase</a>
+                <a href="support.html" class="nav-link">Support</a>
+                <a href="privacy.html" class="nav-link">Privacy</a>
+            </nav>
+        </header>
+
+        <main class="prose">
+            <section class="content-section">
+                <h2 class="section-heading">How to Contribute</h2>
+                <p>We're thrilled you're interested in contributing to BLACK! As an open-source project, we thrive on community support. Your contributions help us build a better tool for students everywhere.</p>
+                
+                <h3 class="text-gray-300 font-medium mt-8 mb-4">Types of Contributions</h3>
+                <p>We welcome various forms of contributions, including but not limited to:</p>
+                <ul>
+                    <li>→ Reporting bugs and suggesting features in the GitHub Issues.</li>
+                    <li>→ Writing or improving documentation.</li>
+                    <li>→ Submitting pull requests with bug fixes or new features.</li>
+                    <li>→ Helping answer questions in the community forums.</li>
+                </ul>
+
+                <h3 class="text-gray-300 font-medium mt-8 mb-4">Getting Started</h3>
+                <p>To get started, please visit our repository on <a href="https://github.com/loveucifer/ultimatelyitsblack" target="_blank" rel="noopener noreferrer">GitHub</a>. The main branch contains the most up-to-date code. Fork the repository and create a new branch for your changes.</p>
+                
+                <h3 class="text-gray-300 font-medium mt-8 mb-4">Development Setup</h3>
+                <p>The application is built using Flutter for the cross-platform framework and Firebase for the backend. You will need to have the Flutter SDK installed on your machine. A `firebase_options.dart` file with your own Firebase project credentials will be required to run the app locally.</p>
+
+                 <h3 class="text-gray-300 font-medium mt-8 mb-4">Pull Request Process</h3>
+                <ol class="list-decimal list-inside">
+                    <li>Ensure any installation or build dependencies are removed before the end of the layer when doing a build.</li>
+                    <li>Update the README.md with details of changes to the interface, this includes new environment variables, exposed ports, useful file locations and container parameters.</li>
+                    <li>Increase the version numbers in any examples files and the README.md to the new version that this Pull Request would represent.</li>
+                    <li>You may merge the Pull Request in once you have the sign-off of two other developers, or if you do not have permission to do that, you may request the second reviewer to merge it for you.</li>
+                </ol>
+            </section>
+        </main>
+    </div>
+
+</body>
+</html>
